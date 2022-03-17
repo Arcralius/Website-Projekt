@@ -11,16 +11,8 @@
     <?php
     include 'navbar.php';
     ?>
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">Petshop 2.0</h1>
-            <p class="lead text-muted">Welcome to petshop 2.0</p>
-            <p>
-                <a href="main.php#products" class="btn btn-primary my-2">Start Shopping</a>
-            </p>
-        </div>
-    </section>
 
+    <h1 class="mb-3" id="productspageheading">Products</h1>
     <div class="album py-3 bg-light">
         <div class="container">
             <section id="products">
@@ -56,9 +48,8 @@
         if ($result->num_rows > 0) {
             // output data of each row
             // while ($row = $result->fetch_assoc()) 
-            for ($i = 0; $i < 3; $i++) {
-                $row = $result->fetch_assoc();
-
+            while($row = $result->fetch_assoc())
+            {
                 echo '<div class="col-md-4">';
                 echo '<a href="product.php?id=' . $row['product_id'] . '">';
                 echo '<div class="card mb-4 box-shadow">';

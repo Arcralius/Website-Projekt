@@ -42,3 +42,12 @@ div.feature a {
   opacity: 0; /* Fix to make div clickable in IE */
   filter: alpha(opacity=1); /* Fix to make div clickable in IE */
 }
+
+#productspageheading {
+  text-align: center
+}
+
+.container a {
+  color: #000000;
+  text-decoration: none;
+}
