@@ -17,9 +17,8 @@
     if (empty($_POST["username"])) {
         $errorMsg .= "Username is required.<br>";
         $success = false;
-    } else if (!preg_match("/^[a-zA-Z0-9]{1,255}$/", $_POST["username"])) { //this regex will validate if the username only has alphanumeric chars
-        $errorMsg .= "Invalid Username format. Username should only contain alphanumeric characters.<br>";
-        //set the following the false so that the user inputs will not be added to database should it not meet the formatting requirements.
+    } else if (!preg_match("/^[a-zA-Z0-9]{1,255}$/", $_POST["username"])) {
+        $errorMsg .= "Username should only contain alphanumeric characters.<br>";
         $inputSuccess = false;
     } else {
         $username = sanitize_input($_POST["username"]);
@@ -29,14 +28,14 @@
     if (empty($_POST["email"])) {
         $errorMsg .= "Email is required.<br>";
         $success = false;
-    } else if (!preg_match("/[a-zA-Z0-9_\-]+@([a-zA-Z_\-])+[.]+[a-zA-Z]{2,4}/", $_POST["email"])) { //this regex will validate if the user email matches the format of an email i.e example@email.com
-        $errorMsg .= "Invalid email format.";
+    } else if (!preg_match("/[a-zA-Z0-9_\-]+@([a-zA-Z_\-])+[.]+[a-zA-Z]{2,4}/", $_POST["email"])) {
+        $errorMsg .= "Invalid email format.<br>";
         $inputSuccess = false;
     } else {
         $email = sanitize_input($_POST["email"]);
         // Additional check to make sure e-mail address is well-formed.     
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errorMsg .= "Invalid email format.";
+            $errorMsg .= "Invalid email format.<br>";
             $success = false;
         }
     }
@@ -59,7 +58,6 @@
         $success = false;
     } else {
         $lname = sanitize_input($_POST["lname"]);
-        $success = true;
     }
 
     if (empty($_POST["password"])) {
@@ -68,11 +66,14 @@
     } else if (empty($_POST["cfm_password"])) {
         $errorMsg .= "Password and Comfirm password field is required.<br>";
         $success = false;
-    } else if (!preg_match("/[a-zA-Z0-9!@#$ ]{8,255}/", ($_POST["password"]))) { //this regex will validate if the user password contains at least 8 chars, and only contains alphanumeric chars, spaces and some symbols
-        $errorMsg .= "Passwords must be of minimum length 8 characters. We only accept alphanumeric characters, spaces and select symbols: @,# and $..<br>";
+    }  else if ($_POST["cfm_password"] != $_POST["password"]){
+        $errorMsg .= "Passwords do not match.<br>";
         $success = false;
-    } else if (!preg_match("/[a-zA-Z0-9!@#$ ]{8,255}/", ($_POST["cfm_password"]))) { //this regex will validate if the user password contains at least 8 chars, and only contains alphanumeric chars, spaces and some symbols
-        $errorMsg .= "Passwords must be of minimum length 8 characters. We only accept alphanumeric characters, spaces and select symbols: @,# and $..<br>";
+    }  else if (!preg_match("/[a-zA-Z0-9!@#$ ]{8,255}/", $_POST["password"])) { //this regex will validate if the user password contains at least 8 chars, and only contains alphanumeric chars, spaces and some symbols
+        $errorMsg .= "Minimum password length must be 8. We only accept alphanumeric characters and specific special characters: @,# and $<br>";
+        $success = false;
+    } else if (!preg_match("/[a-zA-Z0-9!@#$ ]{8,255}/", $_POST["cfm_password"])) { //this regex will validate if the user password contains at least 8 chars, and only contains alphanumeric chars, spaces and some symbols
+        $errorMsg .= "Minimum password length must be 8. We only accept alphanumeric characters and specific special characters: @,# and $<br>";
         $success = false;
     } else {
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
@@ -83,33 +84,36 @@
             $success = false;
         } else {
             $pwd_confirm = password_hash($_POST["cfm_password"], PASSWORD_DEFAULT);
-            $success = true;
         }
     }
 
-    saveMemberToDB();
+
 
     if ($success) {
-        echo "<main class='container' id='process_register'>";
-        echo "<hr/>";
-        echo "<h1>Your registration successful!</h1>";
-        echo "<h4>Thank you for signing up, " . $fname . " " . $lname . "</h4>";
-        echo '<form action="signup.php" method="post">';
-        echo '<button class="btn btn-success" type="submit">Log-in</button>';
-        echo '</form>';
-        echo "</main>";
+        saveMemberToDB();
+        if($success) {
+            echo "<main class='container' id='process_register'>";
+            echo "<hr/>";
+            echo "<h1>Your registration successful!</h1>";
+            echo "<h4>Thank you for signing up, " . $fname . " " . $lname . "</h4>";
+            echo '<form action="signin.php" method="post">';
+            echo '<button class="btn btn-success" type="submit">Log-in</button>';
+            echo '</form>';
+            echo "</main>";
+            echo "<h1>$result</h1>";
+        }
+        else {
+            echo '<script>';
+            echo 'createCookie("errorMsg", "Username or Email has been taken.", 1);';
+            echo 'window.location.href = "/Website-Projekt/signup.php";';
+            echo '</script>';
+        }
 
-        echo "<h1>$result</h1>";
     } else {
-        echo "<main class='container' id='process_register'>";
-        echo "<hr/>";
-        echo "<h1>Oops!</h1>";
-        echo "<h4>The following input errors were detected:</h4>";
-        echo "<p>" . $errorMsg . "</p>";
-        echo '<form action="signup.php" method="post">';
-        echo '<button class="btn btn-danger" type="submit">Return to Sign Up</button>';
-        echo '</form>';
-        echo "</main>";
+        echo '<script>';
+        echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+        echo 'window.location.href = "/Website-Projekt/signup.php";';
+        echo '</script>';
     }
 
     function sanitize_input($data)
@@ -126,7 +130,7 @@
         $servername = "localhost";
         $dbusername = "arcralius";
         $dbpassword = "password";
-        $dbname = "worldofpetsv2";
+        $dbname = "ict1004_assignment";
 
         // Create database connection.
         $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -142,10 +146,11 @@
             $errorMsg = "Connection failed: " . $conn->connect_error;
             $success = false;
         } else {
+            $role = "U";
             // Prepare the statement:         
-            $stmt = $conn->prepare("INSERT INTO users (username, fname, lname, email, password) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO users (username, fname, lname, email, password, role) VALUES (?, ?, ?, ?, ?, ?)");
             //Bind & execute the query statement:         
-            $stmt->bind_param("sssss", $username, $fname, $lname, $email, $password);
+            $stmt->bind_param("ssssss", $username, $fname, $lname, $email, $password, $role);
             if (!$stmt->execute())         
             {             
                 $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;

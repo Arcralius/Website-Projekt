@@ -21,9 +21,9 @@
         </div>
     </section>
 
-    <div class="album py-3 bg-light">
-        <div class="container">
-            <section id="products">
+    <div class="album py-3 bg-white">
+        <div class="container" id="products">
+            <section>
                 <div class="row">
                     <?php
                     printproducts();
@@ -40,7 +40,7 @@
         $servername = "localhost";
         $username = "arcralius";
         $password = "password";
-        $dbname = "worldofpetsv2";
+        $dbname = "ict1004_assignment";
 
 
         // Create connection
@@ -53,7 +53,26 @@
         $sql = "SELECT * FROM `products`; ";
         $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
+        if ($result -> num_rows == 0 ) {
+            echo "0 results";
+        }
+        if ($result->num_rows < 3) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="col-md-4">';
+                echo '<a href="product.php?id=' . $row['product_id'] . '">';
+                echo '<div class="card mb-4 box-shadow">';
+                echo '<img class="card-img-top" src=' . $row['product_image'] . ' alt="Card image cap">';
+                echo '<div class="card-body">';
+                echo '<p class="card-text">' . $row['product_name'] . '</p>';
+                echo '<div class="d-flex justify-content-between align-items-center">';
+                echo '<small class="text-muted">$' . $row['product_price'] . '</small>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</a>';
+                echo '</div>';
+            }
+        } else if ($result->num_rows > 0) {
             // output data of each row
             // while ($row = $result->fetch_assoc()) 
             for ($i = 0; $i < 3; $i++) {

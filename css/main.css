@@ -44,10 +44,38 @@ div.feature a {
 }
 
 #productspageheading {
+  padding-top: 2%;
   text-align: center
 }
 
 .container a {
   color: #000000;
   text-decoration: none;
+}
+
+#compulse {
+  color: gray;
+}
+
+#errormsg {
+  color: red;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }
