@@ -16,6 +16,10 @@
     if (empty($_POST["username"])) {
         $errorMsg .= "username is required.<br>";
         $success = false;
+    } else if (!preg_match("/^[a-zA-Z0-9]{1,255}$/", $_POST["username"])) { //this regex will validate if the username only has alphanumeric chars
+        $errorMsg .= "Username should only contain alphanumeric characters.<br>";
+        //set the following the false so that the user inputs will not be added to database should it not meet the formatting requirements.
+        $inputSuccess = false;
     } else {
         $username = sanitize_input($_POST["username"]);
     }
@@ -23,28 +27,28 @@
     if (empty($_POST["password"])) {
         $errorMsg .= "Password and Comfirm password field is required.<br>";
         $success = false;
+    } else if (!preg_match("/[a-zA-Z0-9!@#$ ]{8,255}/", $_POST["password"])) { //this regex will validate if the user password contains at least 8 chars, and only contains alphanumeric chars, spaces and some symbols
+        $errorMsg .= "Minimum password length must be 8. We only accept alphanumeric characters and specific special characters: @,# and $<br>";
+        $success = false;
     } else {
         authenticateUser();
     }
 
 
     if ($success) {
-        echo "<main class='container' id='process_login'>";
-        echo "<hr/>";
-        echo "<h1>Your login is successful!</h1>";
-        echo "<h4>Welcome back, " . $fname . " " . $lname . "</h4>";
-        echo '</form>';
-        echo "</main>";
+        session_destroy();
+        session_start();
+        $_SESSION["role"] = $role;
+        $_SESSION["username"] = $username;
+        
+        echo '<script>';
+        echo 'window.location.href = "/Website-Projekt/account.php";';
+        echo '</script>';
     } else {
-        echo "<main class='container' id='process_login'>";
-        echo "<hr/>";
-        echo "<h1>Oops!</h1>";
-        echo "<h4>The following input errors were detected:</h4>";
-        echo "<p>" . $errorMsg . "</p>";
-        echo '<form action="signin.php" method="post">';
-        echo '<button class="btn btn-danger" type="submit">Return to Login</button>';
-        echo '</form>';
-        echo "</main>";
+        echo '<script>';
+        echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+        echo 'window.location.href = "/Website-Projekt/signin.php";';
+        echo '</script>';
     }
 
     function sanitize_input($data)
@@ -57,11 +61,11 @@
 
     function authenticateUser()
     {
-        global $errorMsg, $success, $fname, $lname, $username, $password_hashed;
+        global $errorMsg, $success, $fname, $lname, $username, $password_hashed, $role, $username;
         $servername = "localhost";
         $dbusername = "arcralius";
         $dbpassword = "password";
-        $dbname = "worldofpetsv2";
+        $dbname = "ict1004_assignment";
 
 
         // Create connection
@@ -83,19 +87,21 @@
                 $row = $result->fetch_assoc();
                 $fname = $row["fname"];
                 $lname = $row["lname"];
+                $role = $row["role"];
+                $username = $row["username"];
                 $password_hashed = $row["password"];
                 // Check if the password matches:
-                if ($password_hashed != $_POST["password"]) {
+                if (!password_verify($_POST["password"], $password_hashed)) {
 
                     // Don't be too specific with the error message - hackers don't                 
 
                     // need to know which one they got right or wrong. :)                 
 
-                    $errorMsg = "Email not found or password doesn't match...";
+                    $errorMsg = "Email not found or password doesn't match.<br>";
                     $success = false;
                 }
             } else {
-                $errorMsg = "Email not found or password doesn't match...";
+                $errorMsg = "Email not found or password doesn't match.<br>";
                 $success = false;
             }
             $stmt->close();

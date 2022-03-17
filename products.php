@@ -13,9 +13,9 @@
     ?>
 
     <h1 class="mb-3" id="productspageheading">Products</h1>
-    <div class="album py-3 bg-light">
+    <div class="album py-3 bg-white">
         <div class="container">
-            <section id="products">
+            <section>
                 <div class="row">
                     <?php
                     printproducts();
@@ -32,7 +32,7 @@
         $servername = "localhost";
         $username = "arcralius";
         $password = "password";
-        $dbname = "worldofpetsv2";
+        $dbname = "ict1004_assignment";
 
 
         // Create connection

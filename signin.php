@@ -34,20 +34,21 @@
                         <div class="form-group">
                             <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
                         </div>
-                        <div class="form-group d-md-flex">
-                            <div class="w-50 text-left">
-                                <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-                                    <input type="checkbox" checked>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="w-50 text-md-right">
-                                <a href="#">Forgot Password</a>
-                            </div>
-                        </div>
                     </form>
-                    <p class="text-center">Not a member? <a data-toggle="tab" href="signup.php">Sign Up</a></p>
+                    <p class="text-center h6">Not a member? <a data-toggle="tab" href="signup.php"><em>Sign Up</em></a></p>
+                    <p class="text-center"><a href="iforgor.php"><em>Forgot Password?</em></a></p>
+                    <div>
+                        <p id="errormsg">
+                        </p>
+                    </div>
                 </div>
+                <script>
+                    var errormsg = getCookie("errorMsg");
+                    if (errormsg == null) {
+                        errormsg = " ";
+                    }
+                    document.getElementById('errormsg').innerHTML += errormsg;
+                </script>
             </div>
         </div>
     </div>

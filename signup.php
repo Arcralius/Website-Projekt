@@ -25,11 +25,11 @@
                     <form action="signupprocess.php" method="post" class="signup-form">
                         <div class="form-group mt-3">
                             <input type="text" class="form-control" required type="username" id="username" name="username">
-                            <label class="form-control-placeholder" for="username">Username</label>
+                            <label class="form-control-placeholder" for="username">Username*</label>
                         </div>
                         <div class="form-group mt-3">
                             <input type="text" class="form-control" required type="email" id="email" name="email">
-                            <label class="form-control-placeholder" for="email">Email</label>
+                            <label class="form-control-placeholder" for="email">Email*</label>
                         </div>
                         <div class="form-group mt-3">
                             <input type="text" class="form-control" type="fname" id="fname" name="fname">
@@ -37,21 +37,33 @@
                         </div>
                         <div class="form-group mt-3">
                             <input type="text" class="form-control" required type="lname" id="lname" name="lname">
-                            <label class="form-control-placeholder" for="lname">Last name</label>
+                            <label class="form-control-placeholder" for="lname">Last name*</label>
                         </div>
                         <div class="form-group">
                             <input id="password-field" type="password" class="form-control" required type="password" id="password" name="password">
-                            <label class="form-control-placeholder" for="password">Password</label>
+                            <label class="form-control-placeholder" for="password">Password*</label>
                         </div>
                         <div class="form-group">
                             <input id="password-field" type="password" class="form-control" required type="cfm_password" id="cfm_password" name="cfm_password">
-                            <label class="form-control-placeholder" for="cfm_password">Confirm Password</label>
+                            <label class="form-control-placeholder" for="cfm_password">Confirm Password*</label>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
                         </div>
                         <div class="form-group d-md-flex">
+                            <p class="h6" id="compulse">* are compulsary fields</p>
                         </div>
+                        <div>
+                            <p id="errormsg">
+                            </p>
+                        </div>
+                        <script>
+                            var errormsg = getCookie("errorMsg");
+                            if (errormsg == null) {
+                                errormsg = " ";
+                            }
+                            document.getElementById('errormsg').innerHTML += errormsg;
+                        </script>
                     </form>
                 </div>
             </div>
