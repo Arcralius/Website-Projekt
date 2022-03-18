@@ -38,11 +38,6 @@
     if ($success) {
         session_destroy();
         session_start();
-        if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 1800)) {
-            session_unset(); 
-            session_destroy();
-        }
-        $_SESSION['start'] = time();
         $_SESSION["role"] = $role;
         $_SESSION["username"] = $username;
         

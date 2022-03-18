@@ -12,6 +12,13 @@
 
           <?php
           session_start();
+
+          if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 1800)) {
+            session_unset();
+            session_destroy();
+          }
+          $_SESSION['start'] = time();
+
           if (!isset($_SESSION["role"])) {
             echo '</ul>';
             echo '<form action="signin.php">';
