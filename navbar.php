@@ -21,7 +21,7 @@
             echo '</form>';
           } else {
             echo '<li class="nav-item"><a class="nav-link" href="#!">Account</a></li>';
-            if ($_SESSION["role"] = "A") {
+            if ($_SESSION["role"] == "A") {
               echo '<li class="nav-item"><a class="nav-link" href="#!">Admin</a></li>';
             }
             echo '</ul>';
