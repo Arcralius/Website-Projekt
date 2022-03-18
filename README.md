@@ -1,5 +1,12 @@
 # Website-Projekt
 
+## V1.43
+### Patch Notes
+
++ Added cart and dynamic checkout page with Ajax
++ Implemented usage of db-config.ini
++ Edited paths for resources and redirects
+
 ## V1.42
 ### Patch Notes
 
