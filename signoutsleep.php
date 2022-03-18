@@ -10,7 +10,7 @@
 
     <script>
         sleep(10000);
-        window.location.href = "/Website-Projekt/main.php";
+        window.location.href = "main.php";
 
     </script>
 

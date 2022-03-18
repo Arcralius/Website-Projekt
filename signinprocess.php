@@ -42,12 +42,12 @@
         $_SESSION["username"] = $username;
         
         echo '<script>';
-        echo 'window.location.href = "/Website-Projekt/account.php";';
+        echo 'window.location.href = "account.php";';
         echo '</script>';
     } else {
         echo '<script>';
         echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
-        echo 'window.location.href = "/Website-Projekt/signin.php";';
+        echo 'window.location.href = "signin.php";';
         echo '</script>';
     }
 
@@ -62,14 +62,9 @@
     function authenticateUser()
     {
         global $errorMsg, $success, $fname, $lname, $username, $password_hashed, $role, $username;
-        $servername = "localhost";
-        $dbusername = "arcralius";
-        $dbpassword = "password";
-        $dbname = "ict1004_assignment";
-
-
-        // Create connection
-        $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+        $config = parse_ini_file("../../private/db-config.ini");
+        $conn = new mysqli($config["servername"], $config["username"],
+            $config["password"], $config["dbname"]);
         // Check connection
         if ($conn->connect_error) {
             $errorMsg = "Connection failed: " . $conn->connect_error;

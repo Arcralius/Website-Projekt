@@ -51,7 +51,7 @@
                             <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
                         </div>
                         <div class="form-group d-md-flex">
-                            <p class="h6" id="compulse">* are compulsary fields</p>
+                            <p class="h6" id="compulse">* are compulsory fields</p>
                         </div>
                         <div>
                             <p id="errormsg">

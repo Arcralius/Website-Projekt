@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="center">
-    <h1 class="text-left, text-right, text-center"> Please wait while sign you out</h1>
+    <h1 class="text-left, text-right, text-center"> Please wait while we sign you out</h1>
 </div>
     <script>
         setTimeout(() => {  window.location = 'main.php'; }, 2000);

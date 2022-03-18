@@ -105,14 +105,14 @@
         else {
             echo '<script>';
             echo 'createCookie("errorMsg", "Username or Email has been taken.", 1);';
-            echo 'window.location.href = "/Website-Projekt/signup.php";';
+            echo 'window.location.href = "signup.php";';
             echo '</script>';
         }
 
     } else {
         echo '<script>';
         echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
-        echo 'window.location.href = "/Website-Projekt/signup.php";';
+        echo 'window.location.href = "signup.php";';
         echo '</script>';
     }
 
@@ -127,13 +127,10 @@
     function saveMemberToDB()
     {
         global $errorMsg, $success, $fname, $lname, $username, $password, $email;
-        $servername = "localhost";
-        $dbusername = "arcralius";
-        $dbpassword = "password";
-        $dbname = "ict1004_assignment";
-
-        // Create database connection.
-        $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+        
+        $config = parse_ini_file("../../private/db-config.ini");
+        $conn = new mysqli($config["servername"], $config["username"],
+            $config["password"], $config["dbname"]);
 
         $username = mysqli_real_escape_string($conn, $username);
         $email = mysqli_real_escape_string($conn, $email);
@@ -160,7 +157,5 @@
         }
         $conn->close();
     }
-
-
     ?>
 </body>

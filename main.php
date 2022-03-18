@@ -37,14 +37,10 @@
 
     function printproducts()
     {
-        $servername = "localhost";
-        $username = "arcralius";
-        $password = "password";
-        $dbname = "ict1004_assignment";
-
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        $config = parse_ini_file("../../private/db-config.ini");
+        $conn = new mysqli($config["servername"], $config["username"],
+            $config["password"], $config["dbname"]);
+        
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
