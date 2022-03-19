@@ -1,5 +1,10 @@
 # Website-Projekt
 
+## V1.44
+### Patch Notes
+
++ CRUD functionality available for admin on orders, products, promotions table
+
 ## V1.43
 ### Patch Notes
 
