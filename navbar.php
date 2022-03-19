@@ -33,7 +33,7 @@
           } else {
             echo '<li class="nav-item"><a class="nav-link" href="#!">Account</a></li>';
             if ($_SESSION["role"] == "A") {
-              echo '<li class="nav-item"><a class="nav-link" href="#!">Admin</a></li>';
+              echo '<li class="nav-item"><a class="nav-link" href="adminhome.php">Admin</a></li>';
             }
             echo '</ul>';
             echo '<form action="checkout.php" class="d-flex">';

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <head>
-    <title>test</title>
+    <title>Update Products</title>
     <?php
     include 'header.php';
     ?>
