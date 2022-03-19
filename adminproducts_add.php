@@ -10,7 +10,9 @@
 <body>
     <?php
     include 'navbar.php';
+    include 'adminsession.php';
     ?>
+    
 
     <main class="container">
             <h1>Add Products</h1>

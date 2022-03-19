@@ -10,8 +10,10 @@
 <body>
     <?php
     include 'navbar.php';
+    include 'adminsession.php';
     ?>
     
+    <main class="container">
     <?php
 
 		$p_name = $p_desc = $p_category = $p_image = $p_thumbnail = $p_price = $p_quantity = $errorMsg = "";
@@ -112,5 +114,6 @@
         }
 		
 	?>
+    </main>
 
 </body>

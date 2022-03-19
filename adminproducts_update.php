@@ -10,10 +10,12 @@
 <body>
     <?php
         include 'navbar.php';
+        include 'adminsession.php';
     ?>
 
     <main class="container">
     <?php 
+    
     require("conn.php");
     function sanitize_input($data) {
             $data = trim($data);
@@ -33,13 +35,6 @@
 
 
 
-            /**$sql = "UPDATE `products` SET `product_name`='$p_name',`product_desc`='$p_desc',`product_category`='$p_category',`product_image`='$p_image',`$p_thumbnail`='product_thumbnail',`$p_price`='product_price',`$p_quantity`='product_quantity' WHERE `product_id`='$product_id'"; 
-            $result = $conn->query($sql); 
-            if ($result == TRUE) {
-                echo "Record updated successfully.";
-            }else{
-                echo "Error:" . $sql . "<br>" . $conn->error;
-            }**/
             $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_desc`=?,`product_category`=?,
 `product_image`=?,`product_thumbnail`=?,`product_price`=?,`product_quantity`=? WHERE `product_id`=?");
             // Bind & execute the query statement:
@@ -71,7 +66,7 @@
             } 
             
         ?>
-
+        
             <h1>Update Products</h1>
 
             <form action="" method="post">
@@ -110,12 +105,12 @@
                 </div>
                 <div class="form-group">
                 <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
-                <input type="submit" value="update" name="update">
                 </div>
               </fieldset>
             </form> 
             </body>
-            </html> 
+            </html>
+            
         <?php
         } else{ 
             header('Location: adminproduct.php');

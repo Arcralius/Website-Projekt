@@ -10,29 +10,19 @@
 <body>
     <?php
     include 'navbar.php';
+    include 'adminsession.php';
     ?>
 
     <?php
+    
 		require("conn.php");
 
-		/**$sql = "SELECT * FROM products";
-		$result = $conn->query($sql);
-
-		if ($result->num_rows > 0) {
-		  // output data of each row
-		  while($row = $result->fetch_assoc()) {
-			echo "id: " . $row["product_id"] . " - desc: " . $row["product_name"] . " " . $row["product_price"] . $row["product_quantity"]. "<br>";
-		  }
-		} else {
-		  echo "0 results";
-		}
-		$conn->close();**/
 
 		$sql = "SELECT * FROM products";
 		$result = $conn->query($sql);
 
 	?> 
-
+    
 	<div class="container">
     <p>
         <a href="adminproducts_add.php" class="btn btn-primary my-2">Add products</a>
@@ -51,11 +41,12 @@
             <th>Quantity</th>
         </tr>
         </thead>
-        <tbody> 
+        <tbody>
             <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
             ?>
+            
                         <tr>
                         <td><?php echo $row['product_id']; ?></td>
                         <td><?php echo $row['product_name']; ?></td>
@@ -67,7 +58,7 @@
                         <td><?php echo $row['product_quantity']; ?></td>
 
                         <td><a class="btn btn-info" href="adminproducts_update.php?product_id=<?php echo $row['product_id']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" href="adminproducts_delete.php?product_id=<?php echo $row['product_id']; ?>">Delete</a></td>
-                        </tr>   
+                        </tr>
             <?php       }
                 }
             ?>
