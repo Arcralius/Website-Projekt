@@ -34,7 +34,6 @@
             $p_quantity = sanitize_input((int)$_POST['p_quantity']);
 
 
-
             $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_desc`=?,`product_category`=?,
 `product_image`=?,`product_thumbnail`=?,`product_price`=?,`product_quantity`=? WHERE `product_id`=?");
             // Bind & execute the query statement:

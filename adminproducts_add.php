@@ -17,7 +17,7 @@
     <main class="container">
             <h1>Add Products</h1>
             
-            <form action="adminproducts_add_p.php" method="post">
+            <form action="adminproducts_add_p.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                 <label for="p_name">Product Name:</label>
                 <input class="form-control" type="text" id="p_name" required maxlength="45" name="p_name"
@@ -35,14 +35,16 @@
                 </div>
                 <div class="form-group">
                 <label for="p_image">Image:</label>
-                <input class="form-control" type="text" id="p_image" required maxlength="45" required name="p_image"
-                       placeholder="Enter image link">
+                <!-- HTML5 Input Form  -->
+                <input id="file" type="file" name="file" />
                 </div>
                 <div class="form-group">
                 <label for="p_thumbnail">Image thumbnail:</label>
-                <input class="form-control" type="text" id="p_thumbnail" required maxlength="45" required name="p_thumbnail"
-                       placeholder="Enter thumbnail link">
+                <!-- HTML5 Input Form  -->
+                <input id="file2" type="file" name="file2" />
                 </div>
+
+
                 <div class="form-group">
                 <label for="p_price">Price:</label>
                 <input class="form-control" type="number" step=0.01 id="p_price" required maxlength="11" required name="p_price"

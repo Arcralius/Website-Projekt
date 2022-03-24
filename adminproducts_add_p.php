@@ -39,19 +39,7 @@
             $p_category = sanitize_input($_POST["p_category"]);
         }
 
-        if (empty($_POST["p_image"])) {
-            $errorMsg .= "Image link is required.<br>";
-            $success = false;
-        } else {
-            $p_image = sanitize_input($_POST["p_image"]);
-        }
-
-        if (empty($_POST["p_thumbnail"])) {
-            $errorMsg .= "Image thumbnail link is required.<br>";
-            $success = false;
-        } else {
-            $p_thumbnail = sanitize_input($_POST["p_thumbnail"]);
-        }
+        
         if (empty($_POST["p_price"])) {
             $errorMsg .= "Price is required.<br>";
             $success = false;
@@ -64,6 +52,47 @@
         } else {
             $p_quantity = sanitize_input((int)$_POST["p_quantity"]);
         }
+
+        
+
+        /* Get the name of the file uploaded to Apache */
+        $filename = $_FILES['file']['name'];
+
+        if (($_FILES["file"]["type"] == "image/gif") || ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/png")){
+            /* Prepare to save the file upload to the upload folder */
+            $location = "img/".$filename;
+            /* Permanently save the file upload to the upload folder */
+            if ( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) { 
+              echo '<p>The HTML5 and php file upload was a success!</p>'; 
+            } else { 
+              echo '<p>The php and HTML5 file upload failed.</p>'; 
+            }
+        }
+        else {
+        //error
+        echo "Wrong Image.";
+        $success = false;
+        }
+
+        if (($_FILES["file2"]["type"] == "image/gif") || ($_FILES["file2"]["type"] == "image/jpeg") || ($_FILES["file2"]["type"] == "image/jpg") || ($_FILES["file2"]["type"] == "image/png")){
+            /* Get the name of the file uploaded to Apache */
+            $filename2 = $_FILES['file2']['name'];
+            /* Prepare to save the file upload to the upload folder */
+            $location2 = "img/".$filename2;
+            /* Permanently save the file upload to the upload folder */
+            if ( move_uploaded_file($_FILES['file2']['tmp_name'], $location2) ) { 
+              echo '<p>The HTML5 and php file upload was a success!</p>';
+            } else { 
+              echo '<p>The php and HTML5 file upload failed.</p>'; 
+            }
+        } 
+        else {
+            //error
+            echo "Wrong Image.";
+            $success = false;
+        }
+
+        
 
         if ($success) {
             saveProductToDB();
@@ -87,7 +116,7 @@
             return $data;
         }
         function saveProductToDB() {
-            global $p_name, $p_desc, $p_category, $p_image, $p_thumbnail, $p_price, $p_quantity, $errorMsg, $success;
+            global $p_name, $p_desc, $p_category, $p_image, $p_thumbnail, $p_price, $p_quantity, $location, $location2, $errorMsg, $success;
             // Create database connection.
             /**$config = parse_ini_file('../../private/db-config.ini');
             $conn = new mysqli($config['servername'], $config['username'],
@@ -103,7 +132,7 @@
                 $stmt = $conn->prepare("INSERT INTO products (product_name, product_desc, product_category, product_image, product_thumbnail,
  product_price, product_quantity) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 // Bind & execute the query statement:
-                $stmt->bind_param("sssssdi", $p_name, $p_desc, $p_category, $p_image, $p_thumbnail, $p_price, $p_quantity);
+                $stmt->bind_param("sssssdi", $p_name, $p_desc, $p_category, $location, $location2, $p_price, $p_quantity);
                 if (!$stmt->execute()) {
                     $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                     $success = false;
