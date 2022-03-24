@@ -21,7 +21,6 @@
         <div class="container" id="products">
             <section>
                     <?php
-                    session_start();
                     if (isset($_SESSION["role"])) {
                         echo '<div class="carttable"></div>';
                         //getCart();
