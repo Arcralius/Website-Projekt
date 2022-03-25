@@ -1,5 +1,15 @@
 # Website-Projekt
 
+## V1.45
+### Patch Notes
+
++ Added user page 
++ Added input validation for user input
++ Added user edit last name, first name
++ Added user edit password
++ Added delete password
++ Added page redirect when not admin or logged in
+
 ## V1.44
 ### Patch Notes
 
