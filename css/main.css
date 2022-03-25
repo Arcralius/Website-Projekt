@@ -61,6 +61,14 @@ div.feature a {
   color: red;
 }
 
+#errorsign {
+  color: red;
+}
+
+#succmessage {
+  color: green;
+}
+
 .text-left {
   text-align: left;
 }

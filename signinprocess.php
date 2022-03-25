@@ -21,7 +21,7 @@
         //set the following the false so that the user inputs will not be added to database should it not meet the formatting requirements.
         $inputSuccess = false;
     } else {
-        $username = sanitize_input($_POST["username"]);
+        $formusername = sanitize_input($_POST["username"]);
     }
 
     if (empty($_POST["password"])) {
@@ -61,11 +61,15 @@
 
     function authenticateUser()
     {
-        global $errorMsg, $success, $fname, $lname, $username, $password_hashed, $role, $username;
+        global $errorMsg, $success, $fname, $lname, $password_hashed, $role, $username, $formusername;
         $config = parse_ini_file("../../private/db-config.ini");
         $conn = new mysqli($config["servername"], $config["username"],
             $config["password"], $config["dbname"]);
         // Check connection
+
+        $formusername = mysqli_real_escape_string($conn, $formusername);
+        $password = mysqli_real_escape_string($conn, $_POST["password"]);
+
         if ($conn->connect_error) {
             $errorMsg = "Connection failed: " . $conn->connect_error;
             $success = false;
@@ -73,7 +77,7 @@
             // Prepare the statement:         
             $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
             // Bind & execute the query statement:         
-            $stmt->bind_param("s", $username);
+            $stmt->bind_param("s", $formusername);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
@@ -86,17 +90,17 @@
                 $username = $row["username"];
                 $password_hashed = $row["password"];
                 // Check if the password matches:
-                if (!password_verify($_POST["password"], $password_hashed)) {
+                if (!password_verify($password, $password_hashed)) {
 
                     // Don't be too specific with the error message - hackers don't                 
 
                     // need to know which one they got right or wrong. :)                 
 
-                    $errorMsg = "Email not found or password doesn't match.<br>";
+                    $errorMsg = "Username not found or password doesn't match.<br>";
                     $success = false;
                 }
             } else {
-                $errorMsg = "Email not found or password doesn't match.<br>";
+                $errorMsg = "Username not found or password doesn't match.<br>";
                 $success = false;
             }
             $stmt->close();

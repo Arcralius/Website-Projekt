@@ -21,10 +21,10 @@
             <p>
                 <a href="adminproducts.php" class="btn btn-primary my-2">View Products</a>
             </p>
-			<p>
+            <p>
                 <a href="adminorders.php" class="btn btn-primary my-2">View Orders</a>
             </p>
-			<p>
+            <p>
                 <a href="adminpromotions.php" class="btn btn-primary my-2">View Promotions</a>
             </p>
         </div>

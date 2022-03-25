@@ -43,7 +43,7 @@
     if (empty($_POST["fname"])) {
         $fname = "";
     } else if (!preg_match("/^([a-zA-Z ])+$/", $_POST["fname"])) {
-        $errorMsg .= "Invalid last Name.<br>";
+        $errorMsg .= "Invalid first Name.<br>";
         $success = false;
     } else {
         $fname = sanitize_input($_POST["fname"]);
@@ -92,15 +92,10 @@
     if ($success) {
         saveMemberToDB();
         if($success) {
-            echo "<main class='container' id='process_register'>";
-            echo "<hr/>";
-            echo "<h1>Your registration successful!</h1>";
-            echo "<h4>Thank you for signing up, " . $fname . " " . $lname . "</h4>";
-            echo '<form action="signin.php" method="post">';
-            echo '<button class="btn btn-success" type="submit">Log-in</button>';
-            echo '</form>';
-            echo "</main>";
-            echo "<h1>$result</h1>";
+            echo '<script>';
+            echo 'createCookie("succmessage", "Sign up success!", 1);';
+            echo 'window.location.href = "signin.php";';
+            echo '</script>';
         }
         else {
             echo '<script>';

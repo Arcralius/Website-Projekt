@@ -13,7 +13,7 @@
     <?php
     include 'navbar.php';
     ?>
-    <div class="container" id="main">
+    <div class="card mb-4">
         <div class="row justify-content-center">
             <div class="col-md-7 col-lg-5">
                 <div class="login-wrap p-4 p-md-5">

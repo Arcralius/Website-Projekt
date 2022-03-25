@@ -12,26 +12,28 @@
 
           <?php
           session_start();
-
+          
           if (isset($_SESSION['start']) && (time() - $_SESSION['start'] > 1800)) {
             session_unset();
             session_destroy();
           }
           $_SESSION['start'] = time();
           $cart;
-          if (!empty($_SESSION["cart"])) 
+          if (!empty($_SESSION["cart"]))
             $cart = count($_SESSION["cart"]);
           else
             $cart = 0;
           if (!isset($_SESSION["role"])) {
             echo '</ul>';
+            
             echo '<form action="signin.php">';
             echo '<button class="btn btn-outline-dark" type="submit" id="signin">';
             echo 'Sign-In';
             echo '</button>';
             echo '</form>';
           } else {
-            echo '<li class="nav-item"><a class="nav-link" href="#!">Account</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="account.php">Account</a></li>';
+            
             if ($_SESSION["role"] == "A") {
               echo '<li class="nav-item"><a class="nav-link" href="adminhome.php">Admin</a></li>';
             }
@@ -49,10 +51,7 @@
             echo '</button>';
             echo '</form>';
           }
-
-
           ?>
-
         </div>
     </div>
   </div>

@@ -13,7 +13,8 @@
     <?php
     include 'navbar.php';
     ?>
-    <div class="container" id="main">
+
+    <div class="card mb-4">
         <div class="row justify-content-center">
             <div class="col-md-7 col-lg-5">
                 <div class="login-wrap p-4 p-md-5">
@@ -38,11 +39,19 @@
                     <p class="text-center h6">Not a member? <a data-toggle="tab" href="signup.php"><em>Sign Up</em></a></p>
                     <p class="text-center"><a href="iforgor.php"><em>Forgot Password?</em></a></p>
                     <div>
+                        <p id="succmessage">
+                        </p>
                         <p id="errormsg">
                         </p>
                     </div>
                 </div>
                 <script>
+                    var succmessage = getCookie("succmessage");
+                    if (succmessage == null) {
+                        succmessage = " ";
+                    }
+                    document.getElementById('succmessage').innerHTML += succmessage;
+
                     var errormsg = getCookie("errorMsg");
                     if (errormsg == null) {
                         errormsg = " ";
