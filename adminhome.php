@@ -27,6 +27,9 @@
             <p>
                 <a href="adminpromotions.php" class="btn btn-primary my-2">View Promotions</a>
             </p>
+            <p>
+                <a href="adminusers.php" class="btn btn-primary my-2">View Users</a>
+            </p>
         </div>
     </section>
 
