@@ -107,4 +107,7 @@ $(document).ready(function () {
     activateMenu();
     showCart();
     modal();
+    $("#discount").change(function() {
+        $("#discountval").html(this.value);
+    });
 });

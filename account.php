@@ -47,7 +47,7 @@
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputFirstName">Change First name</label>
                             <?php
-                            echo '<input class="form-control" id="inputFirstName" type="text" name="fname" placeholder=' . $fname . ' value=' . $fname . '> ';
+                            echo '<input class="form-control" id="inputFirstName" type="text" name="fname" placeholder="' . $fname . '" value="' . $fname . '"> ';
                             ?>
 
                         </div>
@@ -55,7 +55,7 @@
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputLastName">Change Last name</label>
                             <?php
-                            echo '<input class="form-control" id="inputLastName" type="text" requied name="lname" placeholder=' . $lname . ' value=' . $lname . '> ';
+                            echo '<input class="form-control" id="inputLastName" type="text" requied name="lname" placeholder="' . $lname . '" value="' . $lname . '"> ';
                             ?>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         <label class="small mb-1" for="inputEmailAddress">Change Email address</label>
 
                         <?php
-                        echo '<input class="form-control" id="inputEmailAddress" type="email" requied name="email" placeholder=' . $email . ' value=' . $email . '> ';
+                        echo '<input class="form-control" id="inputEmailAddress" type="email" requied name="email" placeholder="' . $email . '" value="' . $email . '"> ';
                         ?>
                     </div>
                     <!-- Save changes button-->

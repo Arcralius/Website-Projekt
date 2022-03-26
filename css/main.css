@@ -88,11 +88,9 @@ div.feature a {
   height: 200px;
 }
 
-table.cart {
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-    border: 3px solid gray;
+img.cart {
+    width: auto;
+    max-height: 150px;
 }
 
 th, td {

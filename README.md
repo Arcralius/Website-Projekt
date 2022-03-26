@@ -1,5 +1,13 @@
 # Website-Projekt
 
+## V1.46
+### Patch Notes
+
++ Updated cart design
++ Added total cost to cart
++ Added Promotions (discounts for products) and factored it into cart cost
++ Updated Promotions CRUD on admin pages
+
 ## V1.45
 ### Patch Notes
 

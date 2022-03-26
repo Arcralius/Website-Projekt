@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <head>
-    <title>test</title>
+    <title>Petshop</title>
     <?php
     include 'header.php';
     ?>
@@ -66,6 +66,7 @@
                 echo '</div>';
                 echo '</div>';
                 echo '</a>';
+                echo '<button name="addtocart" value="' . $row['product_id'] .'"class="btn btn-success">Add to Cart</button>';
                 echo '</div>';
             }
         } else if ($result->num_rows > 0) {
@@ -86,6 +87,7 @@
                 echo '</div>';
                 echo '</div>';
                 echo '</a>';
+                echo '<button name="addtocart" value="' . $row['product_id'] .'"class="btn btn-success">Add to Cart</button>';
                 echo '</div>';
             }
         } else {
