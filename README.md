@@ -1,6 +1,6 @@
 # Website-Projekt
 
-## V1.46
+## V1.47
 ### Patch Notes
 + Added products page (products.php)
 + Added individual product page (product.php) and added stock checking
