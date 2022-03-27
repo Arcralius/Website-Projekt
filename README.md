@@ -2,6 +2,11 @@
 
 ## V1.46
 ### Patch Notes
++ Added products page (products.php)
++ Added individual product page (product.php) and added stock checking
+
+## V1.46
+### Patch Notes
 
 + Updated cart design
 + Added total cost to cart
