@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <head>
-    <title>Admin Home Page</title>
+
     <?php
     include 'header.php';
     ?>
