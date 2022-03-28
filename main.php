@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <head>
-    <title>Petshop</title>
+    
     <?php
     include 'header.php';
     ?>

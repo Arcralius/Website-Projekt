@@ -8,8 +8,6 @@
         <li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
         <li class="nav-item"><a class="nav-link" href="#!">Promotions</a></li>
 
-        <div class="d-flex">
-
           <?php
           session_start();
           
@@ -25,12 +23,13 @@
             $cart = 0;
           if (!isset($_SESSION["role"])) {
             echo '</ul>';
-            
+            echo '<div class="p-1">';
             echo '<form action="signin.php">';
-            echo '<button class="btn btn-outline-dark" type="submit" id="signin">';
+            echo '<button class="btn btn-outline-dark" type="submit" id="signin" style="width:100%;">';
             echo 'Sign-In';
             echo '</button>';
             echo '</form>';
+            echo '</div>';
           } else {
             echo '<li class="nav-item"><a class="nav-link" href="account.php">Account</a></li>';
             
@@ -38,21 +37,24 @@
               echo '<li class="nav-item"><a class="nav-link" href="adminhome.php">Admin</a></li>';
             }
             echo '</ul>';
-            echo '<form action="checkout.php" class="d-flex">';
+            echo '<form action="checkout.php">';
+            echo '<div class="p-1">';
             echo '<button class="btn btn-outline-dark" type="submit" id="cart">';
             echo '<i class="bi-cart-fill me-1"></i>';
             echo 'Cart';
             echo '<span class="badge bg-dark text-white ms-1 rounded-pill cartitems">' . $cart . '</span>';
             echo '</button>';
+            echo '</div>';
             echo '</form>';
+            echo '<div class="p-1">';
             echo '<form action="signoutprocess.php">';
-            echo '<button class="btn btn-outline-dark" type="submit" id="signin">';
+            echo '<button class="btn btn-outline-dark" type="submit" id="signin" style="width:100%;">';
             echo 'Sign-Out';
             echo '</button>';
             echo '</form>';
+            echo '</div>';
           }
           ?>
-        </div>
     </div>
   </div>
 </nav>
