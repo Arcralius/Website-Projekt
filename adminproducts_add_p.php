@@ -70,7 +70,7 @@
         }
         else {
         //error
-        echo "Wrong Image.";
+        $errorMsg .= "Wrong Image.<br>";
         $success = false;
         }
 
@@ -88,7 +88,7 @@
         } 
         else {
             //error
-            echo "Wrong Image.";
+            $errorMsg .= "Wrong Image.<br>";
             $success = false;
         }
 
@@ -102,10 +102,10 @@
             echo "<h3>Product entry added!</h3>";
             echo "<br><button class=\"btn btn-success\" type=\"submit\" onclick=\"window.location.href='adminproducts.php'\">Back to product table</button>";
         } else {
-            echo "<h3>Oops!</h3>";
-            echo "<h4>The following errors were detected:</h4>";
-            echo "<p>" . $errorMsg . "</p>";
-            echo "<br><button class=\"btn btn-danger\" type=\"submit\" onclick=\"window.location.href='adminproducts_add.php'\">Return to add</button>";
+            echo '<script>';
+            echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+            echo 'window.location.href = "adminproducts_add.php";';
+            echo '</script>';
         }
 
 //Helper function that checks input for malicious or unwanted content.

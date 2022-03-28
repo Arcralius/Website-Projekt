@@ -37,7 +37,6 @@
                         </div>
                     </form>
                     <p class="text-center h6">Not a member? <a data-toggle="tab" href="signup.php"><em>Sign Up</em></a></p>
-                    <p class="text-center"><a href="iforgor.php"><em>Forgot Password?</em></a></p>
                     <div>
                         <p id="succmessage">
                         </p>
