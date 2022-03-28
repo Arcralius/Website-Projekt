@@ -99,8 +99,10 @@
         }
 
         if ($success) {
-            echo "<h3>Product entry added!</h3>";
-            echo "<br><button class=\"btn btn-success\" type=\"submit\" onclick=\"window.location.href='adminproducts.php'\">Back to product table</button>";
+            echo '<script>';
+            echo 'createCookie("succmessage", "Add success!", 1);';
+            echo 'window.location.href = "adminproducts.php";';
+            echo '</script>';
         } else {
             echo '<script>';
             echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';

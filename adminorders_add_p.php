@@ -42,17 +42,20 @@
 
         if ($success) {
             savePromotionToDB();
+            if ($success) {
+                echo '<script>';
+                echo 'createCookie("succmessage", "Order add success!", 1);';
+                echo 'window.location.href = "adminorders.php";';
+                echo '</script>';
+            } else {
+                echo '<script>';
+                echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+                echo 'window.location.href = "adminorders_add.php";';
+                echo '</script>';
+            }
         }
 
-        if ($success) {
-            echo "<h3>Order entry added!</h3>";
-            echo "<br><button class=\"btn btn-success\" type=\"submit\" onclick=\"window.location.href='adminorders.php'\">Back to order table</button>";
-        } else {
-            echo "<h3>Oops!</h3>";
-            echo "<h4>The following errors were detected:</h4>";
-            echo "<p>" . $errorMsg . "</p>";
-            echo "<br><button class=\"btn btn-danger\" type=\"submit\" onclick=\"window.location.href='adminorders_add.php'\">Return to add</button>";
-        }
+
 
 //Helper function that checks input for malicious or unwanted content.
         function sanitize_input($data) {
@@ -78,7 +81,7 @@
                 // Bind & execute the query statement:
                 $stmt->bind_param("iis", $pid, $uid, $s_date);
                 if (!$stmt->execute()) {
-                    $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+                    $errorMsg = "User/Product ID not found";
                     $success = false;
                 }
                 $stmt->close();

@@ -36,8 +36,10 @@
                 $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                 $success = false;
             } else {
-                echo "<h3>User role updated!</h3>";
-                echo "<br><button class=\"btn btn-success\" type=\"submit\" onclick=\"window.location.href='adminusers.php'\">Back to user table</button>";
+                echo '<script>';
+                echo 'createCookie("succmessage", "Update success!", 1);';
+                echo 'window.location.href = "adminusers.php";';
+                echo '</script>';
             }
             $stmt->close();
         }
@@ -84,16 +86,14 @@
                         <div class="form-group">
                             <label for="role">Role:</label>
                             <select name="role" id="role" value="<?php echo $role; ?>">
-                            <?php if ($role == "U")
-                            {
-                                echo '<option value="U">U</option>';
-                                echo '<option value="A">A</option>';
-                            }
-                            else {
-                                echo '<option value="A">A</option>';
-                                echo '<option value="U">U</option>';
-                            } 
-                            ?>
+                                <?php if ($role == "U") {
+                                    echo '<option value="U">U</option>';
+                                    echo '<option value="A">A</option>';
+                                } else {
+                                    echo '<option value="A">A</option>';
+                                    echo '<option value="U">U</option>';
+                                }
+                                ?>
                             </select>
                         </div>
 
@@ -101,8 +101,30 @@
                             <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
                         </div>
                     </fieldset>
+
+                    <div>
+                        <p id="succmessage">
+                        </p>
+                        <p id="errormsg">
+                        </p>
+                    </div>
+
                 </form>
 </body>
+
+<script>
+    var succmessage = getCookie("succmessage");
+    if (succmessage == null) {
+        succmessage = " ";
+    }
+    document.getElementById('succmessage').innerHTML += succmessage;
+
+    var errormsg = getCookie("errorMsg");
+    if (errormsg == null) {
+        errormsg = " ";
+    }
+    document.getElementById('errormsg').innerHTML += errormsg;
+</script>
 
 </html>
 

@@ -12,9 +12,9 @@
     include 'navbar.php';
     include 'adminsession.php';
     ?>
-    
+
     <main class="container">
-    <?php
+        <?php
         $prod_id = $discount = $errorMsg = $success = $sdate = $edate = "";
         $success = true;
         if (empty($_POST["prod_id"])) {
@@ -30,50 +30,54 @@
         } else {
             $discount = sanitize_input($_POST["discount"]);
         }
-        
+
         if (empty($_POST["sdate"])) {
             $errorMsg .= "Starting date is required.<br>";
             $success = false;
         } else {
             $sdate = sanitize_input($_POST["sdate"]);
         }
-        
+
         if (empty($_POST["edate"])) {
             $errorMsg .= "End date is required.<br>";
             $success = false;
         } else {
             $edate = sanitize_input($_POST["edate"]);
         }
-        
+
         if ($sdate > $edate) {
             $errorMsg .= "The starting date cannot be after the end date.<br>";
             $success = false;
         }
-        
+
         checkPromo();
-        
+
         if ($success) {
             savePromotionToDB();
         }
 
         if ($success) {
-            echo "<h3>Promotion entry added!</h3>";
-            echo "<br><button class=\"btn btn-success\" type=\"submit\" onclick=\"window.location.href='adminpromotions.php'\">Back to promotion table</button>";
-            } else {
-            echo "<h3>Oops!</h3>";
-            echo "<h4>The following errors were detected:</h4>";
-            echo "<p>" . $errorMsg . "</p>";
-            echo "<br><button class=\"btn btn-danger\" type=\"submit\" onclick=\"window.location.href='adminpromotions_add.php'\">Return to adding promotions</button>";
+            echo '<script>';
+            echo 'createCookie("succmessage", "Addtion success!", 1);';
+            echo 'window.location.href = "adminpromotions.php";';
+            echo '</script>';
+        } else {
+            echo '<script>';
+            echo 'createCookie("errorMsg", "' . $errorMsg . '", 1);';
+            echo 'window.location.href = "adminpromotions_add.php";';
+            echo '</script>';
         }
 
-//Helper function that checks input for malicious or unwanted content.
-        function sanitize_input($data) {
+        //Helper function that checks input for malicious or unwanted content.
+        function sanitize_input($data)
+        {
             $data = trim($data);
             $data = stripslashes($data);
             $data = htmlspecialchars($data);
             return $data;
         }
-        function savePromotionToDB() {
+        function savePromotionToDB()
+        {
             global $prod_id, $discount, $sdate, $edate, $errorMsg, $success;
             // Create database connection.
             /**$config = parse_ini_file('../../private/db-config.ini');
@@ -94,33 +98,35 @@
                 // Bind & execute the query statement:
                 $stmt->bind_param("iiss", $prod_id, $discount, $sdate, $edate);
                 if (!$stmt->execute()) {
-                    $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+                    $errorMsg = "Product not found";
                     $success = false;
+                } else {
+                    $success = true;
                 }
                 $stmt->close();
             }
             $conn->close();
         }
-		
+
         function checkPromo()
         {
             global $prod_id, $sdate, $edate, $errorMsg, $success;
             require("conn.php");
-            $conn = new mysqli($config["servername"],$config["username"],
-                    $config["password"],$config["dbname"]);
-            if ($conn->connect_error)
-            {
+            $conn = new mysqli(
+                $config["servername"],
+                $config["username"],
+                $config["password"],
+                $config["dbname"]
+            );
+            if ($conn->connect_error) {
                 $errorMsg = "Connection failed: " . $conn->connect_error;
                 $success = false;
-            }
-            else
-            {
+            } else {
                 $stmt = $conn->prepare("SELECT * FROM promotions WHERE prod_id=?");
                 $stmt->bind_param("i", $prod_id);
                 $stmt->execute();
                 $result = $stmt->get_result();
-                if ($result->num_rows > 0)
-                {
+                if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         if (($row['start_date']  <= $sdate && $row['end_date'] >= $sdate) || ($row['start_date']  <= $edate && $row['end_date'] >= $edate)) {
                             $errorMsg .= "<p>An existing promotion for that product is already in the date range specified.</p>";
@@ -133,7 +139,7 @@
             $conn->close();
             return;
         }
-	?>
+        ?>
     </main>
 
 </body>

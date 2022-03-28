@@ -22,11 +22,16 @@
             $sql = "DELETE FROM `products` WHERE `product_id`='$product_id'";
             $result = $conn->query($sql);
             if ($result == TRUE) {
-                echo "<h3>Product deleted successfully!</h3>";
-                echo "<br><button class=\"btn btn-success\" type=\"submit\" onclick=\"window.location.href='adminproducts.php'\">Back to product table</button>";
+                echo '<script>';
+                echo 'createCookie("succmessage", "Deletion success!", 1);';
+                echo 'window.location.href = "adminproducts.php";';
+                echo '</script>';
             }
             else{
-                echo "Error:" . $sql . "<br>" . $conn->error;
+                echo '<script>';
+                echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+                echo 'window.location.href = "adminproducts.php";';
+                echo '</script>';
             }
         }
 

@@ -15,7 +15,9 @@
 
     <main class="container">
     <?php 
-    
+    $success = true;
+
+
     require("conn.php");
     function sanitize_input($data) {
             $data = trim($data);
@@ -42,9 +44,18 @@
                 $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                 $success = false;
             }
-            else{
-                echo "<h3>Product entry updated!</h3>";
-                echo "<br><button class=\"btn btn-success\" type=\"submit\" onclick=\"window.location.href='adminproducts.php'\">Back to product table</button>";
+
+            if ($success) {
+                echo '<script>';
+                echo 'createCookie("succmessage", "Update success!", 1);';
+                echo 'window.location.href = "adminproducts.php";';
+                echo '</script>';
+            }
+            else {
+                echo '<script>';
+                echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+                echo 'window.location.href = "adminproducts.php";';
+                echo '</script>';
             }
             $stmt->close();
         } 
