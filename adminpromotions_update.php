@@ -25,41 +25,11 @@
             return $data;
         }
 
-        if (isset($_POST['update'])) {
-            $pid = $prod_id = $discount = 0;
-            $sdate = $edate = "";
-            $pid = sanitize_input((int)$_GET['promotion_id']);
-            $prod_id = sanitize_input((int)$_POST['prod_id']);
-            $discount = sanitize_input((int)$_POST['discount']);
-            $sdate = sanitize_input((string)$_POST['sdate']);
-            $edate = sanitize_input((string)$_POST['edate']);
 
-            $stmt = $conn->prepare("UPDATE `promotions` SET `prod_id`=?,`discount`=?, `start_date`=?, `end_date`=? WHERE `promotion_id`=?");
-            $pid = mysqli_real_escape_string($conn, $pid);
-            $prod_id = mysqli_real_escape_string($conn, $prod_id);
-            $discount = mysqli_real_escape_string($conn, $discount);
-            $sdate = mysqli_real_escape_string($conn, $sdate);
-            $edate = mysqli_real_escape_string($conn, $edate);
-            // Bind & execute the query statement:
-            $stmt->bind_param("iissi", $prod_id, $discount, $sdate, $edate, $pid);
-            if (!$stmt->execute()) {
-                echo '<script>';
-                echo 'createCookie("errorMsg", "' . $errorMsg . '", 1);';
-                echo 'window.location.href = "adminpromotions_update.php";';
-                echo '</script>';
-            } else {
-                echo '<script>';
-                echo 'createCookie("succmessage", "Update success!", 1);';
-                echo 'window.location.href = "adminpromotions.php";';
-                echo '</script>';
-            }
-            $stmt->close();
-        }
-
-        if (isset($_GET['promotion_id'])) {
+        if (isset($_POST['promotion_id'])) {
             $pid = $prod_id = 0;
             $prod_name = "";
-            $pid = $_GET['promotion_id'];
+            $pid = $_POST['promotion_id'];
             $conn = new mysqli(
                 $config["servername"],
                 $config["username"],
@@ -68,7 +38,7 @@
             );
             $stmt = $conn->prepare("SELECT * FROM `promotions` WHERE promotion_id=?;");
             $pid = mysqli_real_escape_string($conn, $pid);
-            $stmt->bind_param("d", $pid);
+            $stmt->bind_param("i", $pid);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
@@ -87,7 +57,7 @@
 
             <h1>Update Promotion</h1>
 
-            <form action="" method="post">
+            <form action="adminpromotions_update_process.php" method="post">
                 <fieldset>
                     <div class="form-group">
                         <label for="promotion_id">Promotion ID:</label>
@@ -126,6 +96,7 @@
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
                     </div>
+                    <input type="hidden" id="promotion_id" name="promotion_id" value="<?php echo $promotion_id; ?>">
                 </fieldset>
             </form>
             <div>

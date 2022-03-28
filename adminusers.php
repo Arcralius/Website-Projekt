@@ -49,8 +49,12 @@
                             <td><?php echo $row['username']; ?></td>
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['role']; ?></td>
-
-                            <td><a class="btn btn-info" href="adminusers_update.php?user_id=<?php echo $row['user_id']; ?>">Edit</a>&nbsp;</td>
+                            <td>
+                                <form action="adminusers_update.php" method="post">
+                                    <input type="hidden" id="user_id" name="user_id" value="<?php echo $row['user_id']; ?>">
+                                    <button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>
+                                </form>
+                            </td>
                         </tr>
                 <?php       }
                 }
@@ -60,17 +64,22 @@
         <div>
             <p id="succmessage">
             </p>
+            <p id="errormsg">
+            </p>
         </div>
-    </div>
 
+        <script>
+            var succmessage = getCookie("succmessage");
+            if (succmessage == null) {
+                succmessage = " ";
+            }
+            document.getElementById('succmessage').innerHTML += succmessage;
 
-
-    <script>
-        var succmessage = getCookie("succmessage");
-        if (succmessage == null) {
-            succmessage = " ";
-        }
-        document.getElementById('succmessage').innerHTML += succmessage;
-    </script>
+            var errormsg = getCookie("errorMsg");
+            if (errormsg == null) {
+                errormsg = " ";
+            }
+            document.getElementById('errormsg').innerHTML += errormsg;
+        </script>
 
 </body>

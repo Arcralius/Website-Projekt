@@ -9,34 +9,45 @@
 
 <body>
     <?php
-        include 'navbar.php';
-        include 'adminsession.php';
+    include 'navbar.php';
+    include 'adminsession.php';
     ?>
 
     <main class="container">
-    <?php 
-    
+
+        <?php
+
         require("conn.php");
-        if (isset($_GET['product_id'])) {
-            $product_id = $_GET['product_id'];
-            $sql = "DELETE FROM `products` WHERE `product_id`='$product_id'";
-            $result = $conn->query($sql);
-            if ($result == TRUE) {
+
+
+        if (isset($_POST['product_id'])) {
+            $pid = mysqli_real_escape_string($conn, sanitize_input($_POST['product_id']));
+            $stmt = $conn->prepare("DELETE FROM products WHERE product_id = ?");
+            $stmt->bind_param("i", $pid);
+            echo "<h1>".$pid."</h1>";
+            if ($stmt->execute()) {
                 echo '<script>';
                 echo 'createCookie("succmessage", "Deletion success!", 1);';
                 echo 'window.location.href = "adminproducts.php";';
                 echo '</script>';
-            }
-            else{
+            } else {
                 echo '<script>';
-                echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+                echo 'createCookie("errorMsg", "An error occoured. Is product in promotion.", 1);';
                 echo 'window.location.href = "adminproducts.php";';
                 echo '</script>';
             }
         }
 
-    ?> 
-</main>
+        function sanitize_input($data)
+        {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+        ?>
+
+    </main>
 
 
 </body>

@@ -47,45 +47,61 @@
                     while ($row = $result->fetch_assoc()) {
                 ?>
 
-                        <tr>
-                            <td><?php echo $row['product_id']; ?></td>
-                            <td><?php echo $row['product_name']; ?></td>
-                            <td><?php echo $row['product_desc']; ?></td>
-                            <td><?php echo $row['product_category']; ?></td>
-                            <td><?php echo $row['product_image']; ?></td>
-                            <td><?php echo $row['product_thumbnail']; ?></td>
-                            <td><?php echo $row['product_price']; ?></td>
-                            <td><?php echo $row['product_quantity']; ?></td>
-
-                            <td><a class="btn btn-info" href="adminproducts_update.php?product_id=<?php echo $row['product_id']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" href="adminproducts_delete.php?product_id=<?php echo $row['product_id']; ?>">Delete</a></td>
-                        </tr>
-                <?php       }
+                <tr>
+                    <td><?php echo $row['product_id']; ?></td>
+                    <td><?php echo $row['product_name']; ?></td>
+                    <td><?php echo $row['product_desc']; ?></td>
+                    <td><?php echo $row['product_category']; ?></td>
+                    <td><?php echo $row['product_image']; ?></td>
+                    <td><?php echo $row['product_thumbnail']; ?></td>
+                    <td><?php echo $row['product_price']; ?></td>
+                    <td><?php echo $row['product_quantity']; ?></td>
+                    <td>
+                        <div class="col-sm-12 text-center">
+                            <?php
+                            echo '<form action="adminproducts_update.php" method="post">';
+                            echo '<input type="hidden" id="product_id" name="product_id" value="' . $row['product_id'] . '">';
+                            echo '<button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>';
+                            echo '</form>';
+                            ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo '<form action="adminproducts_delete.php" method="post">';
+                        echo '<input type="hidden" id="product_id" name="product_id" value="' . $row['product_id'] . '">';
+                        echo '<button type="submit" class="btn btn-danger btn-md" style=" width: 100px; display: inline-block; vertical-align: top;" >Delete</button>';
+                        echo '</form>';
+                        ?>
+                        </div>
+                    </td>
+                </tr>
+<?php       }
                 }
-                ?>
-            </tbody>
-        </table>
+?>
+</tbody>
+</table>
 
-        <div>
-            <p id="succmessage">
-            </p>
-            <p id="errormsg">
-            </p>
-        </div>
-        
-    </div>
+<div>
+    <p id="succmessage">
+    </p>
+    <p id="errormsg">
+    </p>
+</div>
 
-    <script>
-        var succmessage = getCookie("succmessage");
-        if (succmessage == null) {
-            succmessage = " ";
-        }
-        document.getElementById('succmessage').innerHTML += succmessage;
+</div>
 
-        var errormsg = getCookie("errorMsg");
-        if (errormsg == null) {
-            errormsg = " ";
-        }
-        document.getElementById('errormsg').innerHTML += errormsg;
-    </script>
+<script>
+    var succmessage = getCookie("succmessage");
+    if (succmessage == null) {
+        succmessage = " ";
+    }
+    document.getElementById('succmessage').innerHTML += succmessage;
+
+    var errormsg = getCookie("errorMsg");
+    if (errormsg == null) {
+        errormsg = " ";
+    }
+    document.getElementById('errormsg').innerHTML += errormsg;
+</script>
 
 </body>

@@ -63,7 +63,7 @@
             echo '</script>';
         } else {
             echo '<script>';
-            echo 'createCookie("errorMsg", "' . $errorMsg . '", 1);';
+            echo 'createCookie("errorMsg", "Product not avaliable", 1);';
             echo 'window.location.href = "adminpromotions_add.php";';
             echo '</script>';
         }

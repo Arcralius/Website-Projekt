@@ -67,37 +67,51 @@
                         } else {
                             echo '<td>Inactive</td>';
                         }
-                        echo '<td>';
-                        echo '<a class="btn btn-info" href="adminpromotions_update.php?promotion_id=' . $row['promotion_id'] . '">Edit</a>';
-                        echo '&nbsp';
-                        echo '<a class="btn btn-danger" href="adminpromotions_delete.php?promotion_id=' . $row['promotion_id'] . '">Delete</a>';
-                        echo '</td>';
-                        echo '</tr>';
+                ?>
+                        <td>
+                            <div class="col-sm-12 text-center">
+                                <?php
+                                echo '<form action="adminpromotions_update.php" method="post">';
+                                echo '<input type="hidden" id="promotion_id" name="promotion_id" value="' . $row['promotion_id'] . '">';
+                                echo '<button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>';
+                                echo '</form>';
+                                ?>
+                        </td>
+                        <td>
+                            <?php
+                            echo '<form action="adminpromotions_delete.php" method="post">';
+                            echo '<input type="hidden" id="promotion_id" name="promotion_id" value="' . $row['promotion_id'] . '">';
+                            echo '<button type="submit" class="btn btn-danger btn-md" style=" width: 100px; display: inline-block; vertical-align: top;" >Delete</button>';
+                            echo '</form>';
+                            ?>
+    </div>
+    </td>
+    </tr><?php
                     }
                 }
-                ?>
-            </tbody>
-        </table>
-        <div>
-            <p id="succmessage">
-            </p>
-            <p id="errormsg">
-            </p>
-        </div>
-        <script>
-            var succmessage = getCookie("succmessage");
-            if (succmessage == null) {
-                succmessage = " ";
-            }
-            document.getElementById('succmessage').innerHTML += succmessage;
+            ?>
+</tbody>
+</table>
+<div>
+    <p id="succmessage">
+    </p>
+    <p id="errormsg">
+    </p>
+</div>
+<script>
+    var succmessage = getCookie("succmessage");
+    if (succmessage == null) {
+        succmessage = " ";
+    }
+    document.getElementById('succmessage').innerHTML += succmessage;
 
-            var errormsg = getCookie("errorMsg");
-            if (errormsg == null) {
-                errormsg = " ";
-            }
-            document.getElementById('errormsg').innerHTML += errormsg;
-        </script>
-    </div>
+    var errormsg = getCookie("errorMsg");
+    if (errormsg == null) {
+        errormsg = " ";
+    }
+    document.getElementById('errormsg').innerHTML += errormsg;
+</script>
+</div>
 
 
 </body>

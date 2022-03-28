@@ -17,9 +17,9 @@
         <?php
 
         require("conn.php");
-        if (isset($_GET['promotion_id'])) {
+        if (isset($_POST['promotion_id'])) {
             $pid = 0;
-            $pid = mysqli_real_escape_string($conn, (int) sanitize_input($_GET['promotion_id']));
+            $pid = mysqli_real_escape_string($conn, (int) sanitize_input($_POST['promotion_id']));
             $stmt = $conn->prepare("DELETE FROM `promotions` WHERE `promotion_id`=?");
             $stmt->bind_param("i", $pid);
             if ($stmt->execute()) {

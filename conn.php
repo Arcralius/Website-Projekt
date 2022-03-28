@@ -7,4 +7,5 @@ $config = parse_ini_file("../../private/db-config.ini");
 	// Check connection
 	if ($conn->connect_error) {
 	  die("Connection failed: " . $conn->connect_error);
+	 
 	}

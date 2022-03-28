@@ -49,26 +49,50 @@
                             <td><?php echo $row['uid']; ?></td>
                             <td><?php echo $row['shipment_date']; ?></td>
 
-                            <td><a class="btn btn-info" href="adminorders_update.php?order_id=<?php echo $row['order_id']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" href="adminorders_delete.php?order_id=<?php echo $row['order_id']; ?>">Delete</a></td>
-                        </tr>
-                <?php       }
-                }
-                ?>
-            </tbody>
-        </table>
-        <div>
-            <p id="succmessage">
-            </p>
-        </div>
+                            <td>
+                                <div class="col-sm-12 text-center">
+                                    <?php
+                                    echo '<form action="adminorders_update.php" method="post">';
+                                    echo '<input type="hidden" id="product_id" name="order_id" value="' . $row['order_id'] . '">';
+                                    echo '<button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>';
+                                    echo '</form>';
+                                    ?>
+                            </td>
+                            <td>
+                                <?php
+                                echo '<form action="adminorders_delete.php" method="post">';
+                                echo '<input type="hidden" id="product_id" name="order_id" value="' . $row['order_id'] . '">';
+                                echo '<button type="submit" class="btn btn-danger btn-md" style=" width: 100px; display: inline-block; vertical-align: top;" >Delete</button>';
+                                echo '</form>';
+                                ?>
     </div>
+    </td>
+    </tr>
+<?php       }
+                }
+?>
+</tbody>
+</table>
+<div>
+    <p id="succmessage">
+    </p>
+    <p id="errormsg">
+    </p>
+</div>
+</div>
 
-    <script>
-        var succmessage = getCookie("succmessage");
-        if (succmessage == null) {
-            succmessage = " ";
-        }
-        document.getElementById('succmessage').innerHTML += succmessage
-    </script>
+<script>
+    var succmessage = getCookie("succmessage");
+    if (succmessage == null) {
+        succmessage = " ";
+    }
+    document.getElementById('succmessage').innerHTML += succmessage
+    var errorMsg = getCookie("errorMsg");
+    if (errorMsg == null) {
+        errorMsg = " ";
+    }
+    document.getElementById('errormsg').innerHTML += errorMsg
+</script>
 
 
 </body>

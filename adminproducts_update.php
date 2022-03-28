@@ -9,30 +9,31 @@
 
 <body>
     <?php
-        include 'navbar.php';
-        include 'adminsession.php';
+    include 'navbar.php';
+    include 'adminsession.php';
     ?>
 
     <main class="container">
-    <?php 
-    $success = true;
+        <?php
+        $success = true;
 
 
-    require("conn.php");
-    function sanitize_input($data) {
+        require("conn.php");
+        function sanitize_input($data)
+        {
             $data = trim($data);
             $data = stripslashes($data);
             $data = htmlspecialchars($data);
             return $data;
         }
+
         if (isset($_POST['update'])) {
-            $product_id = sanitize_input($_GET['product_id']);
             $p_name = sanitize_input($_POST['p_name']);
             $p_desc = sanitize_input($_POST['p_desc']);
             $p_category = sanitize_input($_POST['p_category']);
             $p_image = sanitize_input($_POST['p_image']);
             $p_thumbnail = sanitize_input($_POST['p_thumbnail']);
-            $p_price = sanitize_input($_POST['p_price']); 
+            $p_price = sanitize_input($_POST['p_price']);
             $p_quantity = sanitize_input((int)$_POST['p_quantity']);
 
 
@@ -43,91 +44,92 @@
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                 $success = false;
-            }
+            }   
 
-            if ($success) {
-                echo '<script>';
-                echo 'createCookie("succmessage", "Update success!", 1);';
-                echo 'window.location.href = "adminproducts.php";';
-                echo '</script>';
-            }
-            else {
-                echo '<script>';
-                echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
-                echo 'window.location.href = "adminproducts.php";';
-                echo '</script>';
-            }
+            echo '<h1>'. $stmt->bind_param .'</h1>';
+            // if ($success) {
+            //     // echo '<script>';
+            //     // echo 'createCookie("succmessage", "Update success!", 1);';
+            //     // echo 'window.location.href = "adminproducts.php";';
+            //     // echo '</script>';
+            // } else {
+            //     // echo '<script>';
+            //     // echo 'createCookie("errorMsg", "' . $errorMsg . '", 1);';
+            //     // echo 'window.location.href = "adminproducts.php";';
+            //     // echo '</script>';
+            // }
             $stmt->close();
-        } 
+        }
 
-    if (isset($_GET['product_id'])) {
-        $product_id = $_GET['product_id']; 
-        $sql = "SELECT * FROM `products` WHERE `product_id`='$product_id'";
-        $result = $conn->query($sql); 
-        if ($result->num_rows > 0) {        
-            while ($row = $result->fetch_assoc()) {
-                $p_name = $row['product_name'];
-                $p_desc = $row['product_desc'];
-                $p_category = $row['product_category'];
-                $p_image  = $row['product_image'];
-                $p_thumbnail = $row['product_thumbnail'];
-                $p_price = $row['product_price'];
-                $p_quantity = $row['product_quantity'];
-            } 
-            
+        if (isset($_POST['product_id'])) {
+            $product_id = $_POST['product_id'];
+            $sql = "SELECT * FROM `products` WHERE `product_id`='$product_id'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $p_name = $row['product_name'];
+                    $p_desc = $row['product_desc'];
+                    $p_category = $row['product_category'];
+                    $p_image  = $row['product_image'];
+                    $p_thumbnail = $row['product_thumbnail'];
+                    $p_price = $row['product_price'];
+                    $p_quantity = $row['product_quantity'];
+                }
         ?>
-        
-            <h1>Update Products</h1>
 
-            <form action="" method="post">
-              <fieldset>
-                <div class="form-group">
-                <label for="p_name">Product ID:</label>
-                <input class="form-control" type="text" name="product_id" value="<?php echo $product_id; ?>" disabled>
-                </div>
-                <div class="form-group">
-                <label for="p_name">Product Name:</label>
-                <input class="form-control" type="text" name="p_name" required maxlength="45" value="<?php echo $p_name; ?>">
-                </div>
-                <div class="form-group">
-                <label for="p_desc">Description:</label>
-                <input class="form-control" type="text" name="p_desc" required maxlength="255" value="<?php echo $p_desc; ?>">
-                </div>
-                <div class="form-group">
-                <label for="p_category">Category:</label>
-                <input class="form-control" type="text" name="p_category" required maxlength="45" value="<?php echo $p_category; ?>">
-                </div>
-                <div class="form-group">
-                <label for="p_image">Image:</label>
-                <input class="form-control" type="text" name="p_image" required maxlength="45" value="<?php echo $p_image; ?>">
-                </div>
-                <div class="form-group">
-                <label for="p_thumbnail">Image thumbnail:</label>
-                <input class="form-control" type="text" name="p_thumbnail" required maxlength="45" value="<?php echo $p_thumbnail; ?>">
-                </div>
-                <div class="form-group">
-                <label for="p_price">Price:</label>
-                <input class="form-control" type="number" step=0.01 name="p_price" required maxlength="11" value="<?php echo $p_price; ?>">
-                </div>
-                <div class="form-group">
-                <label for="p_quantity">Quantity:</label>
-                <input class="form-control" type="number" step=1 name="p_quantity" required maxlength="11" value="<?php echo $p_quantity; ?>">
-                </div>
-                <div class="form-group">
-                <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
-                </div>
-              </fieldset>
-            </form> 
-            </body>
-            </html>
-            
-        <?php
-        } else{ 
-            header('Location: adminproduct.php');
-        } 
-    }
+                <h1>Update Products</h1>
 
-?> 
+                <form action="adminproducts_update_p.php" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="p_name">Product ID:</label>
+                            <input class="form-control" type="text" name="product_id" value="<?php echo $product_id; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="p_name">Product Name:</label>
+                            <input class="form-control" type="text" name="p_name" required maxlength="45" value="<?php echo $p_name; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="p_desc">Description:</label>
+                            <input class="form-control" type="text" name="p_desc" required maxlength="255" value="<?php echo $p_desc; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="p_category">Category:</label>
+                            <input class="form-control" type="text" name="p_category" required maxlength="45" value="<?php echo $p_category; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="p_image">Image:</label>
+                            <input class="form-control" type="text" name="p_image" required maxlength="45" value="<?php echo $p_image; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="p_thumbnail">Image thumbnail:</label>
+                            <input class="form-control" type="text" name="p_thumbnail" required maxlength="45" value="<?php echo $p_thumbnail; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="p_price">Price:</label>
+                            <input class="form-control" type="number" step=0.01 name="p_price" required maxlength="11" value="<?php echo $p_price; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="p_quantity">Quantity:</label>
+                            <input class="form-control" type="number" step=1 name="p_quantity" required maxlength="11" value="<?php echo $p_quantity; ?>">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
+                        </div>
+                        <input type="hidden" id="product_id" name="product_id" value="<?php echo $product_id; ?>">
+                    </fieldset>
+                </form>
+</body>
+
+</html>
+
+<?php
+            } else {
+                header('Location: adminproduct.php');
+            }
+        }
+
+?>
 </main>
 
 

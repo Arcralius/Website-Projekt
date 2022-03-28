@@ -24,28 +24,9 @@
             $data = htmlspecialchars($data);
             return $data;
         }
-        if (isset($_POST['update'])) {
-            $user_id = sanitize_input($_GET['user_id']);
-            $role = sanitize_input($_POST['role']);
 
-
-            $stmt = $conn->prepare("UPDATE `users` SET `role`=? WHERE `user_id`=?");
-            // Bind & execute the query statement:
-            $stmt->bind_param("si", $role, $user_id);
-            if (!$stmt->execute()) {
-                $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-                $success = false;
-            } else {
-                echo '<script>';
-                echo 'createCookie("succmessage", "Update success!", 1);';
-                echo 'window.location.href = "adminusers.php";';
-                echo '</script>';
-            }
-            $stmt->close();
-        }
-
-        if (isset($_GET['user_id'])) {
-            $user_id = $_GET['user_id'];
+        if (isset($_POST['user_id'])) {
+            $user_id = $_POST['user_id'];
             $sql = "SELECT * FROM `users` WHERE `user_id`='$user_id'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
@@ -61,7 +42,7 @@
 
                 <h1>Update Users</h1>
 
-                <form action="" method="post">
+                <form action="adminusers_update_p.php" method="post">
                     <fieldset>
                         <div class="form-group">
                             <label for="user_id">User ID:</label>
@@ -96,35 +77,15 @@
                                 ?>
                             </select>
                         </div>
-
+                        <input type="hidden" id="user_id" name="user_id" value="<?php echo $user_id ?>">
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
                         </div>
                     </fieldset>
-
-                    <div>
-                        <p id="succmessage">
-                        </p>
-                        <p id="errormsg">
-                        </p>
-                    </div>
-
+                    
+                            
                 </form>
 </body>
-
-<script>
-    var succmessage = getCookie("succmessage");
-    if (succmessage == null) {
-        succmessage = " ";
-    }
-    document.getElementById('succmessage').innerHTML += succmessage;
-
-    var errormsg = getCookie("errorMsg");
-    if (errormsg == null) {
-        errormsg = " ";
-    }
-    document.getElementById('errormsg').innerHTML += errormsg;
-</script>
 
 </html>
 
