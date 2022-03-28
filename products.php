@@ -120,9 +120,8 @@
 
 
         echo '<div class="col-6 col-md-6 col-lg-4 mb-3">';
-        echo '<a href="product.php?id=' . $row['product_id'] . '">';
         echo '<div class="card h-100">';
-        echo '<img class="card-img-top" src="' . $productImage . '" alt="..." />';
+        echo '<img class="card-img-top" src="' . $productImage . '" alt="' . $description . '" />';
         echo '<div class="card-body p-4">';
         echo '<div class="text-center">';
         echo '<h5 class="fw-bolder">' . $productName . '</h5>';
@@ -130,10 +129,13 @@
         echo '</div>';
         echo '</div>';
         echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
-        echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="product.php?id=' . $productID . '">View options</a></div>';
+        echo '<form action="product.php" method="post">';
+        echo '<input type="hidden" id="productID" name="productID" value="'.$productID.'">';
+        // echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="product.php?id=' . $productID . '">View options</a></div>';
+        echo '<button type="submit" class="form-control btn btn-outline-dark rounded submit px-3">View Details</button>';
+        echo '</form>';
         echo '</div>';
         echo '</div>';
-        echo '</a>';
         echo '</div>';
       }
       $conn->close();
