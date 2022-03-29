@@ -24,21 +24,23 @@
 
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
-            <a class="nav-link active ms-0" href="/Website-Projekt/account.php">Profile</a>
-            <!-- <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="__blank">Billing</a> -->
-            <a class="nav-link" href="/Website-Projekt/2fa.php" target="__blank">Security</a>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item"><a class="nav-link active ms-0" href="/Website-Projekt/account.php">Profile</a></li>
+                <li class="list-group-item"><a class="nav-link" href="/Website-Projekt/billinginfo.php">Billing</a></li>
+                <li class="list-group-item"><a class="nav-link" href="/Website-Projekt/2fa.php">Security</a></li>
+            </ul>
 
             <hr class="mt-0 mb-4">
             <!-- Account details card-->
             <div class="card mb-4">
                 <div class="card-header">
-                    <h1>Enable 2 Factor Authentication?</h1>
+                    <h1>2 Factor Authentication</h1>
                 </div>
                 <div class="card-body">
                     <form action="2faprocess.php" method="post" class="update-form">
                         <!-- Form Group (username)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="2fa">Change Username (how your name will appear to other users on the site)</label>
+                            <label class="small mb-1" for="2fa">Enable 2 Factor Authentication?</label>
                             <br>
                             <select name="fa" id="fa" value="<?php echo $role; ?>">
                             <?php

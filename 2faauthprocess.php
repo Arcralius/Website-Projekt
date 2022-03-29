@@ -8,11 +8,11 @@
 
     <?php
     include 'navbar.php';
-
+    require_once 'GoogleAuthenticator.php';
+    $ga = new PHPGangsta_GoogleAuthenticator();
     $username = $errorMsg = "";
     $success = true;
 
-    //Check if username is empty
     if (empty($_POST["username"])) {
         $errorMsg .= "username is required.<br>";
         $success = false;
@@ -24,41 +24,53 @@
         $formusername = sanitize_input($_POST["username"]);
     }
 
-    if (empty($_POST["password"])) {
-        $errorMsg .= "Password field is required.<br>";
+    
+    //Check if username is empty
+
+    if (empty($_POST["fa"])) {
+        $errorMsg .= "2 FA Field is required<br>";
         $success = false;
-    } else if (!preg_match("/[a-zA-Z0-9!@#$ ]{8,255}/", $_POST["password"])) { //this regex will validate if the user password contains at least 8 chars, and only contains alphanumeric chars, spaces and some symbols
-        $errorMsg .= "Minimum password length must be 8. We only accept alphanumeric characters and specific special characters: @,# and $<br>";
-        $success = false;
+    } else if (!preg_match("/^[0-9]{1,6}$/", $_POST["fa"])) { //this regex will validate if the username only has alphanumeric chars
+        $errorMsg .= "2 FA Field should only contain numeric characters.<br>";
+        //set the following the false so that the user inputs will not be added to database should it not meet the formatting requirements.
+        $fa = NULL;
+        $inputSuccess = false;
     } else {
-        authenticateUser();
+        $fa = sanitize_input($_POST["fa"]);
     }
+
+    authenticateUser();
+
 
 
     if ($success) {
-        if ($fa == NULL) {
+        $checkResult = $ga->verifyCode($dbfa, $fa, 2);    // 2 = 2*30sec clock tolerance
+        if ($checkResult) {
             session_destroy();
             session_start();
             $_SESSION["role"] = $role;
             $_SESSION["username"] = $username;
-
             echo '<script>';
             echo 'window.location.href = "account.php";';
             echo '</script>';
-        }
-        else {
+        } else {
             session_destroy();
             session_start();
-            $_SESSION["role"] = $role;
             $_SESSION["username"] = $username;
             echo '<script>';
+            echo 'createCookie("errorMsg", "2 FA does not match.", 1);';
             echo 'window.location.href = "2faauth.php";';
             echo '</script>';
         }
     } else {
+        session_destroy();
+        session_start();
+
+        $_SESSION["username"] = $username;
+
         echo '<script>';
         echo 'createCookie("errorMsg", "' . $errorMsg . '", 1);';
-        echo 'window.location.href = "signin.php";';
+        echo 'window.location.href = "2faauth.php";';
         echo '</script>';
     }
 
@@ -72,7 +84,7 @@
 
     function authenticateUser()
     {
-        global $errorMsg, $success, $fname, $lname, $password_hashed, $role, $username, $formusername, $fa;
+        global $errorMsg, $success, $formusername, $dbfa, $role, $username;
         $config = parse_ini_file("../../private/db-config.ini");
         $conn = new mysqli(
             $config["servername"],
@@ -83,7 +95,6 @@
         // Check connection
 
         $formusername = mysqli_real_escape_string($conn, $formusername);
-        $password = mysqli_real_escape_string($conn, $_POST["password"]);
 
         if ($conn->connect_error) {
             $errorMsg = "Connection failed: " . $conn->connect_error;
@@ -99,24 +110,12 @@
                 // Note that email field is unique, so should only have
                 // one row in the result set.             
                 $row = $result->fetch_assoc();
-                $fname = $row["fname"];
-                $lname = $row["lname"];
+                $dbfa = $row["2fa"];
                 $role = $row["role"];
                 $username = $row["username"];
-                $password_hashed = $row["password"];
-                $fa = $row["2fa"];
                 // Check if the password matches:
-                if (!password_verify($password, $password_hashed)) {
-
-                    // Don't be too specific with the error message - hackers don't                 
-
-                    // need to know which one they got right or wrong. :)                 
-
-                    $errorMsg = "Username not found or password doesn't match.<br>";
-                    $success = false;
-                }
             } else {
-                $errorMsg = "Username not found or password doesn't match.<br>";
+                $errorMsg = "User not found.<br>";
                 $success = false;
             }
             $stmt->close();
