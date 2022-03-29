@@ -93,8 +93,14 @@
     {
         require("conn.php");
         $productID = htmlspecialchars($_POST["productID"]);
-        $sql = "SELECT * FROM `products` where product_category = (SELECT product_category from `products` where product_id = $productID ) && product_id != $productID ; ";
-        $result = $conn->query($sql);
+        
+        $stmt = $conn->prepare("SELECT * FROM `products` where product_category = (SELECT product_category from `products` where product_id = ? ) && product_id != ? ; ");
+        $stmt->bind_param("ii", $productID, $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        // $sql = "SELECT * FROM `products` where product_category = (SELECT product_category from `products` where product_id = $productID ) && product_id != $productID ; ";
+        // $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             // output data of each row
@@ -121,7 +127,7 @@
             echo '</div>';
         }
 
-
+        $stmt->close();
         $conn->close();
     }
     ?>
@@ -131,8 +137,14 @@
 
         require("conn.php");
         $productID = htmlspecialchars($_POST["productID"]);
-        $sql = "SELECT product_quantity FROM `products` where product_id = $productID ; ";
-        $result = $conn->query($sql);
+        
+        $stmt = $conn->prepare("SELECT product_quantity FROM `products` where product_id = ? ;");
+        $stmt->bind_param("i", $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        // $sql = "SELECT product_quantity FROM `products` where product_id = $productID ; ";
+        // $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             // output data of each row
@@ -150,6 +162,7 @@
         } else {
             echo "0 results";
         }
+        $stmt->close();
         $conn->close();
     }
     ?>
