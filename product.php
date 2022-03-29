@@ -19,7 +19,7 @@
 <body>
     <?php
     include 'navbar.php';
-    $productID = htmlspecialchars($_POST["productID"]);
+    $productID = htmlspecialchars($_GET["id"]);
     ?>
     <!-- Product section-->
     <section class="py-5">
@@ -92,7 +92,7 @@
     function getRelatedProducts()
     {
         require("conn.php");
-        $productID = htmlspecialchars($_POST["productID"]);
+        $productID = htmlspecialchars($_GET["id"]);
         
         $stmt = $conn->prepare("SELECT * FROM `products` where product_category = (SELECT product_category from `products` where product_id = ? ) && product_id != ? ; ");
         $stmt->bind_param("ii", $productID, $productID);
@@ -136,7 +136,7 @@
     {
 
         require("conn.php");
-        $productID = htmlspecialchars($_POST["productID"]);
+        $productID = htmlspecialchars($_GET["id"]);
         
         $stmt = $conn->prepare("SELECT product_quantity FROM `products` where product_id = ? ;");
         $stmt->bind_param("i", $productID);
@@ -157,6 +157,7 @@
                 echo '<h3>Out of Stock!</h3>';
             } else {
                 echo '<div class="d-flex">';
+                echo '<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem">';
                 echo '<button name="addtocart" value="' . $productID . '"class="btn btn-outline-dark flex-shrink-0">Add to Cart</button>';
             }
         } else {
