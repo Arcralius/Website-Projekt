@@ -28,8 +28,11 @@
 
         if (isset($_POST['user_id'])) {
             $user_id = $_POST['user_id'];
-            $sql = "SELECT * FROM `users` WHERE `user_id`='$user_id'";
-            $result = $conn->query($sql);
+            $sql = "SELECT * FROM `users` WHERE `user_id`=?";
+            $stmt = $conn->prepare($sql); 
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $fname = $row['fname'];

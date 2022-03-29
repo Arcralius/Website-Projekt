@@ -21,8 +21,11 @@
 
             if (isset($_POST['order_id'])) {
                 $order_id = $_POST['order_id'];
-                $sql = "SELECT * FROM `orders` WHERE `order_id`='$order_id'";
-                $result = $conn->query($sql);
+                $sql = "SELECT * FROM `orders` WHERE `order_id`=?";
+                $stmt = $conn->prepare($sql); 
+                $stmt->bind_param("i", $order_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $order_id = $row['order_id'];
