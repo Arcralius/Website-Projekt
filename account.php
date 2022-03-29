@@ -24,8 +24,8 @@
     <div class="container-xl px-4 mt-4">
         <!-- Account page navigation-->
             <a class="nav-link active ms-0" href="/Website-Projekt/account.php">Profile</a>
-            <!-- <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="__blank">Billing</a>
-            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-security-page" target="__blank">Security</a> -->
+            <a class="nav-link" href="/Website-Projekt/billinginfo.php">Billing</a>
+            <!-- <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-security-page" target="__blank">Security</a> -->
 
         <hr class="mt-0 mb-4">
         <!-- Account details card-->
@@ -37,7 +37,7 @@
                     <div class="mb-3">
                         <label class="small mb-1" for="inputUsername">Change Username (how your name will appear to other users on the site)</label>
                         <?php
-                        echo '<input class="form-control" id="inputUsername" type="text" requied name="username" placeholder="' . $username . '" value="' . $username . '"> ';
+                        echo '<input class="form-control" id="inputUsername" type="text" required name="username" placeholder="' . $username . '" value="' . $username . '"> ';
                         ?>
                     </div>
                     <div class="row gx-3 mb-3">
@@ -45,7 +45,7 @@
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputFirstName">Change First name</label>
                             <?php
-                            echo '<input class="form-control" id="inputFirstName" type="text" name="fname" placeholder="' . $fname . '" value="' . $fname . '"> ';
+                            echo '<input class="form-control" id="inputFirstName" type="text" required name="fname" placeholder="' . $fname . '" value="' . $fname . '"> ';
                             ?>
 
                         </div>
@@ -53,7 +53,7 @@
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputLastName">Change Last name</label>
                             <?php
-                            echo '<input class="form-control" id="inputLastName" type="text" requied name="lname" placeholder="' . $lname . '" value="' . $lname . '"> ';
+                            echo '<input class="form-control" id="inputLastName" type="text" required name="lname" placeholder="' . $lname . '" value="' . $lname . '"> ';
                             ?>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <label class="small mb-1" for="inputEmailAddress">Change Email address</label>
 
                         <?php
-                        echo '<input class="form-control" id="inputEmailAddress" type="email" requied name="email" placeholder="' . $email . '" value="' . $email . '"> ';
+                        echo '<input class="form-control" id="inputEmailAddress" type="email" required name="email" placeholder="' . $email . '" value="' . $email . '"> ';
                         ?>
                     </div>
                     <!-- Save changes button-->
