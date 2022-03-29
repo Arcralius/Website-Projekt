@@ -58,11 +58,10 @@
     {
         require("conn.php");
         global $productName, $productPrice, $productImage, $quantity, $description, $productID;
-
-
-        $sql = "SELECT * FROM `products` where product_id = $productID ; ";
-        $result = $conn->query($sql);
-
+        $stmt = $conn->prepare("SELECT * FROM `products` where product_id = ? ; ");
+        $stmt->bind_param("i", $productID);
+        $stmt->execute();
+        $result = $stmt->get_result();
         if ($result->num_rows > 0) {
             // output data of each row
             // while ($row = $result->fetch_assoc()) 

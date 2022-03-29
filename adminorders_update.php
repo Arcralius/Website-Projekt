@@ -29,40 +29,44 @@
                     $uid = $row['uid'];
                     $s_date = $row['shipment_date'];
                 }
+            } else {
+                header('Location: adminorders.php');
+            }
+        }
 
         ?>
 
-                <h1>Update Orders</h1>
+        <h1>Update Orders</h1>
 
-                <form action="adminorders_update_p.php" method="post">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="order_id">Order ID:</label>
-                            <input class="form-control" type="number" name="order_id" value="<?php echo $order_id; ?>" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="pid">Product ID:</label>
-                            <input class="form-control" type="number" step=1 name="pid" required maxlength="20" value="<?php echo $pid; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="uid">User ID:</label>
-                            <input class="form-control" type="number" step=1 name="uid" required maxlength="20" value="<?php echo $uid; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="s_date">Shipment Date:</label>
-                            <input class="form-control" type="date" name="s_date" required value="<?php echo $s_date; ?>">
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
-                            <input type="hidden" id="order_id" name="order_id" value="<?php echo $order_id; ?>">
+        <form action="adminorders_update_p.php" method="post">
+            <fieldset>
+                <div class="form-group">
+                    <label for="order_id">Order ID:</label>
+                    <input class="form-control" type="number" name="order_id" value="<?php echo $order_id; ?>" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="pid">Product ID:</label>
+                    <input class="form-control" type="number" step=1 name="pid" required maxlength="20" value="<?php echo $pid; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="uid">User ID:</label>
+                    <input class="form-control" type="number" step=1 name="uid" required maxlength="20" value="<?php echo $uid; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="s_date">Shipment Date:</label>
+                    <input class="form-control" type="date" name="s_date" required value="<?php echo $s_date; ?>">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
+                    <input type="hidden" id="order_id" name="order_id" value="<?php echo $order_id; ?>">
 
-                            <div>
-                                <p id="errorMsg">
-                                </p>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                    <div>
+                        <p id="errorMsg">
+                        </p>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
 </body>
 
 </html>
@@ -75,14 +79,6 @@
     document.getElementById('errorMsg').innerHTML += errorMsg
 </script>
 
-
-<?php
-            } else {
-                header('Location: adminorders.php');
-            }
-        }
-
-?>
 </main>
 
 

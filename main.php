@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-
+<html lang="en">
+<main>
 <head>
     
     <?php
@@ -32,9 +33,7 @@
             </section>
         </div>
     </div>
-
     <?php
-
     function printproducts()
     {
         $config = parse_ini_file("../../private/db-config.ini");
@@ -59,13 +58,13 @@
                 echo '<img class="card-img-top" src="' . $row['product_image'] . '" alt="' . $row['product_desc'] . '" />';
                 echo '<div class="card-body p-4">';
                 echo '<div class="text-center">';
-                echo '<h5 class="fw-bolder">' . $row['product_name'] . '</h5>';
+                echo '<p class="fw-bolder">' . $row['product_name'] . '</p>';
                 echo '<span class="text-muted text-decoration-line-through">$' . $row['product_price'] . '</span>';
                 echo '</div>';
                 echo '</div>';
                 echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
                 echo '<form action="product.php" method="post">';
-                echo '<input type="hidden" id="productID" name="productID" value="'.$row['product_id'].'">';
+                echo '<input type="hidden" name="productID" value="'.$row['product_id'].'">';
                 // echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="product.php?id=' . $productID . '">View options</a></div>';
                 echo '<button type="submit" class="form-control btn btn-outline-dark rounded submit px-3">View Details</button>';
                 echo '</form>';
@@ -84,13 +83,13 @@
                 echo '<img class="card-img-top" src="' . $row['product_image'] . '" alt="' . $row['product_desc'] . '" />';
                 echo '<div class="card-body p-4">';
                 echo '<div class="text-center">';
-                echo '<h5 class="fw-bolder">' . $row['product_name'] . '</h5>';
+                echo '<p class="fw-bolder">' . $row['product_name'] . '</p>';
                 echo '<span class="text-muted text-decoration-line-through">$' . $row['product_price'] . '</span>';
                 echo '</div>';
                 echo '</div>';
                 echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
                 echo '<form action="product.php" method="post">';
-                echo '<input type="hidden" id="productID" name="productID" value="'.$row['product_id'].'">';
+                echo '<input type="hidden" name="productID" value="'.$row['product_id'].'">';
                 // echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="product.php?id=' . $productID . '">View options</a></div>';
                 echo '<button type="submit" class="form-control btn btn-outline-dark rounded submit px-3">View Details</button>';
                 echo '</form>';
@@ -103,8 +102,8 @@
         }
         $conn->close();
     }
-
     ?>
 
-
 </body>
+</main>
+</html>
