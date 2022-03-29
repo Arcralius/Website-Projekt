@@ -17,7 +17,9 @@
     <?php
     require("conn.php");
     $sql = "SELECT * FROM promotions";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result(); // get the mysqli result
     ?>
 
     <div class="container">
