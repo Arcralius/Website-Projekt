@@ -36,17 +36,24 @@
 
 
     if ($success) {
-        session_destroy();
-        session_start();
-        $_SESSION["role"] = $role;
-        $_SESSION["username"] = $username;
-        
-        echo '<script>';
-        echo 'window.location.href = "account.php";';
-        echo '</script>';
+        if ($fa == NULL) {
+            session_destroy();
+            session_start();
+            $_SESSION["role"] = $role;
+            $_SESSION["username"] = $username;
+
+            echo '<script>';
+            echo 'window.location.href = "account.php";';
+            echo '</script>';
+        }
+        else {
+            echo '<script>';
+            echo 'window.location.href = "2faauth.php";';
+            echo '</script>';
+        }
     } else {
         echo '<script>';
-        echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+        echo 'createCookie("errorMsg", "' . $errorMsg . '", 1);';
         echo 'window.location.href = "signin.php";';
         echo '</script>';
     }
@@ -61,10 +68,14 @@
 
     function authenticateUser()
     {
-        global $errorMsg, $success, $fname, $lname, $password_hashed, $role, $username, $formusername;
+        global $errorMsg, $success, $fname, $lname, $password_hashed, $role, $username, $formusername, $fa;
         $config = parse_ini_file("../../private/db-config.ini");
-        $conn = new mysqli($config["servername"], $config["username"],
-            $config["password"], $config["dbname"]);
+        $conn = new mysqli(
+            $config["servername"],
+            $config["username"],
+            $config["password"],
+            $config["dbname"]
+        );
         // Check connection
 
         $formusername = mysqli_real_escape_string($conn, $formusername);
@@ -89,6 +100,7 @@
                 $role = $row["role"];
                 $username = $row["username"];
                 $password_hashed = $row["password"];
+                $fa = $row["2fa"];
                 // Check if the password matches:
                 if (!password_verify($password, $password_hashed)) {
 
