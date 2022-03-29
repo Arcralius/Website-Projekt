@@ -1,5 +1,11 @@
 # Website-Projekt
 
+## V1.48
+### Patch Notes
++ Added update and insert functionality for billing/payment info
++ Added some simple input validation for billing/payment form (except address)
+
+
 ## V1.47
 ### Patch Notes
 + Added products page (products.php)
