@@ -46,6 +46,7 @@
                             <input id="password-field" type="password" class="form-control" required type="cfm_password" id="cfm_password" name="cfm_password">
                             <label class="form-control-placeholder" for="cfm_password">Confirm Password*</label>
                         </div>
+
                         <div class="form-group">
                             <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
                         </div>

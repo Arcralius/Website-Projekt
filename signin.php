@@ -31,6 +31,7 @@
                             <input id="password-field" type="password" class="form-control" required type="password" id="password" name="password">
                             <label class="form-control-placeholder" for="password">Password</label>
                         </div>
+                        <button class="g-recaptcha" data-sitekey="6LeIzSQfAAAAAAALvttThcdXcSeCE-J08PtQlz4-" data-callback='onSubmit' data-action='submit'>Submit</button>
                         <div class="form-group">
                             <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
                         </div>

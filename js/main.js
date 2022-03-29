@@ -111,3 +111,7 @@ $(document).ready(function () {
         $("#discountval").html(this.value);
     });
 });
+
+function onSubmit(token) {
+    document.getElementById("demo-form").submit();
+  }
