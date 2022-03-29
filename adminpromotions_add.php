@@ -1,4 +1,7 @@
 <!DOCTYPE HTML>
+<html lang="en">
+
+
 
 <head>
     <title>Add Promotions</title>
@@ -26,7 +29,7 @@
                 <label for="prod_id">Product:</label><br>
                 <?php
                 if ($result->num_rows > 0) {
-                    echo '<select name="prod_id">';
+                    echo '<select name="prod_id" id="prod_id">';
                     while ($row = $result->fetch_assoc()) {
                         echo '<option value="' . $row['product_id'] . '">' . $row['product_name'] . '</option>';
                     }
@@ -41,12 +44,12 @@
                 <input class="form-range" type="range" id="discount" required min="1" max="99" name="discount" value="1">
             </div>
             <div class="form-group">
-                <label for="discount">Start Date:</label>
-                <input class="form-control date" type="date" name="sdate" min="<?php echo date("Y-m-d"); ?>" value="<?php echo date("Y-m-d"); ?>">
+                <label for="sdate">Start Date:</label>
+                <input class="form-control date" type="date" id="sdate" name="sdate" min="<?php echo date("Y-m-d"); ?>" value="<?php echo date("Y-m-d"); ?>">
             </div>
             <div class="form-group">
-                <label for="discount">End Date:</label>
-                <input class="form-control date" type="date" name="edate" min="<?php echo date("Y-m-d"); ?>" value="<?php echo date("Y-m-d"); ?>">
+                <label for="edate">End Date:</label>
+                <input class="form-control date" type="date" id="edate" name="edate" min="<?php echo date("Y-m-d"); ?>" value="<?php echo date("Y-m-d"); ?>">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" type="submit" name="btnSubmit">Submit</button>
@@ -65,3 +68,5 @@
         </script>
     </main>
 </body>
+
+</html>

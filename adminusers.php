@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-
+<html lang="en">
+<main>
 <head>
     <title>Users</title>
     <?php
@@ -24,7 +25,7 @@
     ?>
 
     <div class="container">
-        <h2>Users</h2>
+        <h1>Users</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -51,7 +52,7 @@
                             <td><?php echo $row['role']; ?></td>
                             <td>
                                 <form action="adminusers_update.php" method="post">
-                                    <input type="hidden" id="user_id" name="user_id" value="<?php echo $row['user_id']; ?>">
+                                    <input type="hidden"  name="user_id" value="<?php echo $row['user_id']; ?>">
                                     <button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>
                                 </form>
                             </td>
@@ -83,3 +84,5 @@
         </script>
 
 </body>
+</main>
+</html>

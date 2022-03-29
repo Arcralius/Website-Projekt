@@ -63,13 +63,13 @@
                 <fieldset>
                     <div class="form-group">
                         <label for="promotion_id">Promotion ID:</label>
-                        <input class="form-control" type="number" name="promotion_id" value="<?php echo $promotion_id; ?>" disabled>
+                        <input class="form-control" type="number" id="promotion_id" name="promotion_id" value="<?php echo $promotion_id; ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="prod_id">Product:</label><br>
                         <?php
                         if ($result->num_rows > 0) {
-                            echo '<select name="prod_id">';
+                            echo '<select name="prod_id" title="products" id="prod_id">';
                             while ($row = $result->fetch_assoc()) {
                                 if ($row['product_id'] == $prod_id) {
                                     echo '<option selected value="' . $row['product_id'] . '">' . $row['product_name'] . '</option>';
@@ -88,17 +88,17 @@
                         <input class="form-range" type="range" id="discount" required min="1" max="99" name="discount" value="<?php echo $discount ?>">
                     </div>
                     <div class="form-group">
-                        <label for="discount">Start Date:</label>
-                        <input class="form-control date" type="date" name="sdate" value="<?php echo $sdate; ?>">
+                        <label for="sdate">Start Date:</label>
+                        <input class="form-control date" type="date" id="sdate" name="sdate" value="<?php echo $sdate; ?>">
                     </div>
                     <div class="form-group">
-                        <label for="discount">End Date:</label>
-                        <input class="form-control date" type="date" name="edate" min="<?php echo date("Y-m-d"); ?>" value="<?php echo $edate; ?>">
+                        <label for="edate">End Date:</label>
+                        <input class="form-control date" type="date" id="edate" name="edate" min="<?php echo date("Y-m-d"); ?>" value="<?php echo $edate; ?>">
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
                     </div>
-                    <input type="hidden" id="promotion_id" name="promotion_id" value="<?php echo $promotion_id; ?>">
+                    <input type="hidden" name="promotion_id" value="<?php echo $promotion_id; ?>">
                 </fieldset>
             </form>
             <div>

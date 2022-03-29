@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 
+<html lang="en">
 <head>
     <title>Update Users</title>
     <?php
@@ -46,23 +47,23 @@
                     <fieldset>
                         <div class="form-group">
                             <label for="user_id">User ID:</label>
-                            <input class="form-control" type="text" name="user_id" value="<?php echo $user_id; ?>" disabled>
+                            <input class="form-control" type="text" id="user_id" name="user_id" value="<?php echo $user_id; ?>" disabled>
                         </div>
                         <div class="form-group">
                             <label for="fname">First Name:</label>
-                            <input class="form-control" type="text" name="fname" value="<?php echo $fname; ?>" disabled>
+                            <input class="form-control" type="text" id="fname"  name="fname" value="<?php echo $fname; ?>" disabled>
                         </div>
                         <div class="form-group">
                             <label for="lname">Last Name:</label>
-                            <input class="form-control" type="text" name="lname" value="<?php echo $lname; ?>" disabled>
+                            <input class="form-control" type="text" id="lname"  name="lname" value="<?php echo $lname; ?>" disabled>
                         </div>
                         <div class="form-group">
                             <label for="username">Username:</label>
-                            <input class="form-control" type="text" name="username" value="<?php echo $username; ?>" disabled>
+                            <input class="form-control" type="text" id="username"  name="username" value="<?php echo $username; ?>" disabled>
                         </div>
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input class="form-control" type="text" name="email" value="<?php echo $email; ?>" disabled>
+                            <input class="form-control" type="text" id="email"  name="email" value="<?php echo $email; ?>" disabled>
                         </div>
                         <div class="form-group">
                             <label for="role">Role:</label>
@@ -77,7 +78,7 @@
                                 ?>
                             </select>
                         </div>
-                        <input type="hidden" id="user_id" name="user_id" value="<?php echo $user_id ?>">
+                        <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
                         </div>
@@ -100,3 +101,4 @@
 
 
 </body>
+</html>

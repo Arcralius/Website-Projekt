@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
+
+<main>
 
 <head>
     <?php
@@ -18,7 +20,7 @@
                 <div class="login-wrap p-4 p-md-5">
                     <div class="d-flex">
                         <div class="w-100">
-                            <h3 class="mb-4">Sign Up</h3>
+                            <h1 class="mb-4">Sign Up</h1>
                         </div>
                     </div>
                     <form action="signupprocess.php" method="post" class="signup-form">
@@ -40,11 +42,11 @@
                         </div>
                         <div class="form-group">
                             <input id="password-field" type="password" class="form-control" required type="password" id="password" name="password">
-                            <label class="form-control-placeholder" for="password">Password*</label>
+                            <label class="form-control-placeholder" for="password-field">Password*</label>
                         </div>
                         <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" required type="cfm_password" id="cfm_password" name="cfm_password">
-                            <label class="form-control-placeholder" for="cfm_password">Confirm Password*</label>
+                            <input id="cfm-password-field" type="password" class="form-control" required type="cfm_password" id="cfm_password" name="cfm_password">
+                            <label class="form-control-placeholder" for="cfm-password-field">Confirm Password*</label>
                         </div>
 
                         <div class="form-group">
@@ -74,3 +76,5 @@
 </body>
 
 </html>
+
+</main>

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-
+<html lang="en">
+<main>
 <head>
     <title>Promotions</title>
     <?php
@@ -23,7 +24,7 @@
         <p>
             <a href="adminpromotions_add.php" class="btn btn-primary my-2">Add promotions</a>
         </p>
-        <h2>Promotions</h2>
+        <h1>Promotions</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -72,7 +73,7 @@
                             <div class="col-sm-12 text-center">
                                 <?php
                                 echo '<form action="adminpromotions_update.php" method="post">';
-                                echo '<input type="hidden" id="promotion_id" name="promotion_id" value="' . $row['promotion_id'] . '">';
+                                echo '<input type="hidden" name="promotion_id" value="' . $row['promotion_id'] . '">';
                                 echo '<button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>';
                                 echo '</form>';
                                 ?>
@@ -80,7 +81,7 @@
                         <td>
                             <?php
                             echo '<form action="adminpromotions_delete.php" method="post">';
-                            echo '<input type="hidden" id="promotion_id" name="promotion_id" value="' . $row['promotion_id'] . '">';
+                            echo '<input type="hidden" name="promotion_id" value="' . $row['promotion_id'] . '">';
                             echo '<button type="submit" class="btn btn-danger btn-md" style=" width: 100px; display: inline-block; vertical-align: top;" >Delete</button>';
                             echo '</form>';
                             ?>
@@ -115,3 +116,7 @@
 
 
 </body>
+
+</main>
+
+</html>
