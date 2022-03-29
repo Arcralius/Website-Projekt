@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 
+<html lang="en">
+
 <head>
     <title>Add Orders</title>
     <?php
@@ -51,3 +53,5 @@
 
 
 </body>
+
+</html>

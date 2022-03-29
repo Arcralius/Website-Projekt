@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-
+<html lang="en">
+    <main>
 <head>
 
     <?php
@@ -12,8 +13,6 @@
     <?php
     include 'navbar.php';
 
-    echo '<h1>' . !isset($_SESSION['username']) . '</h1>';
-
     if (!isset($_SESSION['username'])) {
         header("Location: /Website-Projekt/signin.php");
     } else {
@@ -24,15 +23,14 @@
 
     <div class="container-xl px-4 mt-4">
         <!-- Account page navigation-->
-        <nav class="nav nav-borders">
             <a class="nav-link active ms-0" href="/Website-Projekt/account.php">Profile</a>
             <!-- <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="__blank">Billing</a>
             <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-security-page" target="__blank">Security</a> -->
-        </nav>
+
         <hr class="mt-0 mb-4">
         <!-- Account details card-->
         <div class="card mb-4">
-            <div class="card-header">Account Details</div>
+            <div class="card-header"><h1>Account Details</h1></div>
             <div class="card-body">
                 <form action="updateaccountprocess.php" method="post" class="update-form">
                     <!-- Form Group (username)-->
@@ -92,11 +90,11 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="comfirm" tabindex="-1" aria-labelledby="comfirmModal" aria-hidden="true">
+        <div class="modal fade" id="comfirm" title="delete" tabindex="-1" aria-labelledby="comfirm" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                        <p class="modal-title" id="delete">Are you sure?</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -117,11 +115,11 @@
             </div>
         </div>
 
-        <div class="modal fade" id="changepw" tabindex="-1" aria-labelledby="changepw" aria-hidden="true">
+        <div class="modal fade" title="changepw" id="changepw" tabindex="-1" aria-labelledby="changepw" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                        <p class="modal-title" id="exampleModalLabel">Change Password</p>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -203,3 +201,4 @@
         }
         ?>
 </body>
+</main>

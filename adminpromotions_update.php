@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 
+<html lang="en">
+    
 <head>
     <title>Update Promotion</title>
     <?php

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-
+<html lang="en">
+<main>
 <head>
   <?php
   include 'header.php';
@@ -29,21 +30,11 @@
             printproducts()
             ?>
           </div>
-          <div class="row sorting mb-5 mt-5">
-            <div class="col-12">
-              <a class="btn btn-light">
-                <i class="fa fa-arrow-up"></i> Back to top</a>
-              <div class="btn-group float-md-right ml-3">
-                <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-left"></span> </button>
-                <button type="button" class="btn btn-lg btn-light"> <span class="fa fa-arrow-right"></span> </button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-      <div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
-        <h3 class="mt-0 mb-5">Showing <span class="text-primary">12</span> Products</h3>
-        <h6 class="text-uppercase font-weight-bold mb-3">Categories</h6>
+      <div class="col-md-4 order-md-1 col-lg-3 sidebar-filter" style="background-color: #FFFFFF;">
+        <p class="mt-0 mb-5">Showing <span class="text-primary">12</span> Products</p>
+        <p class="text-uppercase font-weight-bold mb-3">Categories</p>
         <div class="mt-2 mb-2 pl-2">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="category-1">
@@ -65,9 +56,11 @@
 
 
         <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
-        <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Price</h6>
+        <p class="text-uppercase mt-5 mb-3 font-weight-bold">Price</p>
         <div class="price-filter-control">
+          <label for="price-min-control">min price</label>
           <input type="number" class="form-control w-50 pull-left mb-2" value="50" id="price-min-control">
+          <label for="price-max-control">max price</label>
           <input type="number" class="form-control w-50 pull-right" value="150" id="price-max-control">
         </div>
         <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;">
@@ -121,13 +114,13 @@
         echo '<img class="card-img-top" src="' . $productImage . '" alt="' . $description . '" />';
         echo '<div class="card-body p-4">';
         echo '<div class="text-center">';
-        echo '<h5 class="fw-bolder">' . $productName . '</h5>';
+        echo '<p class="fw-bolder">' . $productName . '</p>';
         echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
         echo '</div>';
         echo '</div>';
         echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
         echo '<form action="product.php" method="post">';
-        echo '<input type="hidden" id="productID" name="productID" value="'.$productID.'">';
+        echo '<input type="hidden" name="productID" value="' . $productID . '">';
         // echo '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="product.php?id=' . $productID . '">View options</a></div>';
         echo '<button type="submit" class="form-control btn btn-outline-dark rounded submit px-3">View Details</button>';
         echo '</form>';
@@ -145,3 +138,6 @@
 
 
 </body>
+
+</html>
+</main>

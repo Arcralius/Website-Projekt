@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
-<html>
-
+<html lang="en">
+<main>
 <head>
     <?php
     include 'header.php';
     ?>
-
 </head>
 
 <body>
@@ -19,7 +18,7 @@
                 <div class="login-wrap p-4 p-md-5">
                     <div class="d-flex">
                         <div class="w-100">
-                            <h3 class="mb-4">Sign In</h3>
+                            <h1 class="mb-4">Sign In</h1>
                         </div>
                     </div>
                     <form action="signinprocess.php" method="post" class="signin-form">
@@ -28,7 +27,7 @@
                             <label class="form-control-placeholder" for="username">Username</label>
                         </div>
                         <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" required type="password" id="password" name="password">
+                            <input type="password" class="form-control" required type="password" id="password" name="password">
                             <label class="form-control-placeholder" for="password">Password</label>
                         </div>
                         <div class="form-group">
@@ -60,5 +59,5 @@
         </div>
     </div>
 </body>
-
+</main>
 </html>

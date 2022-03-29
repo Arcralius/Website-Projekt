@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-
+<html lang="en">
+    <main>
 <head>
     <title>Products</title>
     <?php
@@ -27,7 +28,7 @@
         <p>
             <a href="adminproducts_add.php" class="btn btn-primary my-2">Add products</a>
         </p>
-        <h2>Products</h2>
+        <h1>Products</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -60,7 +61,7 @@
                         <div class="col-sm-12 text-center">
                             <?php
                             echo '<form action="adminproducts_update.php" method="post">';
-                            echo '<input type="hidden" id="product_id" name="product_id" value="' . $row['product_id'] . '">';
+                            echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
                             echo '<button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>';
                             echo '</form>';
                             ?>
@@ -68,7 +69,7 @@
                     <td>
                         <?php
                         echo '<form action="adminproducts_delete.php" method="post">';
-                        echo '<input type="hidden" id="product_id" name="product_id" value="' . $row['product_id'] . '">';
+                        echo '<input type="hidden" name="product_id" value="' . $row['product_id'] . '">';
                         echo '<button type="submit" class="btn btn-danger btn-md" style=" width: 100px; display: inline-block; vertical-align: top;" >Delete</button>';
                         echo '</form>';
                         ?>
@@ -105,3 +106,5 @@
 </script>
 
 </body>
+</main>
+</html>

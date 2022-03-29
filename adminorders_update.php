@@ -1,85 +1,83 @@
 <!DOCTYPE HTML>
+<html lang="en">
 
-<head>
-    <title>Update Order</title>
-    <?php
-    include 'header.php';
-    ?>
-</head>
-
-<body>
-    <?php
-    include 'navbar.php';
-    include 'adminsession.php';
-    ?>
-
-    <main class="container">
+    <head>
+        <title>Update Order</title>
         <?php
+        include 'header.php';
+        ?>
+    </head>
 
-        require("conn.php");
-
-        if (isset($_POST['order_id'])) {
-            $order_id = $_POST['order_id'];
-            $sql = "SELECT * FROM `orders` WHERE `order_id`='$order_id'";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $order_id = $row['order_id'];
-                    $pid = $row['pid'];
-                    $uid = $row['uid'];
-                    $s_date = $row['shipment_date'];
-                }
-            } else {
-                header('Location: adminorders.php');
-            }
-        }
-
+    <body>
+        <?php
+        include 'navbar.php';
+        include 'adminsession.php';
         ?>
 
-        <h1>Update Orders</h1>
+        <main class="container">
+            <?php
 
-        <form action="adminorders_update_p.php" method="post">
-            <fieldset>
-                <div class="form-group">
-                    <label for="order_id">Order ID:</label>
-                    <input class="form-control" type="number" name="order_id" value="<?php echo $order_id; ?>" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="pid">Product ID:</label>
-                    <input class="form-control" type="number" step=1 name="pid" required maxlength="20" value="<?php echo $pid; ?>">
-                </div>
-                <div class="form-group">
-                    <label for="uid">User ID:</label>
-                    <input class="form-control" type="number" step=1 name="uid" required maxlength="20" value="<?php echo $uid; ?>">
-                </div>
-                <div class="form-group">
-                    <label for="s_date">Shipment Date:</label>
-                    <input class="form-control" type="date" name="s_date" required value="<?php echo $s_date; ?>">
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
-                    <input type="hidden" id="order_id" name="order_id" value="<?php echo $order_id; ?>">
+            require("conn.php");
 
-                    <div>
-                        <p id="errorMsg">
-                        </p>
+            if (isset($_POST['order_id'])) {
+                $order_id = $_POST['order_id'];
+                $sql = "SELECT * FROM `orders` WHERE `order_id`='$order_id'";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $order_id = $row['order_id'];
+                        $pid = $row['pid'];
+                        $uid = $row['uid'];
+                        $s_date = $row['shipment_date'];
+                    }
+                } else {
+                    header('Location: adminorders.php');
+                }
+            }
+
+            ?>
+
+            <h1>Update Orders</h1>
+
+            <form action="adminorders_update_p.php" method="post">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="order_id">Order ID:</label>
+                        <input class="form-control" type="number" id="order_id" name="order_id" value="<?php echo $order_id; ?>" disabled>
                     </div>
-                </div>
-            </fieldset>
-        </form>
-</body>
+                    <div class="form-group">
+                        <label for="pid">Product ID:</label>
+                        <input class="form-control" type="number" id="pid" step=1 name="pid" required maxlength="20" value="<?php echo $pid; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="uid">User ID:</label>
+                        <input class="form-control" type="number" id="uid" step=1 name="uid" required maxlength="20" value="<?php echo $uid; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="s_date">Shipment Date:</label>
+                        <input class="form-control" type="date" id="s_date" name="s_date" required value="<?php echo $s_date; ?>">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
+                        <input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
+
+                        <div>
+                            <p id="errorMsg">
+                            </p>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+    </body>
+
+
+
+    <script>
+        var errorMsg = getCookie("errorMsg");
+        if (errorMsg == null) {
+            errorMsg = " ";
+        }
+        document.getElementById('errorMsg').innerHTML += errorMsg
+    </script>
 
 </html>
-
-<script>
-    var errorMsg = getCookie("errorMsg");
-    if (errorMsg == null) {
-        errorMsg = " ";
-    }
-    document.getElementById('errorMsg').innerHTML += errorMsg
-</script>
-
-</main>
-
-
-</body>

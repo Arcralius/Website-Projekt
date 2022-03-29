@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 
+<html lang="en">
+
 <head>
        <title>Add Products</title>
        <?php
@@ -33,12 +35,12 @@
                      <div class="form-group">
                             <label for="p_image">Image:</label>
                             <!-- HTML5 Input Form  -->
-                            <input id="file" type="file" name="file" />
+                            <input id="p_image" type="file" name="file" />
                      </div>
                      <div class="form-group">
                             <label for="p_thumbnail">Image thumbnail:</label>
                             <!-- HTML5 Input Form  -->
-                            <input id="file2" type="file" name="file2" />
+                            <input id="p_thumbnail" type="file" name="file2" />
                      </div>
 
 
@@ -70,3 +72,5 @@
 
 
 </body>
+
+</html>

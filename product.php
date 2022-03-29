@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
-
-
+<html lang="en">
+<main>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -19,7 +19,7 @@
 <body>
     <?php
     include 'navbar.php';
-    $productID = htmlspecialchars($_GET["id"]);
+    $productID = htmlspecialchars($_POST["productID"]);
     ?>
     <!-- Product section-->
     <section class="py-5">
@@ -92,7 +92,7 @@
     function getRelatedProducts()
     {
         require("conn.php");
-        $productID = htmlspecialchars($_GET["id"]);
+        $productID = htmlspecialchars($_POST["productID"]);
         
         $stmt = $conn->prepare("SELECT * FROM `products` where product_category = (SELECT product_category from `products` where product_id = ? ) && product_id != ? ; ");
         $stmt->bind_param("ii", $productID, $productID);
@@ -136,7 +136,7 @@
     {
 
         require("conn.php");
-        $productID = htmlspecialchars($_GET["id"]);
+        $productID = htmlspecialchars($_POST["productID"]);
         
         $stmt = $conn->prepare("SELECT product_quantity FROM `products` where product_id = ? ;");
         $stmt->bind_param("i", $productID);
@@ -152,14 +152,19 @@
             $row = $result->fetch_assoc();
 
             $productQty = $row['product_quantity'];
-
-            if ($productQty == 0) {
-                echo '<h3>Out of Stock!</h3>';
-            } else {
-                echo '<div class="d-flex">';
-                echo '<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem">';
-                echo '<button name="addtocart" value="' . $productID . '"class="btn btn-outline-dark flex-shrink-0">Add to Cart</button>';
+            
+            if (isset($_SESSION['username'])){
+                if ($productQty == 0) {
+                    echo '<h3>Out of Stock!</h3>';
+                } else {
+                    echo '<div class="d-flex">';
+                    echo '<button name="addtocart" value="' . $productID . '"class="btn btn-outline-dark flex-shrink-0">Add to Cart</button>';
+                }
             }
+            else{
+                echo '<p>You must be signed in to add to cart</p>';
+            }
+            
         } else {
             echo "0 results";
         }
@@ -169,5 +174,5 @@
     ?>
 
 </body>
-
+</main>
 </html>

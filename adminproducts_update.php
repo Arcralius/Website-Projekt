@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 
+<html lang="en">
+
 <head>
     <title>Update Products</title>
     <?php
@@ -37,8 +39,7 @@
             $p_quantity = sanitize_input((int)$_POST['p_quantity']);
 
 
-            $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_desc`=?,`product_category`=?,
-`product_image`=?,`product_thumbnail`=?,`product_price`=?,`product_quantity`=? WHERE `product_id`=?");
+            $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_desc`=?,`product_category`=?,`product_image`=?,`product_thumbnail`=?,`product_price`=?,`product_quantity`=? WHERE `product_id`=?");
             // Bind & execute the query statement:
             $stmt->bind_param("sssssdii", $p_name, $p_desc, $p_category, $p_image, $p_thumbnail, $p_price, $p_quantity, $product_id);
             if (!$stmt->execute()) {
@@ -82,36 +83,36 @@
                 <form action="adminproducts_update_p.php" method="post">
                     <fieldset>
                         <div class="form-group">
-                            <label for="p_name">Product ID:</label>
-                            <input class="form-control" type="text" name="product_id" value="<?php echo $product_id; ?>" disabled>
+                            <label for="p_id">Product ID:</label>
+                            <input class="form-control" type="text" id="p_id" name="product_id" value="<?php echo $product_id; ?>" disabled>
                         </div>
                         <div class="form-group">
                             <label for="p_name">Product Name:</label>
-                            <input class="form-control" type="text" name="p_name" required maxlength="45" value="<?php echo $p_name; ?>">
+                            <input class="form-control" type="text" id="p_name" name="p_name" required maxlength="45" value="<?php echo $p_name; ?>">
                         </div>
                         <div class="form-group">
                             <label for="p_desc">Description:</label>
-                            <input class="form-control" type="text" name="p_desc" required maxlength="255" value="<?php echo $p_desc; ?>">
+                            <input class="form-control" type="text" id="p_desc" name="p_desc" required maxlength="255" value="<?php echo $p_desc; ?>">
                         </div>
                         <div class="form-group">
                             <label for="p_category">Category:</label>
-                            <input class="form-control" type="text" name="p_category" required maxlength="45" value="<?php echo $p_category; ?>">
+                            <input class="form-control" type="text" id="p_category" name="p_category" required maxlength="45" value="<?php echo $p_category; ?>">
                         </div>
                         <div class="form-group">
                             <label for="p_image">Image:</label>
-                            <input class="form-control" type="text" name="p_image" required maxlength="45" value="<?php echo $p_image; ?>">
+                            <input class="form-control" type="text" id="p_image" name="p_image" required maxlength="45" value="<?php echo $p_image; ?>">
                         </div>
                         <div class="form-group">
                             <label for="p_thumbnail">Image thumbnail:</label>
-                            <input class="form-control" type="text" name="p_thumbnail" required maxlength="45" value="<?php echo $p_thumbnail; ?>">
+                            <input class="form-control" type="text" id="p_thumbnail" name="p_thumbnail" required maxlength="45" value="<?php echo $p_thumbnail; ?>">
                         </div>
                         <div class="form-group">
                             <label for="p_price">Price:</label>
-                            <input class="form-control" type="number" step=0.01 name="p_price" required maxlength="11" value="<?php echo $p_price; ?>">
+                            <input class="form-control" type="number" step=0.01 id="p_price" name="p_price" required maxlength="11" value="<?php echo $p_price; ?>">
                         </div>
                         <div class="form-group">
                             <label for="p_quantity">Quantity:</label>
-                            <input class="form-control" type="number" step=1 name="p_quantity" required maxlength="11" value="<?php echo $p_quantity; ?>">
+                            <input class="form-control" type="number" step=1 id="p_quantity" name="p_quantity" required maxlength="11" value="<?php echo $p_quantity; ?>">
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit" value="update" name="update">Submit</button>
