@@ -181,7 +181,7 @@
     function printcatagories(){
       require("conn.php");
 
-      $sql = "SELECT * FROM `products`; ";
+      $sql = "SELECT DISTINCT product_category FROM `products`;";
       $result = $conn->query($sql);
 
       global $product_catagory;
