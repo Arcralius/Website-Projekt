@@ -63,9 +63,9 @@
             $location = "img/".$filename;
             /* Permanently save the file upload to the upload folder */
             if ( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) { 
-              echo '<p>The HTML5 and php file upload was a success!</p>'; 
+              echo '<p>File upload was a success!</p>'; 
             } else { 
-              echo '<p>The php and HTML5 file upload failed.</p>'; 
+              echo '<p>File upload failed.</p>'; 
             }
         }
         else {
@@ -81,9 +81,9 @@
             $location2 = "img/".$filename2;
             /* Permanently save the file upload to the upload folder */
             if ( move_uploaded_file($_FILES['file2']['tmp_name'], $location2) ) { 
-              echo '<p>The HTML5 and php file upload was a success!</p>';
+              echo '<p>File upload was a success!</p>';
             } else { 
-              echo '<p>The php and HTML5 file upload failed.</p>'; 
+              echo '<p>File upload failed.</p>'; 
             }
         } 
         else {

@@ -28,14 +28,69 @@
         }
 
         if (isset($_POST['update'])) {
+            global $product_id, $p_name, $p_desc, $p_category, $p_image, $p_thumbnail, $p_price, $p_quantity, $errorMsg;
             $product_id = sanitize_input($_POST['product_id']);
             $p_name = sanitize_input($_POST['p_name']);
             $p_desc = sanitize_input($_POST['p_desc']);
             $p_category = sanitize_input($_POST['p_category']);
-            $p_image = sanitize_input($_POST['p_image']);
-            $p_thumbnail = sanitize_input($_POST['p_thumbnail']);
             $p_price = sanitize_input($_POST['p_price']);
             $p_quantity = sanitize_input((int)$_POST['p_quantity']);
+
+            
+            //check if file upload was filled
+            if (isset($_FILES['file']['name']))
+            {
+                if (($_FILES["file"]["type"] == "image/gif") || ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/png")){
+                    /* Get the name of the file uploaded to Apache */
+                    $filename = $_FILES['file']['name'];
+                    /* Prepare to save the file upload to the upload folder */
+                    $location = "img/".$filename;
+                    $p_image = $location;
+                    /* Permanently save the file upload to the upload folder */
+                    if ( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) { 
+                      echo '<p>File upload was a success!</p>'; 
+                    } else { 
+                      echo '<p>File upload failed.</p>'; 
+                    }
+                }
+                else {
+                    //error
+                    $errorMsg .= "Wrong Image.<br>";
+                    $success = false;
+                }
+            }
+            else
+            {
+                $p_image = $_POST['p_image'];
+            }
+           
+           
+            //check if file upload was filled
+            if (isset($_FILES['file2']['name']))
+            {
+                if (($_FILES["file2"]["type"] == "image/gif") || ($_FILES["file2"]["type"] == "image/jpeg") || ($_FILES["file2"]["type"] == "image/jpg") || ($_FILES["file2"]["type"] == "image/png")){
+                    /* Get the name of the file uploaded to Apache */
+                    $filename2 = $_FILES['file2']['name'];
+                    /* Prepare to save the file upload to the upload folder */
+                    $location2 = "img/".$filename2;
+                    $p_thumbnail = $location2;
+                    /* Permanently save the file upload to the upload folder */
+                    if ( move_uploaded_file($_FILES['file2']['tmp_name'], $location2) ) { 
+                      echo '<p>File upload was a success!</p>';
+                    } else { 
+                      echo '<p>File upload failed.</p>'; 
+                    }
+                } 
+                else {
+                    //error
+                    $errorMsg .= "Wrong Image.<br>";
+                    $success = false;
+                }
+            }
+            else
+            {
+                $p_thumbnail = $_POST['p_thumbnail'];
+            }
 
 
             $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_desc`=?,`product_category`=?,

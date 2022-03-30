@@ -29,14 +29,16 @@
             return $data;
         }
 
-        if (isset($_POST['update'])) {
+        /**if (isset($_POST['update'])) {
             $p_name = sanitize_input($_POST['p_name']);
             $p_desc = sanitize_input($_POST['p_desc']);
             $p_category = sanitize_input($_POST['p_category']);
-            $p_image = sanitize_input($_POST['p_image']);
-            $p_thumbnail = sanitize_input($_POST['p_thumbnail']);
+            $p_image = sanitize_input($_POST['p_image_t']);
+            $p_thumbnail = sanitize_input($_POST['p_thumbnail_t']);
             $p_price = sanitize_input($_POST['p_price']);
             $p_quantity = sanitize_input((int)$_POST['p_quantity']);
+
+            
 
 
             $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_desc`=?,`product_category`=?,`product_image`=?,`product_thumbnail`=?,`product_price`=?,`product_quantity`=? WHERE `product_id`=?");
@@ -60,7 +62,7 @@
             //     // echo '</script>';
             // }
             $stmt->close();
-        }
+        }**/
 
         if (isset($_POST['product_id'])) {
             $product_id = $_POST['product_id'];
@@ -104,10 +106,14 @@
                         <div class="form-group">
                             <label for="p_image">Image:</label>
                             <input class="form-control" type="text" id="p_image" name="p_image" required maxlength="45" value="<?php echo $p_image; ?>">
+                            <!-- HTML5 Input Form  -->
+                            <input id="file" type="file" name="file" />
                         </div>
                         <div class="form-group">
                             <label for="p_thumbnail">Image thumbnail:</label>
                             <input class="form-control" type="text" id="p_thumbnail" name="p_thumbnail" required maxlength="45" value="<?php echo $p_thumbnail; ?>">
+                            <!-- HTML5 Input Form  -->
+                            <input id="file2" type="file" name="file2" />
                         </div>
                         <div class="form-group">
                             <label for="p_price">Price:</label>
