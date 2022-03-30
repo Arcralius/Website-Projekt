@@ -1,5 +1,10 @@
 # Website-Projekt
 
+## V1.49
+### Patch Notes
++ Added payment delete function 
++ Updated the billing information page and all the CRUD functions
+
 ## V1.48
 ### Patch Notes
 + Added update and insert functionality for billing/payment info

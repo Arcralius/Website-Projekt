@@ -117,7 +117,7 @@ function addDashes(element)
 {
     let ele = document.getElementById(element.id);
     ele = ele.value.split('-').join('');    // Remove dash (-) if mistakenly entered.
-
+    
     let finalVal = ele.match(/.{1,2}/g).join('-');
     document.getElementById(element.id).value = finalVal;
 }
@@ -129,4 +129,11 @@ function addSpaces(element)
 
     let finalVal = ele.match(/.{1,4}/g).join(' ');
     document.getElementById(element.id).value = finalVal;
+}
+
+function passpaymentID(id)
+{
+    var paymentid = id.value;
+    document.getElementById("paymentid").value = paymentid;
+    document.getElementById("deletepaymentid").value = paymentid;
 }

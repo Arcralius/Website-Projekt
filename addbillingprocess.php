@@ -1,4 +1,5 @@
 <?php
+
 include 'header.php';
 include 'navbar.php';
 
@@ -6,7 +7,6 @@ $errorMsg = "";
 $success = true;
 $userID = $_SESSION['id'];
 $address = $_POST["address"];
-$paymentID = $_POST["paymentid"];
 
 if (empty($_POST["fullname"])) {
     $errorMsg .= "Fullname is required.<br>";
@@ -62,11 +62,11 @@ if (empty($_POST["address"])) {
 */
 
 if ($success) {
-    updatebilling();
+    addbilling();
     if ($success) 
     {
         echo '<script>';
-        echo 'createCookie("succmessage", "Edit success!", 1);';
+        echo 'createCookie("succmessage", "Card added successfully!", 1);';
         echo 'window.location.href = "billinginfo.php";';
         echo '</script>';
     }
@@ -92,12 +92,12 @@ function sanitize_input($data)
     return $data;
 }
 
-function updatebilling()
+function addbilling()
 {
     global $userID, $paymentID, $errorMsg, $success, $fullname, $cardno, $cvv, $expiration, $address;
      
     // SQL Statements
-    $updatesql = "UPDATE payment_details SET name = ?, card_number = ?, CVC = ?, expiration = ?, address = ? WHERE user_id = ? AND payment_id = ?;";
+    $insertsql = "INSERT INTO payment_details (user_id, name, card_number, CVC, expiration, address) VALUES (?, ?, ?, ?, ?, ?)";
     
     $config = parse_ini_file("../../private/db-config.ini");
     $conn = new mysqli(
@@ -121,15 +121,18 @@ function updatebilling()
         $success = false;
     } else {
         // Prepare the statement:         
-        $stmt = $conn->prepare($updatesql);
-        $stmt->bind_param("sssssii", $fullname, $cardno, $cvv, $expiration, $address, $userID, $paymentID);
+        $stmt = $conn->prepare($insertsql);
+        $stmt->bind_param("isssss", $userID, $fullname, $cardno, $cvv, $expiration, $address);
 
+        
                    
         if (!$stmt->execute()) 
         {
             $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
             $success = false;
         }
+        
         $stmt->close();
+
     }
 }
