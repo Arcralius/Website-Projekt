@@ -6,7 +6,6 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
         <li class="nav-item"><a class="nav-link" aria-current="page" href="main.php">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="products.php">Products</a></li>
-        <li class="nav-item"><a class="nav-link" href="#!">Promotions</a></li>
 
           <?php
           session_start();
