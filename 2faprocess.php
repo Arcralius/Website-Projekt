@@ -59,9 +59,11 @@
         
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
-            <a class="nav-link active ms-0" href="/Website-Projekt/account.php">Profile</a>
-            <!-- <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="__blank">Billing</a> -->
-            <a class="nav-link" href="/Website-Projekt/2fa.php" target="__blank">Security</a>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item"><a class="nav-link active ms-0" href="/Website-Projekt/account.php">Profile</a></li>
+                <li class="list-group-item"><a class="nav-link" href="/Website-Projekt/billinginfo.php">Billing</a></li>
+                <li class="list-group-item"><a class="nav-link" href="/Website-Projekt/2fa.php">Security</a></li>
+            </ul>
 
             <hr class="mt-0 mb-4">
             <!-- Account details card-->
