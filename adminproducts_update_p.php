@@ -27,7 +27,7 @@
             return $data;
         }
 
-        if (isset($_POST['update'])) {
+        if (isset($_POST['product_id'])) {
             global $product_id, $p_name, $p_desc, $p_category, $p_image, $p_thumbnail, $p_price, $p_quantity, $errorMsg;
             $product_id = sanitize_input($_POST['product_id']);
             $p_name = sanitize_input($_POST['p_name']);
@@ -35,17 +35,17 @@
             $p_category = sanitize_input($_POST['p_category']);
             $p_price = sanitize_input($_POST['p_price']);
             $p_quantity = sanitize_input((int)$_POST['p_quantity']);
-
             
-            //check if file upload was filled
-            if (isset($_FILES['file']['name']))
+            if ($_FILES['file']['name'] != NULL)
             {
+                
                 if (($_FILES["file"]["type"] == "image/gif") || ($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/png")){
                     /* Get the name of the file uploaded to Apache */
                     $filename = $_FILES['file']['name'];
                     /* Prepare to save the file upload to the upload folder */
                     $location = "img/".$filename;
                     $p_image = $location;
+                    
                     /* Permanently save the file upload to the upload folder */
                     if ( move_uploaded_file($_FILES['file']['tmp_name'], $location) ) { 
                       echo '<p>File upload was a success!</p>'; 
@@ -64,9 +64,10 @@
                 $p_image = $_POST['p_image'];
             }
            
+            
            
             //check if file upload was filled
-            if (isset($_FILES['file2']['name']))
+            if ($_FILES['file2']['name'] != NULL)
             {
                 if (($_FILES["file2"]["type"] == "image/gif") || ($_FILES["file2"]["type"] == "image/jpeg") || ($_FILES["file2"]["type"] == "image/jpg") || ($_FILES["file2"]["type"] == "image/png")){
                     /* Get the name of the file uploaded to Apache */
@@ -74,6 +75,7 @@
                     /* Prepare to save the file upload to the upload folder */
                     $location2 = "img/".$filename2;
                     $p_thumbnail = $location2;
+                    echo '<h1>'.$p_thumbnail.'</h1>';
                     /* Permanently save the file upload to the upload folder */
                     if ( move_uploaded_file($_FILES['file2']['tmp_name'], $location2) ) { 
                       echo '<p>File upload was a success!</p>';
@@ -102,6 +104,7 @@
                 $success = false;
             }   
             if ($success) {
+                
                 echo '<script>';
                 echo 'createCookie("succmessage", "Update success!", 1);';
                 echo 'window.location.href = "adminproducts.php";';
