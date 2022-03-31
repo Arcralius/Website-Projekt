@@ -1,5 +1,11 @@
 # Website-Projekt
 
+## V1.51
+### Patch Notes
++ Added ability to checkout and send order via payment.php and paymentProcessing.php
++ Added CRUD for orders
++ Added Footer for Checkout and promotion pages
+
 ## V1.50
 ### Patch Notes
 + Fixed errors on CRUD billing function 

@@ -8,6 +8,8 @@
         getCart();
      else if (isset($_POST['setprodqty']))
         setProdQty();
+     else if (isset($_POST['getpayment']))
+        getPayment();
      
     function addToCart() {
         $config = parse_ini_file("../../private/db-config.ini");
@@ -168,6 +170,38 @@
                         $_SESSION["cart"][$index][6] = $qty;
                 }
             }
+        }
+    }
+    
+    function getPayment() {
+        if (!empty($_SESSION["cart"])) {
+            $totalCost = $discountCost = 0;
+            echo '<h2>Payment Summary</h2>';
+            echo '<div class="table-responsive">';
+            echo '<table class="table user-list">';
+            echo '<thead><tr>';
+            echo '<th>Product</th>';
+            echo '<th>Quantity</th>';
+            echo '<th>Subtotal</th>';
+            echo '</tr></thead>';
+            foreach($_SESSION["cart"] as $prod) {
+                $discountCost = $prod[4] * (100 - $prod[5])/100;
+                $totalCost += $discountCost * $prod[6];
+                
+                echo '<tr>';
+                echo '<td>' . $prod[1] . '</td>';
+                echo '<td>' . $prod[6] . '</td>';
+                if ($prod[5] != 0) 
+                    echo '<td><s>$' . $prod[4] * $prod[6] . '</s> $' . $discountCost * $prod[6] . '</td>';
+                else
+                    echo '<td>$' . $discountCost * $prod[6] . '</td>';
+                echo '</tr>';
+            }
+            echo '<tr><td></td><td></td><td>Total: $' . $totalCost . '</td></tr>';
+            echo '</table>';
+            echo '</div>';
+        } else {
+            echo "Your cart is currently empty.";
         }
     }
 ?>

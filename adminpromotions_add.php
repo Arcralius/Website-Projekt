@@ -67,6 +67,7 @@
             document.getElementById('errormsg').innerHTML += errormsg;
         </script>
     </main>
+    <?php include 'footer.php';?>
 </body>
 
 </html>
