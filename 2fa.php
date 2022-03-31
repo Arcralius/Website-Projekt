@@ -38,7 +38,7 @@
                         <div class="mb-3">
                             <label class="small mb-1" for="2fa">Enable 2 Factor Authentication?</label>
                             <br>
-                            <select name="fa" id="fa" value="<?php echo $role; ?>">
+                            <select name="fa" aria-label="2faselect" id="fa" value="<?php echo $role; ?>">
                             <?php
                             if ($fa == NULL) {
                                 echo '<option value="No">No</option>';

@@ -247,7 +247,7 @@
 
             <?php function takeinfo()
             {
-                global $errorMsg, $success, $paymentID, $fullName, $cardNo, $expiration, $address;
+                global $errorMsg, $success, $paymentID, $fullName, $cardNo, $expiration, $address, $cvv;
                 $config = parse_ini_file("../../private/db-config.ini");
                 $conn = new mysqli(
                     $config["servername"],
@@ -273,6 +273,7 @@
                             $paymentID = $row["payment_id"];
                             $fullName = $row["name"];
                             $cardNo = $row["card_number"];
+                            $cvv = $row["CVC"];
                             $expiration = $row["expiration"];
                             $address = $row["address"];
 
@@ -298,8 +299,8 @@
                             echo '<span class = "label label-default">Expires on ' . $expiration . '</span>';
                             echo '</td>';
                             echo '<td class = "align-middle">';
-                            echo '<button type = "button" onclick = "passpaymentID(this)" class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatecard" id="paymentID" value="' . $paymentID . '">Update</button>';
-                            echo '<button type = "button" onclick = "passpaymentID(this)" class = "btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletecard" id="paymentID" value="' . $paymentID . '">Delete</button>';
+                            echo '<button type = "button" onclick = "passpaymentID(this)" class = "btn btn-primary" data-bs-toggle="modal" data-bs-target="#updatecard" value="' . $paymentID . '">Update</button>';
+                            echo '<button type = "button" onclick = "passpaymentID(this)" class = "btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletecard" value="' . $paymentID . '">Delete</button>';
                             echo '</td>';
                             echo '</tr>';
                         }
