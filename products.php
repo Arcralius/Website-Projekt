@@ -105,7 +105,15 @@
           echo '<div class="card-body p-4">';
           echo '<div class="text-center">';
           echo '<p class="fw-bolder">' . $productName . '</p>';
-          echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
+          $discount = checkPromo($productID);
+          if ($discount != NULL)
+          {
+              echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
+              echo '<span class="text"> $' . number_format($productPrice * $discount, 2) . '</span>';
+          }
+          else {
+              echo '<span class="text">$' . $productPrice . '</span>';
+          }
           echo '</div>';
           echo '</div>';
           echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
@@ -159,7 +167,15 @@
           echo '<div class="card-body p-4">';
           echo '<div class="text-center">';
           echo '<h5 class="fw-bolder">' . $productName . '</h5>';
-          echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
+          $discount = checkPromo($productID);
+          if ($discount != NULL)
+          {
+              echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
+              echo '<span class="text"> $' . number_format($productPrice * $discount, 2) . '</span>';
+          }
+          else {
+              echo '<span class="text">$' . $productPrice . '</span>';
+          }
           echo '</div>';
           echo '</div>';
           echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
@@ -207,8 +223,37 @@
         echo "No catagories";
       }
     }
+<<<<<<< Updated upstream
     
     include 'footer.php';
+=======
+
+    function checkPromo($id)
+    {
+        require("conn.php");
+        
+        $stmt = $conn->prepare("SELECT discount FROM `promotions` where prod_id = ?;");
+       
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $discount2 = $row['discount'];
+            $discount2 = (100 - $discount2) / 100;
+        }
+        else {
+            $discount2 = NULL;
+        }
+
+        
+
+        $stmt->close();
+        $conn->close();
+
+        return $discount2;
+    }
+>>>>>>> Stashed changes
     ?>
 
 
