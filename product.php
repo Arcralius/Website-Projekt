@@ -121,7 +121,7 @@
             echo '<img class="card-img-top" src="' . $productImage . '" alt="..." />';
             echo '<div class="card-body p-4">';
             echo '<div class="text-center">';
-            echo '<h5 class="fw-bolder">' . $productName . '</h5>';
+            echo '<p class="fw-bolder">' . $productName . '</p>';
             echo '<span class="text-muted text-decoration-line-through">' . $productPrice . '</span>';
             echo '</div>';
             echo '</div>';
