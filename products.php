@@ -223,10 +223,8 @@
         echo "No catagories";
       }
     }
-<<<<<<< Updated upstream
     
-    include 'footer.php';
-=======
+
 
     function checkPromo($id)
     {
@@ -253,7 +251,7 @@
 
         return $discount2;
     }
->>>>>>> Stashed changes
+    include 'footer.php';
     ?>
 
 

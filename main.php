@@ -59,7 +59,15 @@
                 echo '<div class="card-body p-4">';
                 echo '<div class="text-center">';
                 echo '<p class="fw-bolder">' . $row['product_name'] . '</p>';
-                echo '<span class="text-muted text-decoration-line-through">$' . $row['product_price'] . '</span>';
+                $discount = checkPromo($row['product_id']);
+                if ($discount != NULL)
+                {
+                    echo '<span class="text-muted text-decoration-line-through">$' . $row['product_price'] . '</span>';
+                    echo '<span class="text"> $' . number_format($row['product_price'] * $discount, 2) . '</span>';
+                }
+                else {
+                    echo '<span class="text">$' . $row['product_price'] . '</span>';
+                }
                 echo '</div>';
                 echo '</div>';
                 echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
@@ -84,7 +92,15 @@
                 echo '<div class="card-body p-4">';
                 echo '<div class="text-center">';
                 echo '<p class="fw-bolder">' . $row['product_name'] . '</p>';
-                echo '<span class="text-muted text-decoration-line-through">$' . $row['product_price'] . '</span>';
+                $discount = checkPromo($row['product_id']);
+                if ($discount != NULL)
+                {
+                    echo '<span class="text-muted text-decoration-line-through">$' . $row['product_price'] . '</span>';
+                    echo '<span class="text"> $' . number_format($row['product_price'] * $discount, 2) . '</span>';
+                }
+                else {
+                    echo '<span class="text">$' . $row['product_price'] . '</span>';
+                }
                 echo '</div>';
                 echo '</div>';
                 echo '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">';
@@ -101,6 +117,33 @@
             echo "0 results";
         }
         $conn->close();
+    }
+
+
+    function checkPromo($id)
+    {
+        require("conn.php");
+        
+        $stmt = $conn->prepare("SELECT discount FROM `promotions` where prod_id = ?;");
+       
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $discount2 = $row['discount'];
+            $discount2 = (100 - $discount2) / 100;
+        }
+        else {
+            $discount2 = NULL;
+        }
+
+        
+
+        $stmt->close();
+        $conn->close();
+
+        return $discount2;
     }
     ?>
 
