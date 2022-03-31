@@ -8,10 +8,17 @@ $success = true;
 $userID = $_SESSION['id'];
 $address = $_POST["address"];
 
+$date = "01";
+$year = "20";
+$x = explode("-",$_POST["expiration"]); // split the month and year by date 
+$month = $x[0];
+$expiration = $year . $x[1] . "-" . $month . "-" . $date ;
+
+
 if (empty($_POST["fullname"])) {
     $errorMsg .= "Fullname is required.<br>";
     $success = false;
-} else if (!preg_match("/^[a-zA-Z0-9]{1,255}$/", $_POST["fullname"])) {
+} else if (!preg_match("/^[a-zA-Z0-9 ]{1,255}$/", $_POST["fullname"])) {
     $errorMsg .= "Fullname should only contain alphanumeric characters.<br>";
     $success = false;
 } else {
@@ -38,14 +45,14 @@ if (empty($_POST["cvv"])) {
     $cvv = sanitize_input($_POST["cvv"]);
 }
 
-if (empty($_POST["expiration"])) {
+if (empty($expiration)) {
     $errorMsg .= "Card expiration date is required.<br>";
     $success = false;
-} else if (!preg_match("/^[0-9]+-+[0-9]*$/", $_POST["expiration"])) {
+} else if (!preg_match("/^[0-9]+-+[0-9]+-+[0-9]*$/", $expiration)) {
     $errorMsg .= "Card expiration date should only contain numbers.<br>";
     $success = false;
 } else {
-    $expiration = sanitize_input($_POST["expiration"]);
+    $expiration = sanitize_input($expiration);
 }
 
 /*
@@ -128,10 +135,17 @@ function addbilling()
                    
         if (!$stmt->execute()) 
         {
-            $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-            $success = false;
+            if ($stmt->errno === 1292)
+            {
+                $errorMsg = "Invalid date! Please key in the expiration date on your card";
+                $success = false;
+            }
+            else
+            {
+                $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+                $success = false;
+            }
         }
-        
         $stmt->close();
 
     }

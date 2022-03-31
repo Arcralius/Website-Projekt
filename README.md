@@ -1,5 +1,9 @@
 # Website-Projekt
 
+## V1.50
+### Patch Notes
++ Fixed errors on CRUD billing function 
+
 ## V1.49
 ### Patch Notes
 + Added payment delete function 

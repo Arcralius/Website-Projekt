@@ -78,7 +78,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="updatebillingprocess.php" method="post" class="update-form">
+                            <form action="updatebillingprocess.php" method="post" class="update-form" onsubmit="addDashes(document.getElementById('updateExpiration'))">
                                 <!-- Form Group (Full Name)-->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputFullName">Full Name</label>
@@ -137,7 +137,7 @@
             </div>
 
             <!-- Delete Card -->
-            <div class="modal fade" id="deletecarddiv" title="deletecard" tabindex="-1" aria-labelledby="billing" aria-hidden="true">
+            <div class="modal fade" id="deletecard" title="deletecard" tabindex="-1" aria-labelledby="billing" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -170,7 +170,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="addbillingprocess.php" method="post" class="addcard-form">
+                            <form action="addbillingprocess.php" method="post" class="addcard-form" onsubmit="addDashes(document.getElementById('inputExpiration'))">
                                 <!-- Form Group (Full Name)-->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputFullName">Full Name</label>
@@ -214,7 +214,7 @@
 
                                 <!-- Save changes button-->
 
-                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Save Changes</button>
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3" >Save Changes</button>
 
 
                             </form>
@@ -261,7 +261,7 @@
                     $success = false;
                 } else {
                     // Prepare the statement:         
-                    $stmt = $conn->prepare("SELECT * FROM payment_details WHERE user_id=?");
+                    $stmt = $conn->prepare("SELECT payment_id, user_id, name, card_number, CVC, date_format(expiration, '%m-%y') AS expiration, address FROM payment_details WHERE user_id=?");
                     // Bind & execute the query statement:         
                     $stmt->bind_param("i", $_SESSION['id']);
                     $stmt->execute();

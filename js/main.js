@@ -131,9 +131,12 @@ function addSpaces(element)
     document.getElementById(element.id).value = finalVal;
 }
 
+
 function passpaymentID(id)
 {
     var paymentid = id.value;
     document.getElementById("paymentid").value = paymentid;
     document.getElementById("deletepaymentid").value = paymentid;
 }
+
+

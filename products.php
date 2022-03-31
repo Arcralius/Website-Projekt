@@ -77,6 +77,7 @@
 
     function printproducts()
     {
+      
       require("conn.php");
 
       $sql = "SELECT * FROM `products`; ";
@@ -206,6 +207,8 @@
         echo "No catagories";
       }
     }
+    
+    include 'footer.php';
     ?>
 
 
