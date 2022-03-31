@@ -19,6 +19,12 @@
 <body>
     <?php
     include 'navbar.php';
+    if (!isset($_POST["productID"]))
+    {
+        echo '<script>';
+        echo 'window.location.href = "products.php";';
+        echo '</script>';
+    }
     $productID = htmlspecialchars($_POST["productID"]);
     ?>
     <!-- Product section-->

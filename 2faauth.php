@@ -11,9 +11,22 @@
     <body>
         <?php
         session_start();
+
+        if (!isset($_SESSION["username"])) {
+            echo '<script>';
+            echo 'window.location.href = "signin.php";';
+            echo '</script>';
+        }
+
         $username = $_SESSION["username"];
+
+
+
         session_destroy();
         include 'navbar.php';
+
+
+
         ?>
 
         <div class="card mb-4">
