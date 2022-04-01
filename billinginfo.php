@@ -91,7 +91,7 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputCardNo">Card Number</label>
                                         <?php
-                                        echo '<input class="form-control" id="updateCardNo" onkeypress="addSpaces(this)" type="text" maxlength="19" required name="cardno" placeholder="' . $cardNo . '" value="' . $cardNo . '"> ';
+                                        echo '<input class="form-control" id="updateCardNo" onkeypress="addSpaces(this)" type="text" minlength="16" maxlength="19" required name="cardno" placeholder="' . $cardNo . '" value="' . $cardNo . '"> ';
                                         ?>
 
                                     </div>
@@ -99,7 +99,7 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputCVC">CVV</label>
                                         <?php
-                                        echo '<input class="form-control" id="updateCVV" type="text" maxlength="4" required name="cvv" placeholder="' . $cvv . '" value="' . $cvv . '"> ';
+                                        echo '<input class="form-control" id="updateCVV" type="text" minlength="3" maxlength="3" required name="cvv" placeholder="' . $cvv . '" value="' . $cvv . '"> ';
                                         ?>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                     <label class="small mb-1" for="inputExpiration">Expiration (MM-YY)</label>
 
                                     <?php
-                                    echo '<input class="form-control" id="updateExpiration" onkeypress="addDashes(this)" type="text" maxlength="5" required name="expiration" placeholder="' . $expiration . '" value="' . $expiration . '"> ';
+                                    echo '<input class="form-control" id="updateExpiration" onkeypress="addDashes(this)" type="text" minlength="4" maxlength="5" required name="expiration" placeholder="' . $expiration . '" value="' . $expiration . '"> ';
                                     ?>
                                 </div>
                                 <!-- Form Group (Address)-->
@@ -183,7 +183,7 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputCardNo">Card Number</label>
                                         <?php
-                                        echo '<input class="form-control" id="inputCardNo" onkeypress="addSpaces(this)" type="text" maxlength="19" required name="cardno" placeholder="Card Number"> ';
+                                        echo '<input class="form-control" id="inputCardNo" onkeypress="addSpaces(this)" type="text" minlength="16" maxlength="19" required name="cardno" placeholder="Card Number"> ';
                                         ?>
 
                                     </div>
@@ -191,7 +191,7 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputCVC">CVV</label>
                                         <?php
-                                        echo '<input class="form-control" id="inputCVV" type="text" maxlength="4" required name="cvv" placeholder="CVV"> ';
+                                        echo '<input class="form-control" id="inputCVV" type="text" minlength="3" maxlength="3" required name="cvv" placeholder="CVV"> ';
                                         ?>
                                     </div>
                                 </div>
@@ -200,7 +200,7 @@
                                     <label class="small mb-1" for="inputExpiration">Expiration (MM-YY)</label>
 
                                     <?php
-                                    echo '<input class="form-control" id="inputExpiration" onkeypress="addDashes(this)" type="text" maxlength="5" required name="expiration" placeholder="Expiry Date"> ';
+                                    echo '<input class="form-control" id="inputExpiration" onkeypress="addDashes(this)" type="text" minlength="4" maxlength="5" required name="expiration" placeholder="Expiry Date"> ';
                                     ?>
                                 </div>
                                 <!-- Form Group (Address)-->

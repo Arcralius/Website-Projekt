@@ -172,6 +172,7 @@
                 if ($productQty == 0) {
                     echo '<h3>Out of Stock!</h3>';
                 } else {
+                    echo '<p>In stock: ' . $productQty . '</p>';
                     echo '<div class="d-flex">';
                     echo '<button name="addtocart" value="' . $productID . '"class="btn btn-outline-dark flex-shrink-0">Add to Cart</button>';
                 }
