@@ -36,6 +36,7 @@
             if ($_SESSION["role"] == "A") {
               echo '<li class="nav-item"><a class="nav-link" href="adminhome.php">Admin</a></li>';
             }
+            echo '<li class="nav-item"><a class="nav-link" href="orders.php">Order History</a></li>';
             echo '</ul>';
             echo '<form action="checkout.php">';
             echo '<div class="p-1">';

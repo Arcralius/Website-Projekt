@@ -28,9 +28,9 @@
 <?php
     include 'footer.php';
     $ord_id = $prod_id = $user_id = $total_price = $discountCost = 0;
-    $username = $shipment_date = $errorMsg = $success = $expiry = "";
+    $username = $shipment_date = $errorMsg = $expiry = "";
+    $success = $validated = true;
     
-    $success = true;
     function confirmPayment(){
         global $ord_id, $prod_id, $username, $user_id, $total_price, $shipment_date, $errorMsg, $success;
         $validated = true;

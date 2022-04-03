@@ -1,5 +1,10 @@
 # Website-Projekt
 
+## V1.52
+### Patch Notes
++ Added ability to view order history via orders.php
++ Added "Orders" tab to navbar
+
 ## V1.51
 ### Patch Notes
 + Added ability to checkout and send order via payment.php and paymentProcessing.php
