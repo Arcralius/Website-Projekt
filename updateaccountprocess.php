@@ -5,9 +5,6 @@ $result = "";
 $email = $errorMsg = "";
 $success = true;
 
-
-
-
 if (empty($_POST["username"])) {
     $errorMsg .= "Username is required.<br>";
     $success = false;
@@ -94,7 +91,6 @@ function updateuser()
         $config["password"],
         $config["dbname"]
     );
-
     $username = mysqli_real_escape_string($conn, $username);
     $email = mysqli_real_escape_string($conn, $email);
     $fname = mysqli_real_escape_string($conn, $fname);
@@ -106,7 +102,6 @@ function updateuser()
         $errorMsg = "Connection failed: " . $conn->connect_error;
         $success = false;
     } else {
- 
         // Prepare the statement:         
         $stmt = $conn->prepare("UPDATE users SET username = ? , fname = ?, lname = ?, email = ? WHERE user_id = ?;");
         //Bind & execute the query statement:         

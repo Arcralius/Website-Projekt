@@ -1,5 +1,4 @@
 <?php
-
 include 'header.php';
 include 'navbar.php';
 
@@ -13,7 +12,6 @@ $year = "20";
 $x = explode("-",$_POST["expiration"]); // split the month and year by date 
 $month = $x[0];
 $expiration = $year . $x[1] . "-" . $month . "-" . $date ;
-
 
 if (empty($_POST["fullname"])) {
     $errorMsg .= "Fullname is required.<br>";

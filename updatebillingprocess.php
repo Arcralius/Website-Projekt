@@ -8,7 +8,6 @@ $userID = $_SESSION['id'];
 $address = $_POST["address"];
 $paymentID = $_POST["paymentid"];
 
-
 $date = "01";
 $year = "20";
 $x = explode("-",$_POST["expiration"]); // split the month and year by date 
@@ -55,19 +54,6 @@ if (empty($expiration)) {
     $expiration = sanitize_input($expiration);
 }
 
-/*
-if (empty($_POST["address"])) {
-    $errorMsg .= "Address is required.<br>";
-    $success = false;
-} else if (!preg_match("/^\s*\S+(?:\s+\S+){2}/", $_POST["address"])) {
-    $errorMsg .= "Invalid Address.<br>";
-    $success = false;
-} else {
-    $address = sanitize_input($_POST["address"]);
-}
-
-*/
-
 if ($success) {
     updatebilling();
     if ($success) 
@@ -102,10 +88,8 @@ function sanitize_input($data)
 function updatebilling()
 {
     global $userID, $paymentID, $errorMsg, $success, $fullname, $cardno, $cvv, $expiration, $address;
-     
     // SQL Statements
     $updatesql = "UPDATE payment_details SET name = ?, card_number = ?, CVC = ?, expiration = ?, address = ? WHERE user_id = ? AND payment_id = ?;";
-    
     $config = parse_ini_file("../../private/db-config.ini");
     $conn = new mysqli(
             $config["servername"],
@@ -114,14 +98,12 @@ function updatebilling()
             $config["dbname"]
     );
     
-    
     $fullname = mysqli_real_escape_string($conn, $fullname);
     $cardno = mysqli_real_escape_string($conn, $cardno);
     $cvv = mysqli_real_escape_string($conn, $cvv);
     $expiration = mysqli_real_escape_string($conn, $expiration);
     $address = mysqli_real_escape_string($conn, $address);
    
-    
     // Check connection
     if ($conn->connect_error) {
         $errorMsg = "Connection failed: " . $conn->connect_error;
@@ -130,8 +112,7 @@ function updatebilling()
         // Prepare the statement:         
         $stmt = $conn->prepare($updatesql);
         $stmt->bind_param("sssssii", $fullname, $cardno, $cvv, $expiration, $address, $userID, $paymentID);
-
-                   
+  
         if (!$stmt->execute()) 
         {
             if ($stmt->errno === 1292)
@@ -144,8 +125,6 @@ function updatebilling()
                 $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                 $success = false;
             }
-            
-            
         }
         $stmt->close();
     }

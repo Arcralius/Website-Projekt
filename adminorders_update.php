@@ -1,19 +1,16 @@
 <!DOCTYPE HTML>
 <html lang="en">
-
     <head>
         <title>Update Order</title>
         <?php
         include 'header.php';
         ?>
     </head>
-
     <body>
         <?php
         include 'navbar.php';
         include 'adminsession.php';
         ?>
-
         <main class="container">
             <?php
 
@@ -37,11 +34,8 @@
                     header('Location: adminorders.php');
                 }
             }
-
             ?>
-
             <h1>Update Orders</h1>
-
             <form action="adminorders_update_p.php" method="post">
                 <fieldset>
                     <div class="form-group">
@@ -71,16 +65,14 @@
                     </div>
                 </fieldset>
             </form>
+        </main>
+        <?php include 'footer.php'; ?>
+        <script>
+            var errorMsg = getCookie("errorMsg");
+            if (errorMsg == null) {
+                errorMsg = " ";
+            }
+            document.getElementById('errorMsg').innerHTML += errorMsg
+        </script>
     </body>
-
-
-
-    <script>
-        var errorMsg = getCookie("errorMsg");
-        if (errorMsg == null) {
-            errorMsg = " ";
-        }
-        document.getElementById('errorMsg').innerHTML += errorMsg
-    </script>
-
 </html>

@@ -1,19 +1,15 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<main>
-
     <head>
-
         <?php
         require_once 'GoogleAuthenticator.php';
         include 'header.php';
         ?>
     </head>
-
     <body>
-
         <?php
         include 'navbar.php';
+        echo '<main>';
         $result = "";
         $email = $errorMsg = "";
         $success = true;
@@ -84,114 +80,115 @@
                 </p>
             </div>
         </div>
-
-        <?php
-        function takeinfo()
-        {
-            global $errorMsg, $success, $fname, $lname, $password_hashed, $role, $username, $email, $fa;
-            $config = parse_ini_file("../../private/db-config.ini");
-            $conn = new mysqli(
-                $config["servername"],
-                $config["username"],
-                $config["password"],
-                $config["dbname"]
-            );
-            // Check connection
-            if ($conn->connect_error) {
-                $errorMsg = "Connection failed: " . $conn->connect_error;
-                $success = false;
-            } else {
-                // Prepare the statement:         
-                $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
-                // Bind & execute the query statement:         
-                $stmt->bind_param("s", $username);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                if ($result->num_rows > 0) {
-                    // Note that email field is unique, so should only have
-                    // one row in the result set.             
-                    $row = $result->fetch_assoc();
-                    $email = $row["email"];
-                    $fname = $row["fname"];
-                    $lname = $row["lname"];
-                    $role = $row["role"];
-                    $username = $row["username"];
-                    $password_hashed = $row["password"];
-                    $usr_id = $row["user_id"];
-                    $fa = $row["2fa"];
-                    $_SESSION['id'] = $usr_id;
-                    // Check if the password matches:
-                }
-                $stmt->close();
-            }
-            $conn->close();
-        }
-
-        function add2fa()
-        {
-            global $errorMsg, $success, $secret;
-            $config = parse_ini_file("../../private/db-config.ini");
-            $conn = new mysqli(
-                $config["servername"],
-                $config["username"],
-                $config["password"],
-                $config["dbname"]
-            );
-
-            $secret = mysqli_real_escape_string($conn, $secret);
-            $userid = mysqli_real_escape_string($conn, $_SESSION['id']);
-
-            // Check connection     
-            if ($conn->connect_error) {
-                $errorMsg = "Connection failed: " . $conn->connect_error;
-                $success = false;
-            } else {
-
-                // Prepare the statement:         
-                $stmt = $conn->prepare("UPDATE users SET 2fa = ? WHERE user_id = ?;");
-                //Bind & execute the query statement:         
-                $stmt->bind_param("si", $secret, $userid);
-                if (!$stmt->execute()) {
-                    $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-                    $success = false;
-                }
-                $stmt->close();
-            }
-            $conn->close();
-        }
-
-        function remove2fa()
-        {
-            global $errorMsg, $success, $secret;
-            $config = parse_ini_file("../../private/db-config.ini");
-            $conn = new mysqli(
-                $config["servername"],
-                $config["username"],
-                $config["password"],
-                $config["dbname"]
-            );
-
-            $secret = NULL;
-            $userid = mysqli_real_escape_string($conn, $_SESSION['id']);
-
-            // Check connection     
-            if ($conn->connect_error) {
-                $errorMsg = "Connection failed: " . $conn->connect_error;
-                $success = false;
-            } else {
-
-                // Prepare the statement:         
-                $stmt = $conn->prepare("UPDATE users SET 2fa = ? WHERE user_id = ?;");
-                //Bind & execute the query statement:         
-                $stmt->bind_param("si", $secret, $userid);
-                if (!$stmt->execute()) {
-                    $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
-                    $success = false;
-                }
-                $stmt->close();
-            }
-            $conn->close();
-        }
-        ?>
+        </main>
     </body>
-</main>
+</html>
+
+<?php
+function takeinfo()
+{
+    global $errorMsg, $success, $fname, $lname, $password_hashed, $role, $username, $email, $fa;
+    $config = parse_ini_file("../../private/db-config.ini");
+    $conn = new mysqli(
+        $config["servername"],
+        $config["username"],
+        $config["password"],
+        $config["dbname"]
+    );
+    // Check connection
+    if ($conn->connect_error) {
+        $errorMsg = "Connection failed: " . $conn->connect_error;
+        $success = false;
+    } else {
+        // Prepare the statement:         
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+        // Bind & execute the query statement:         
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            // Note that email field is unique, so should only have
+            // one row in the result set.             
+            $row = $result->fetch_assoc();
+            $email = $row["email"];
+            $fname = $row["fname"];
+            $lname = $row["lname"];
+            $role = $row["role"];
+            $username = $row["username"];
+            $password_hashed = $row["password"];
+            $usr_id = $row["user_id"];
+            $fa = $row["2fa"];
+            $_SESSION['id'] = $usr_id;
+            // Check if the password matches:
+        }
+        $stmt->close();
+    }
+    $conn->close();
+}
+
+function add2fa()
+{
+    global $errorMsg, $success, $secret;
+    $config = parse_ini_file("../../private/db-config.ini");
+    $conn = new mysqli(
+        $config["servername"],
+        $config["username"],
+        $config["password"],
+        $config["dbname"]
+    );
+
+    $secret = mysqli_real_escape_string($conn, $secret);
+    $userid = mysqli_real_escape_string($conn, $_SESSION['id']);
+
+    // Check connection     
+    if ($conn->connect_error) {
+        $errorMsg = "Connection failed: " . $conn->connect_error;
+        $success = false;
+    } else {
+
+        // Prepare the statement:         
+        $stmt = $conn->prepare("UPDATE users SET 2fa = ? WHERE user_id = ?;");
+        //Bind & execute the query statement:         
+        $stmt->bind_param("si", $secret, $userid);
+        if (!$stmt->execute()) {
+            $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            $success = false;
+        }
+        $stmt->close();
+    }
+    $conn->close();
+}
+
+function remove2fa()
+{
+    global $errorMsg, $success, $secret;
+    $config = parse_ini_file("../../private/db-config.ini");
+    $conn = new mysqli(
+        $config["servername"],
+        $config["username"],
+        $config["password"],
+        $config["dbname"]
+    );
+
+    $secret = NULL;
+    $userid = mysqli_real_escape_string($conn, $_SESSION['id']);
+
+    // Check connection     
+    if ($conn->connect_error) {
+        $errorMsg = "Connection failed: " . $conn->connect_error;
+        $success = false;
+    } else {
+
+        // Prepare the statement:         
+        $stmt = $conn->prepare("UPDATE users SET 2fa = ? WHERE user_id = ?;");
+        //Bind & execute the query statement:         
+        $stmt->bind_param("si", $secret, $userid);
+        if (!$stmt->execute()) {
+            $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+            $success = false;
+        }
+        $stmt->close();
+    }
+    $conn->close();
+}
+?>

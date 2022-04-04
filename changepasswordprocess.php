@@ -1,12 +1,10 @@
 <?php
-
 include 'header.php';
 include 'navbar.php';
 
 $result = "";
 $email = $errorMsg = "";
 $success = true;
-
 
 $oldpw = $_POST["old_password"];
 getpw();
@@ -44,17 +42,11 @@ if (empty($_POST["old_password"])) {
     }
 }
 
-
-
-
-
 if (!password_verify($oldpw, $hashedpw))
 {
     $errorMsg .= "Old password is invalid.<br>";
     $success = false;
 }
-
-
 
 if ($success) {
     updateuserpw();
@@ -70,7 +62,6 @@ if ($success) {
         echo 'window.location.href = "account.php";';
         echo '</script>';
     }
-
 } else {
     echo '<script>';
     echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
@@ -78,11 +69,9 @@ if ($success) {
     echo '</script>';
 }
 
-
 function updateuserpw()
 {
     global $errorMsg, $success, $password;
-
     $config = parse_ini_file("../../private/db-config.ini");
     $conn = new mysqli(
         $config["servername"],
@@ -90,16 +79,12 @@ function updateuserpw()
         $config["password"],
         $config["dbname"]
     );
-
     $password = mysqli_real_escape_string($conn, $password);
-
-
     // Check connection     
     if ($conn->connect_error) {
         $errorMsg = "Connection failed: " . $conn->connect_error;
         $success = false;
     } else {
- 
         // Prepare the statement:         
         $stmt = $conn->prepare("UPDATE users SET password = ? WHERE user_id = ?;");
         //Bind & execute the query statement:         
@@ -113,7 +98,6 @@ function updateuserpw()
     $conn->close();
 }
 
-
 function sanitize_input($data)
 {
     $data = trim($data);
@@ -126,7 +110,6 @@ function getpw()
 {
     global $hashedpw, $errorMsg, $success, $passwordold;
     
-
     $config = parse_ini_file("../../private/db-config.ini");
     $conn = new mysqli(
         $config["servername"],
@@ -134,7 +117,6 @@ function getpw()
         $config["password"],
         $config["dbname"]
     );
-
     $passwordold = mysqli_real_escape_string($conn, $_POST["old_password"]);
     $id = mysqli_real_escape_string($conn, $_SESSION['id']);
 
@@ -149,16 +131,12 @@ function getpw()
             $success = false;
         }
         $result = $stmt->get_result();
-        
         if ($result->num_rows > 0) {           
             $row = $result->fetch_assoc();
             $hashedpw = $row["password"];
         }
-
         $stmt->close();
     }
     $conn->close();
 }
-
-
 ?>

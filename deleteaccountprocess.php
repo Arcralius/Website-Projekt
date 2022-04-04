@@ -15,7 +15,6 @@ if (empty($_POST["password"])) {
     $success = false;
 } else {   
     if (!password_verify($password, $hashedpw)) {
-
         $errorMsg .= "Wrong password<br>";
         $success = false;
     }
@@ -53,8 +52,6 @@ function sanitize_input($data)
 function getpw()
 {
     global $hashedpw, $errorMsg, $success, $password;
-    
-
     $config = parse_ini_file("../../private/db-config.ini");
     $conn = new mysqli(
         $config["servername"],
@@ -77,12 +74,10 @@ function getpw()
             $success = false;
         }
         $result = $stmt->get_result();
-        
         if ($result->num_rows > 0) {           
             $row = $result->fetch_assoc();
             $hashedpw = $row["password"];
         }
-
         $stmt->close();
     }
     $conn->close();
@@ -91,7 +86,6 @@ function getpw()
 function deluser()
 {
     global $errorMsg, $success;
-
     $config = parse_ini_file("../../private/db-config.ini");
     $conn = new mysqli(
         $config["servername"],
@@ -99,15 +93,12 @@ function deluser()
         $config["password"],
         $config["dbname"]
     );
-
     $id = mysqli_real_escape_string($conn, $_SESSION['id']);
-    
     // Check connection     
     if ($conn->connect_error) {
         $errorMsg = "Connection failed: " . $conn->connect_error;
         $success = false;
     } else {
-
         // Prepare the statement:         
         $stmt = $conn->prepare("DELETE FROM users WHERE user_id = ?;");
         //Bind & execute the query statement:         
@@ -116,7 +107,6 @@ function deluser()
             $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
             $success = false;
         }
-
         $stmt->close();
     }
     $conn->close();

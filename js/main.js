@@ -83,18 +83,6 @@ function showPayment() {
     });
 }
 
-function showOrders() {
-    var aurl = 'ajaxProcessing.php';
-    $.ajax({
-        url: aurl,
-        type: 'POST',
-        data: { 'getorders': '' },
-        success: function (result) {
-            $(".ordertable").html(result);
-        }
-    });
-}
-
 function createCookie(name, value, seconds) {
     if (seconds) {
         var date = new Date();
@@ -131,7 +119,6 @@ $(document).ready(function () {
     activateMenu();
     showCart();
     showPayment();
-    showOrders();
     modal();
     $("#discount").change(function() {
         $("#discountval").html(this.value);

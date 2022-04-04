@@ -15,10 +15,18 @@
   width: 100%;
 }
 
-#main {
-  background-color: lightgray;
-  padding-bottom: 15%;
-  margin-bottom: 5%;
+body {
+  position: relative;
+}
+
+body::after {
+  content: '';
+  display: block;
+  height: 120px; /* Set same as footer's height */
+}
+
+main {
+  min-height: calc(100vh - 120px - 62px);
 }
 
 div.feature {
@@ -100,4 +108,10 @@ input::-webkit-inner-spin-button {
 
 input[type=number]{
   -moz-appearance: textfield;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

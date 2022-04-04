@@ -1,76 +1,71 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<main>
-<head>
-    <title>Users</title>
-    <?php
-    include 'header.php';
-    ?>
-</head>
-
-<body>
-    <?php
-    include 'navbar.php';
-    include 'adminsession.php';
-    ?>
-
-    <?php
-
-    require("conn.php");
-
-
-    $sql = "SELECT * FROM users";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->get_result(); // get the mysqli result
-
-    ?>
-
-    <div class="container">
-        <h1>Users</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                ?>
-
+    <head>
+        <title>Users</title>
+        <?php
+        include 'header.php';
+        ?>
+    </head>
+    <body>
+        <?php
+        include 'navbar.php';
+        include 'adminsession.php';
+        ?>
+        <?php
+        require("conn.php");
+        $sql = "SELECT * FROM users";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result(); // get the mysqli result
+        ?>
+        <main>
+            <div class="container">
+                <h1>Users</h1>
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td><?php echo $row['user_id']; ?></td>
-                            <td><?php echo $row['fname']; ?></td>
-                            <td><?php echo $row['lname']; ?></td>
-                            <td><?php echo $row['username']; ?></td>
-                            <td><?php echo $row['email']; ?></td>
-                            <td><?php echo $row['role']; ?></td>
-                            <td>
-                                <form action="adminusers_update.php" method="post">
-                                    <input type="hidden"  name="user_id" value="<?php echo $row['user_id']; ?>">
-                                    <button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>
-                                </form>
-                            </td>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
                         </tr>
-                <?php       }
-                }
-                ?>
-            </tbody>
-        </table>
-        <div>
-            <p id="succmessage">
-            </p>
-            <p id="errormsg">
-            </p>
-        </div>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                        ?>
 
+                                <tr>
+                                    <td><?php echo $row['user_id']; ?></td>
+                                    <td><?php echo $row['fname']; ?></td>
+                                    <td><?php echo $row['lname']; ?></td>
+                                    <td><?php echo $row['username']; ?></td>
+                                    <td><?php echo $row['email']; ?></td>
+                                    <td><?php echo $row['role']; ?></td>
+                                    <td>
+                                        <form action="adminusers_update.php" method="post">
+                                            <input type="hidden"  name="user_id" value="<?php echo $row['user_id']; ?>">
+                                            <button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                        <?php       }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <div>
+                    <p id="succmessage">
+                    </p>
+                    <p id="errormsg">
+                    </p>
+                </div>
+            </div>
+        </main>
+        <?php include 'footer.php';?>
         <script>
             var succmessage = getCookie("succmessage");
             if (succmessage == null) {
@@ -84,7 +79,5 @@
             }
             document.getElementById('errormsg').innerHTML += errormsg;
         </script>
-
-</body>
-</main>
+    </body>
 </html>

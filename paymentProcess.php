@@ -1,33 +1,32 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<main>
-
     <head>
         <title>Payment</title>
         <?php
         include 'header.php';
         ?>
     </head>
-
     <body>
         <?php
         include 'navbar.php';
         ?>
-        
-        <div class="album py-3 bg-white">
-            <div class="container" id="payment">
-                <section>
-                    <?php
-                        confirmPayment();
-                    ?>
-                </section>
+        <main>
+            <div class="album py-3 bg-white">
+                <div class="container" id="payment">
+                    <section>
+                        <?php
+                            confirmPayment();
+                        ?>
+                    </section>
+                </div>
             </div>
-        </div>
+        </main>
     </body>
-</main>
+</html>
+
 <?php
     include 'footer.php';
-    $ord_id = $prod_id = $user_id = $total_price = $discountCost = 0;
+    $ord_id = $prod_id = $user_id = $total_price = $discountCost = $stock = 0;
     $username = $shipment_date = $errorMsg = $expiry = "";
     $success = $validated = true;
     
@@ -78,12 +77,23 @@
                     $validated = false;
                 } else {
                     $prod_id = sanitize_input($prod[0]);
+                    $stock = getStock($prod_id);
+                    if (intval($stock) == -1) {
+                        $errorMsg .= "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 7<br>";
+                        $validated = false;
+                    } else if (intval($prod[6]) > intval($stock)) {
+                        $errorMsg .= "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 8<br>";
+                        $validated = false;
+                    }
                 }
 
                 if ($validated) {
                     insertOrder();
                 } else {
                     $success = false;
+                }
+                if ($success) {
+                    updateStock($prod[0], $prod[6]);
                 }
             }
             if ($success) {
@@ -180,6 +190,63 @@
         return $expiry;
     }
     
+    function getStock($pid) {
+        $stock = 0;
+        $config = parse_ini_file("../../private/db-config.ini");
+        $conn = new mysqli($config["servername"], $config["username"],
+            $config["password"], $config["dbname"]);
+        $pid = mysqli_real_escape_string($conn, $pid);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } else {
+            $stmt = $conn->prepare("SELECT * FROM `products` WHERE product_id=?;");
+            $stmt->bind_param("i", $pid);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $stock = $row['product_quantity'];
+            } else {
+                $stock = -1;
+            }
+            $stmt->close();
+        }
+        $conn->close();
+        return $stock;
+    }
+    
+    function updateStock($pid, $pquant) {
+        $stock = 0;
+        $config = parse_ini_file("../../private/db-config.ini");
+        $conn = new mysqli($config["servername"], $config["username"],
+            $config["password"], $config["dbname"]);
+        $pid = mysqli_real_escape_string($conn, $pid);
+        $stock = getStock($pid);
+        if ($stock == -1) {
+            $errorMsg .= "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 9<br>";
+            $validated = false;
+        } else {
+            $pquant = $stock - $pquant;
+            $pquant = mysqli_real_escape_string($conn, $pquant);
+        }
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } else {
+            $stmt = $conn->prepare("UPDATE `products` SET `product_quantity` = ? WHERE (product_id=?);");
+            $stmt->bind_param("ii", $pquant, $pid);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if (!$stmt->execute()) {
+                $errorMsg = "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 10<br>". $stmt->errno ;
+                $success = false;
+            } else {
+                $success = true;
+            }
+            $stmt->close();
+        }
+        $conn->close();
+    }
+    
     function insertOrder() {
         global $ord_id, $prod_id, $user_id, $total_price, $shipment_date, $errorMsg, $success;
         $config = parse_ini_file("../../private/db-config.ini");
@@ -199,7 +266,7 @@
             // Bind & execute the query statement:
             $stmt->bind_param("iiids", $ord_id, $prod_id, $user_id, $total_price, $shipment_date);
             if (!$stmt->execute()) {
-                $errorMsg = "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 6<br>". $stmt->errno ;
+                $errorMsg = "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 11<br>". $stmt->errno ;
                 $success = false;
             } else {
                 $success = true;
