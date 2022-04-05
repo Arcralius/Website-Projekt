@@ -1,5 +1,15 @@
 # Website-Projekt
 
+## V1.53
+### Patch Notes
++ Switched orders.php away from ajax as it does not need to display content dynamically
++ Added additional validation to purchasing CRUD
++ Stocks for products are reduced after purchasing them
++ Added footer to cart.php, payment.php and orders.php
++ Fixed formatting on cart.php, payment.php and orders.php
++ Fixed footer styling (sticks to bottom now)
++ Fixed incorrect use of semantics on cart.php, payment.php and orders.php (main element outside body)
+
 ## V1.52
 ### Patch Notes
 + Added ability to view order history via orders.php
