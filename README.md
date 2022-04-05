@@ -1,14 +1,20 @@
 # Website-Projekt
 
+## V1.54
+### Patch Notes
++ Added footer to all pages
++ Fixed formatting on all pages
++ Fixed incorrect use of semantics on all pages (main element outside body)
+
 ## V1.53
 ### Patch Notes
 + Switched orders.php away from ajax as it does not need to display content dynamically
 + Added additional validation to purchasing CRUD
 + Stocks for products are reduced after purchasing them
-+ Added footer to all pages
-+ Fixed formatting on most pages
++ Added footer to cart.php, payment.php and orders.php
++ Fixed formatting on cart.php, payment.php and orders.php
 + Fixed footer styling (sticks to bottom now)
-+ Fixed incorrect use of semantics (main element outside body)
++ Fixed incorrect use of semantics on cart.php, payment.php and orders.php (main element outside body)
 
 ## V1.52
 ### Patch Notes
