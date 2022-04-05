@@ -3,17 +3,13 @@
     if (!isset($_SESSION['role'])) 
     {
 		
-        header("Location: /Website-Projekt/signin.php");
+        header("Location: /signin.php");
     }
 	else 
 	{
-		if ($_SESSION['role'] =! 'A')
+		if ($_SESSION['role'] != 'A')
 		{
-			header("Location: /Website-Projekt/signin.php");
-		}
-		else
-		{
-			$_SESSION['role'] = 'A';
+			header("Location: /main.php");
 		}
 	}
 ?>
