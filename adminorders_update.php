@@ -18,14 +18,13 @@
             <?php
 
             require("conn.php");
-
-            if (isset($_POST['order_id'])) {
+            if (isset($_POST['uid'])) {
                 $order_id = $_POST['order_id'];
                 $pid = $_POST['pid'];
                 $uid = $_POST['uid'];
-                $sql = "SELECT * FROM `orders` WHERE `order_id`=?,`pid`=?,`uid`=?";
+                $sql = "SELECT * FROM `orders` WHERE `order_id`= ?";
                 $stmt = $conn->prepare($sql); 
-                $stmt->bind_param("iii", $order_id, $pid, $uid);
+                $stmt->bind_param("i", $order_id);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 if ($result->num_rows > 0) {
