@@ -24,7 +24,7 @@
                         </div>
                         <form action="signinprocess.php" method="post" class="signin-form">
                             <div class="form-group mt-3">
-                                <input type="text" class="form-control" required type="username" id="username" name="username">
+                                <input class="form-control" required type="username" id="username" name="username">
                                 <label class="form-control-placeholder" for="username">Username</label>
                             </div>
                             <div class="form-group">
