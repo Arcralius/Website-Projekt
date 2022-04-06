@@ -66,8 +66,9 @@
             <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;"> -->
             <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
             <input type="submit" name="sort" class="btn btn-lg btn-block btn-primary mt-5" style="margin-bottom: 10%;" value="Update Results" />
+          </form>
         </div>
-        </form>
+
       </div>
     </div>
 
