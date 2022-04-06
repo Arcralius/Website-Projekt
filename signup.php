@@ -26,27 +26,27 @@
                     </div>
                     <form action="signupprocess.php" method="post" class="signup-form">
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" required type="username" id="username" name="username">
+                            <input type="text" class="form-control" required  id="username" name="username">
                             <label class="form-control-placeholder" for="username">Username*</label>
                         </div>
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" required type="email" id="email" name="email">
+                            <input class="form-control" required type="email" id="email" name="email">
                             <label class="form-control-placeholder" for="email">Email*</label>
                         </div>
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" type="fname" id="fname" name="fname">
+                            <input type="text" class="form-control" id="fname" name="fname">
                             <label class="form-control-placeholder" for="fname">First name</label>
                         </div>
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" required type="lname" id="lname" name="lname">
+                            <input type="text" class="form-control" required  id="lname" name="lname">
                             <label class="form-control-placeholder" for="lname">Last name*</label>
                         </div>
                         <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" required type="password" id="password" name="password">
+                            <input id="password-field" type="password" class="form-control" required  id="password" name="password">
                             <label class="form-control-placeholder" for="password-field">Password*</label>
                         </div>
                         <div class="form-group">
-                            <input id="cfm-password-field" type="password" class="form-control" required type="cfm_password" id="cfm_password" name="cfm_password">
+                            <input id="cfm-password-field" type="password" class="form-control" required id="cfm_password" name="cfm_password">
                             <label class="form-control-placeholder" for="cfm-password-field">Confirm Password*</label>
                         </div>
 
