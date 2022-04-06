@@ -38,6 +38,7 @@
                         <th>Order ID</th>
                         <th>Product ID</th>
                         <th>User ID</th>
+                        <th>Total Price</th>
                         <th>Shipment Date</th>
                     </tr>
                 </thead>
@@ -51,6 +52,7 @@
                                 <td><?php echo $row['order_id']; ?></td>
                                 <td><?php echo $row['pid']; ?></td>
                                 <td><?php echo $row['uid']; ?></td>
+                                <td><?php echo $row['total_price']; ?></td>
                                 <td><?php echo $row['shipment_date']; ?></td>
 
                                 <td>

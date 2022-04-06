@@ -16,7 +16,7 @@
     <main class="container">
     <?php
 
-		$pid = $uid = $s_date = $errorMsg = "";
+		$pid = $uid = $t_price = $s_date = $errorMsg = "";
         $success = true;
         if (empty($_POST["pid"])) {
             $errorMsg .= "Product id is required.<br>";
@@ -30,6 +30,13 @@
             $success = false;
         } else {
             $uid = sanitize_input($_POST["uid"]);
+        }
+
+        if (empty($_POST["t_price"])) {
+            $errorMsg .= "Total price is required.<br>";
+            $success = false;
+        } else {
+            $uid = sanitize_input($_POST["t_price"]);
         }
 
         if (empty($_POST["s_date"])) {
@@ -74,9 +81,9 @@
                 $success = false;
             } else {
                 // Prepare the statement:
-                $stmt = $conn->prepare("INSERT INTO orders (pid, uid, shipment_date) VALUES (?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO orders (pid, uid, total_price, shipment_date) VALUES (?, ?, ?, ?)");
                 // Bind & execute the query statement:
-                $stmt->bind_param("iis", $pid, $uid, $s_date);
+                $stmt->bind_param("iids", $pid, $uid, $s_date);
                 if (!$stmt->execute()) {
                     $errorMsg = "User/Product ID not found";
                     $success = false;

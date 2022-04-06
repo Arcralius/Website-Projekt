@@ -31,6 +31,7 @@
                         $order_id = $row['order_id'];
                         $pid = $row['pid'];
                         $uid = $row['uid'];
+                        $t_price = $row['total_price'];
                         $s_date = $row['shipment_date'];
                     }
                 } else {
@@ -55,6 +56,10 @@
                     <div class="form-group">
                         <label for="uid">User ID:</label>
                         <input class="form-control" type="number" id="uid" step=1 name="uid" required maxlength="20" value="<?php echo $uid; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="t_price">Total Price:</label>
+                        <input class="form-control" type="number" id="uid" step=0.01 name="t_price" required maxlength="20" value="<?php echo $t_price; ?>">
                     </div>
                     <div class="form-group">
                         <label for="s_date">Shipment Date:</label>

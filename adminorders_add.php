@@ -29,6 +29,10 @@
                 <input class="form-control" type="number" step=1 id="uid" required maxlength="20" name="uid" placeholder="Enter user id">
             </div>
             <div class="form-group">
+                <label for="t_price">Total Price:</label>
+                <input class="form-control" type="number" step=0.01 id="uid" required maxlength="20" name="t_price" placeholder="Enter price">
+            </div>
+            <div class="form-group">
                 <label for="s_date">Shipment Date:</label>
                 <input class="form-control" type="date" id="s_date" required name="s_date" placeholder="Enter shipment date">
             </div>
