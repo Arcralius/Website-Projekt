@@ -13,19 +13,23 @@
         <main>
             <div class="album py-3 bg-white">
                 <div class="container" id="payment">
-                    <section>
+                    <div class="center text-center">
                         <?php
-                            confirmPayment();
+                            if (isset($_SESSION["role"])) {   
+                                confirmPayment();
+                            } else
+                                echo "<div class='center text-center'><h2>You must be signed in to access your cart.</h2></div>";
                         ?>
-                    </section>
+                    </div>
                 </div>
             </div>
         </main>
+        <?php include 'footer.php';?>
     </body>
 </html>
 
 <?php
-    include 'footer.php';
+    
     $ord_id = $prod_id = $user_id = $total_price = $discountCost = $stock = 0;
     $username = $shipment_date = $errorMsg = $expiry = "";
     $success = $validated = true;
@@ -97,16 +101,16 @@
                 }
             }
             if ($success) {
-                echo "<main class='container'>";
-                echo "<div class='col' align='center'>";
+                echo "<div class='col'>";
                 echo "<h1>Payment successful!<br></h1>";
                 echo "<h2>Order ID: " . $ord_id . "</h2>";
                 echo "<h2>Shipment Date: " . $shipment_date . "</h2>";
                 echo "<form action='main.php'>";
+                echo "<div class='center'>";
                 echo "<button class='btn btn-success'>Return to Home</button>";
+                echo "</div>";
                 echo "</form>";
                 echo "</div>";
-                echo "</main>";
                 unset($_SESSION['cart']);
                 echo "<script>updateNavCart(0);</script>";
             } else {

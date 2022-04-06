@@ -113,29 +113,29 @@
             echo '<h2>Cart</h2>';
             echo '<table class="table cart">';
             echo '<thead><tr>';
-            echo '<th>Thumbnail</th>';
-            echo '<th>Product</th>';
-            echo '<th>Description</th>';
-            echo '<th>Price</th>';
-            echo '<th>Quantity</th>';
-            echo '<th>Stock</th>';
-            echo '</tr></thead>';
+            echo '<th class="align-middle text-center">Thumbnail</th>';
+            echo '<th class="align-middle text-center">Product</th>';
+            echo '<th class="align-middle text-center">Description</th>';
+            echo '<th class="align-middle text-center">Price</th>';
+            echo '<th class="align-middle text-center">Quantity</th>';
+            echo '<th class="align-middle text-center">Stock</th>';
+            echo '<th></th></tr></thead>';
             foreach($_SESSION["cart"] as $prod) {
                 $discountCost = $prod[4] * (100 - $prod[5])/100;
                 $totalCost += $discountCost * $prod[6];
                 
-                echo '<tr><td>';
+                echo '<tr><td class="align-middle text-center">';
                 echo '<a href="product.php?id=' . $prod[0] . '">';
-                echo '<img class="img-thumbnail cart" src=' . $prod[3] . ' alt="Card image cap">';
+                echo '<img class="img-thumbnail cart" src="' . $prod[3] . '" alt="Card image cap">';
                 echo '</a>';
-                echo '<td>' . $prod[1] . '</td>';
-                echo '<td>' . $prod[2] . '</td>';
+                echo '<td class="align-middle text-center">' . $prod[1] . '</td>';
+                echo '<td class="align-middle text-center">' . $prod[2] . '</td>';
                 if ($prod[5] != 0) 
-                    echo '<td><s>$' . $prod[4] * $prod[6] . '</s> $' . $discountCost * $prod[6] . '</td>';
+                    echo '<td class="align-middle text-center"><s>$' . $prod[4] * $prod[6] . '</s> $' . $discountCost * $prod[6] . '</td>';
                 else
-                    echo '<td>$' . $discountCost * $prod[6] . '</td>';
-                echo '<td>';
-                echo '<select name="prod_qty">';
+                    echo '<td class="align-middle text-center">$' . $discountCost * $prod[6] . '</td>';
+                echo '<td class="align-middle text-center">';
+                echo '<select aria-label="qty" name="prod_qty">';
                 for ($i=1; $i<=$prod[7];$i++) {
                     if ($i == $prod[6]) {
                         echo '<option selected value="' . $prod[0] . ':' . $i . '">' . $i . '</option>';
@@ -144,19 +144,15 @@
                     }
                 }
                 echo '</select></td>';
-                echo '<td>' . $prod[7] . '</td>';
-                echo '<td><button name="removefromcart" value="' . $prod[0] .'"class="btn btn-danger">Remove from Cart</button></td>';
+                echo '<td class="align-middle text-center">' . $prod[7] . '</td>';
+                echo '<td class="align-middle text-center"><button name="removefromcart" value="' . $prod[0] .'"class="btn btn-danger">Remove from Cart</button></td>';
                 echo '</tr>';
             }
-            echo '<tr><td>Total: $' . $totalCost . '</td></tr>';
+            echo '<tr><th></th><th></th><th></th><th></th><th></th><th></th><th class="align-middle text-center">Total</th></tr>';
+            echo '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td class="align-middle text-center">$' . $totalCost . '</td></tr>';
             echo '</table>';
-            echo '<div class="center">';
-            echo '<form action="payment.php">';
-            echo '<button class="btn btn-success">Proceed to payment</button>';
-            echo '</form';
-            echo '</div>';
         } else {
-            echo "Your cart is currently empty.";
+            echo "<div class='center text-center'><h2>Your cart is currently empty.</h2></div>";
         }
     }
     
@@ -180,28 +176,29 @@
             echo '<div class="table-responsive">';
             echo '<table class="table user-list">';
             echo '<thead><tr>';
-            echo '<th>Product</th>';
-            echo '<th>Quantity</th>';
-            echo '<th>Subtotal</th>';
+            echo '<th class="align-middle text-center">Product</th>';
+            echo '<th class="align-middle text-center">Quantity</th>';
+            echo '<th class="align-middle text-center">Subtotal</th>';
             echo '</tr></thead>';
             foreach($_SESSION["cart"] as $prod) {
                 $discountCost = $prod[4] * (100 - $prod[5])/100;
                 $totalCost += $discountCost * $prod[6];
                 
                 echo '<tr>';
-                echo '<td>' . $prod[1] . '</td>';
-                echo '<td>' . $prod[6] . '</td>';
+                echo '<td class="align-middle text-center">' . $prod[1] . '</td>';
+                echo '<td class="align-middle text-center">' . $prod[6] . '</td>';
                 if ($prod[5] != 0) 
-                    echo '<td><s>$' . $prod[4] * $prod[6] . '</s> $' . $discountCost * $prod[6] . '</td>';
+                    echo '<td class="align-middle text-center"><s>$' . $prod[4] * $prod[6] . '</s> $' . $discountCost * $prod[6] . '</td>';
                 else
-                    echo '<td>$' . $discountCost * $prod[6] . '</td>';
+                    echo '<td class="align-middle text-center">$' . $discountCost * $prod[6] . '</td>';
                 echo '</tr>';
             }
-            echo '<tr><td></td><td></td><td>Total: $' . $totalCost . '</td></tr>';
+            echo '<tr><th></th><th></th><th class="align-middle text-center">Total</th></tr>';
+            echo '<tr><td></td><td></td><td class="align-middle text-center">$' . $totalCost . '</td></tr>';
             echo '</table>';
             echo '</div>';
         } else {
-            echo "Your cart is currently empty.";
+            echo "<div class='center text-center'><h2>Your cart is currently empty.</h2></div>";
         }
     }
 ?>

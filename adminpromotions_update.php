@@ -1,64 +1,61 @@
 <!DOCTYPE HTML>
-
 <html lang="en">
-    
-<head>
-    <title>Update Promotion</title>
-    <?php
-    include 'header.php';
-    ?>
-</head>
-
-<body>
-    <?php
-    include 'navbar.php';
-    include 'adminsession.php';
-    ?>
-
-    <main class="container">
+    <head>
+        <title>Update Promotion</title>
         <?php
-
-        require("conn.php");
-        function sanitize_input($data)
-        {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
-
-
-        if (isset($_POST['promotion_id'])) {
-            $pid = $prod_id = 0;
-            $prod_name = "";
-            $pid = $_POST['promotion_id'];
-            $conn = new mysqli(
-                $config["servername"],
-                $config["username"],
-                $config["password"],
-                $config["dbname"]
-            );
-            $stmt = $conn->prepare("SELECT * FROM `promotions` WHERE promotion_id=?;");
-            $pid = mysqli_real_escape_string($conn, $pid);
-            $stmt->bind_param("i", $pid);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $promotion_id = $row['promotion_id'];
-                $prod_id = $row['prod_id'];
-                $discount = $row['discount'];
-                $sdate = $row['start_date'];
-                $edate = $row['end_date'];
-            }
-            $stmt = $conn->prepare("SELECT * FROM `products`;");
-            $prod_id = mysqli_real_escape_string($conn, $prod_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
+        include 'header.php';
+        ?>
+    </head>
+    <body>
+        <?php
+        include 'navbar.php';
+        include 'adminsession.php';
         ?>
 
+        <main class="container">
+            <?php
+            require("conn.php");
+            function sanitize_input($data)
+            {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+            }
+            if (isset($_POST['promotion_id'])) {
+                $pid = $prod_id = 0;
+                $prod_name = "";
+                $pid = $_POST['promotion_id'];
+                $conn = new mysqli(
+                    $config["servername"],
+                    $config["username"],
+                    $config["password"],
+                    $config["dbname"]
+                );
+                $stmt = $conn->prepare("SELECT * FROM `promotions` WHERE promotion_id=?;");
+                $pid = mysqli_real_escape_string($conn, $pid);
+                $stmt->bind_param("i", $pid);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $promotion_id = $row['promotion_id'];
+                    $prod_id = $row['prod_id'];
+                    $discount = $row['discount'];
+                    $sdate = $row['start_date'];
+                    $edate = $row['end_date'];
+                }
+                $stmt = $conn->prepare("SELECT * FROM `products`;");
+                $prod_id = mysqli_real_escape_string($conn, $prod_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+        
+            } else {
+                header('Location: adminpromotions.php');
+            }
+        
+            ?>
             <h1>Update Promotion</h1>
-
             <form action="adminpromotions_update_process.php" method="post">
                 <fieldset>
                     <div class="form-group">
@@ -85,7 +82,7 @@
                     </div>
                     <div class="form-group">
                         <label for="discount">Discount: <span id="discountval"><?php echo $discount ?></span>%</label>
-                        <input class="form-range" type="range" id="discount" required min="1" max="99" name="discount" value="<?php echo $discount ?>">
+                        <input class="form-range" type="range" id="discount" min="1" max="99" name="discount" value="<?php echo $discount ?>">
                     </div>
                     <div class="form-group">
                         <label for="sdate">Start Date:</label>
@@ -101,28 +98,18 @@
                     <input type="hidden" name="promotion_id" value="<?php echo $promotion_id; ?>">
                 </fieldset>
             </form>
-            <div>
+            <div class = "center text-center">
                 <p id="errormsg">
                 </p>
             </div>
-            <script>
-                var errormsg = getCookie("errorMsg");
-                if (errormsg == null) {
-                    errormsg = " ";
-                }
-                document.getElementById('errormsg').innerHTML += errormsg;
-            </script>
-</body>
-
+        </main>
+        <?php include 'footer.php';?>
+        <script>
+            var errormsg = getCookie("errorMsg");
+            if (errormsg == null) {
+                errormsg = " ";
+            }
+            document.getElementById('errormsg').innerHTML += errormsg;
+        </script>
+    </body>
 </html>
-
-<?php
-        } else {
-            header('Location: adminpromotions.php');
-        }
-?>
-</main>
-    <?php include 'footer.php';?>
-
-
-</body>
