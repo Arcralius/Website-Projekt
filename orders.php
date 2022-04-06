@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>Order History</title>
         <?php
         include 'header.php';
         ?>
