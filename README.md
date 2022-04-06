@@ -1,5 +1,9 @@
 # Website-Projekt
 
+## V1.58
+### Patch Notes
++ Output sanitization for payment.php
+
 ## V1.57
 ### Patch Notes
 + Updated styling for order.php when there is no order history
