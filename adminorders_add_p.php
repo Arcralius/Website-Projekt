@@ -55,7 +55,7 @@
         if (empty($_POST["qty"])) {
             $errorMsg .= "Quantity is required.<br>";
             $success = false;
-        } else if (!preg_match("/^[0-9 ]*$/", $_POST["qty"])) {
+        } else if (!preg_match("/[0-9]/", $_POST["qty"])) {
             $errorMsg .= "Invalid quantity.<br>";
             $success = false;
         } else {
