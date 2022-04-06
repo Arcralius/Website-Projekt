@@ -13,12 +13,12 @@
             <div class="album py-3 bg-white">
                 <div class="container" id="products">
                     <section>
-                    <h1>Order History</h1>
+                    <h1 class='text-center'>Order History</h1>
                         <?php
                         if (isset($_SESSION["role"])) {
                             getOrders();
                         } else
-                            echo "You must be signed in to view your order history.";
+                            echo "<div class='center text-center'><h2>You must be signed in to view your order history.</h2></div>";
                         ?>
                     </section>
                 </div>

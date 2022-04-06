@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>Delete Promotions</title>
         <?php
         include 'header.php';
         ?>

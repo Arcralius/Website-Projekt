@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>Add Promotions</title>
         <?php
         include 'header.php';
         ?>

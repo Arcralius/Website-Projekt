@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>Payment</title>
         <?php
         include 'header.php';
         ?>

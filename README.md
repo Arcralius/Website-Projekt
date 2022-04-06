@@ -1,5 +1,10 @@
 # Website-Projekt
 
+## V1.57
+### Patch Notes
++ Updated styling for order.php when there is no order history
++ Removed title from checkout, payment, order and promotion pages
+
 ## V1.56
 ### Patch Notes
 + Added check for if user has an existing card on payment.php page
