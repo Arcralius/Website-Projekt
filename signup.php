@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 
-<main>
+
 
 <head>
     <?php
@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<main>
     <?php
     include 'navbar.php';
     ?>
@@ -75,6 +76,7 @@
     </div>
 </body>
 
-</html>
+
 
 </main>
+</html>
