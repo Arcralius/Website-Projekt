@@ -87,7 +87,7 @@
 
                     echo '<tr>';
                     echo '<td>';
-                    echo '<span class = "label label-default">' . $fullName . '</span>';
+                    echo '<span class = "label label-default">' . htmlspecialchars($fullName) . '</span>';
                     echo '</td>';
                     if ($cardNo[0] == 5) {
                         echo '<td>';
@@ -110,7 +110,7 @@
                     echo '<span class = "label label-default">Expires on ' . $expiration . '</span>';
                     echo '</td>';
                     echo '<td>';
-                    echo '<span class = "label label-default">' . $address . '</span>';
+                    echo '<span class = "label label-default">' . htmlspecialchars($address) . '</span>';
                     echo '</td>';
                     echo '</tr>';
                 }
@@ -133,7 +133,6 @@
                 echo '</form>';
                 echo '</div>';
             }
-
             $stmt->close();
         }
         $conn->close();
