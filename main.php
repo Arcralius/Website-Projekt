@@ -1,12 +1,15 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<main>
+
 <head>
     
     <?php
     include 'header.php';
     ?>
 </head>
+
+<main>
+
 
 <body>
     <?php

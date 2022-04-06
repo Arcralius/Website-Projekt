@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<main>
+
 
     <head>
 
@@ -10,6 +10,7 @@
     </head>
 
     <body>
+    <main>
 
         <?php
         include 'navbar.php';
@@ -36,18 +37,18 @@
                     <form action="2faprocess.php" method="post" class="update-form">
                         <!-- Form Group (username)-->
                         <div class="mb-3">
-                            <label class="small mb-1" for="2fa">Enable 2 Factor Authentication?</label>
+                            <label class="small mb-1">Enable 2 Factor Authentication?</label>
                             <br>
                             <select name="fa" aria-label="2faselect" id="fa" value="<?php echo $role; ?>">
-                            <?php
-                            if ($fa == NULL) {
-                                echo '<option value="No">No</option>';
-                                echo '<option value="Yes">Yes</option>';
-                            } else {
-                                echo '<option value="Yes">Yes</option>';
-                                echo '<option value="No">No</option>';
-                            }
-                            ?>
+                                <?php
+                                if ($fa == NULL) {
+                                    echo '<option value="No">No</option>';
+                                    echo '<option value="Yes">Yes</option>';
+                                } else {
+                                    echo '<option value="Yes">Yes</option>';
+                                    echo '<option value="No">No</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                         <button type="submit" class="form-control btn btn-primary rounded submit px-3">Save Changes</button>
@@ -77,8 +78,8 @@
             document.getElementById('errormsg').innerHTML += errormsg;
         </script>
 
-        <?php 
-        
+        <?php
+
         function takeinfo()
         {
             global $errorMsg, $success, $fname, $lname, $password_hashed, $role, $username, $email, $fa;
@@ -120,5 +121,5 @@
             $conn->close();
         }
         ?>
-    </body>
 </main>
+</body>
