@@ -34,6 +34,7 @@
                     $uid = $row['uid'];
                     $t_price = $row['total_price'];
                     $s_date = $row['shipment_date'];
+                    $qty = $row['qty'];
                 }
             } else {
                 header('Location: adminorders.php');
@@ -65,6 +66,10 @@
                 <div class="form-group">
                     <label for="s_date">Shipment Date:</label>
                     <input class="form-control" type="date" id="s_date" name="s_date" required value="<?php echo $s_date; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="s_date">Quantity:</label>
+                    <input class="form-control" type="number" id="qty" name="qty" required value="<?php echo $qty; ?>">
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="pid" value="<?php echo $pid; ?>">

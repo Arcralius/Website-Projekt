@@ -10,7 +10,6 @@
         setProdQty();
      else if (isset($_POST['getpayment']))
         getPayment();
-     
     function addToCart() {
         $config = parse_ini_file("../../private/db-config.ini");
         $existing = false;
@@ -151,11 +150,12 @@
             echo '<tr><th></th><th></th><th></th><th></th><th></th><th></th><th class="align-middle text-center">Total</th></tr>';
             echo '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td class="align-middle text-center">$' . $totalCost . '</td></tr>';
             echo '</table>';
-            echo '<form action="payment.php">';
+            echo '<form action="payment.php" method="post">';
             echo '<div class="center text-center">';
+            echo '<input type="hidden" name="qty_order" value="'.$prod[6].'">';
             echo '<button class="btn btn-success">Proceed to payment</button>';
             echo '</div>';
-            echo '</form';
+            echo '</form>';
         } else {
             echo "<div class='center text-center'><h2>Your cart is currently empty.</h2></div>";
         }

@@ -31,17 +31,22 @@
             $uid = sanitize_input((int)$_POST['uid']);
             $t_price = sanitize_input($_POST['t_price']);
             $s_date = sanitize_input($_POST['s_date']);
+            $qty = sanitize_input((int)$_POST['qty']);
         
 
-            $stmt = $conn->prepare("UPDATE `orders` SET `total_price`=?, `shipment_date`=? WHERE `order_id`=? AND `pid`=? AND `uid`=?");
+            $stmt = $conn->prepare("UPDATE `orders` SET `total_price`=?, `shipment_date`=?, `qty`=? WHERE `order_id`=? AND `pid`=? AND `uid`=?");
             // Bind & execute the query statement:
-            $stmt->bind_param("dsiii", $t_price, $s_date, $order_id, $pid, $uid);
+            $stmt->bind_param("dsiiii", $t_price, $s_date, $qty, $order_id, $pid, $uid);
 
             if (!$stmt->execute()) {
                 $errorMsg = "Error! Cannot find product id or user id.";
                 $success = false;
             }
             if ($success) {
+                
+
+
+
                 echo '<script>';
                 echo 'createCookie("succmessage", "Update success!", 1);';
                 echo 'window.location.href = "adminorders.php";';

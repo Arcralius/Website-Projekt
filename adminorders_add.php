@@ -20,9 +20,9 @@
         <h1>Add Orders</h1>
 
         <form action="adminorders_add_p.php" method="post">
-            <div class="form-group">
+        <div class="form-group">
                 <label for="oid">Order ID:</label>
-                <input class="form-control" type="number" step=1 id="oid" required maxlength="20" name="oid" placeholder="Enter order id">
+                <input class="form-control" type="number" step=1 id="oid" required maxlength="20" name="oid" placeholder="Enter Order id">
             </div>
             <div class="form-group">
                 <label for="pid">Product ID:</label>
@@ -39,6 +39,10 @@
             <div class="form-group">
                 <label for="s_date">Shipment Date:</label>
                 <input class="form-control" type="date" id="s_date" required name="s_date" placeholder="Enter shipment date">
+            </div>
+            <div class="form-group">
+                <label for="qty">Quantity:</label>
+                <input class="form-control" type="number" id="qty" required name="qty" placeholder="Enter quantity">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" type="submit" name="btnSubmit">Submit</button>

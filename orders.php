@@ -72,6 +72,7 @@
                     echo '<thead><tr>';
                     echo '<th class="align-middle text-center">Order ID</th>';
                     echo '<th class="align-middle text-center">Products</th>';
+                    echo '<th class="align-middle text-center">Quantity</th>';
                     echo '<th class="align-middle text-center">Total</th>';
                     echo '<th class="align-middle text-center">Shipment Date</th>';
                     echo '</tr></thead>';
@@ -111,6 +112,7 @@
                                     echo getProd($p) . "<br>";
                             }
                             echo '</td>';
+                            echo '<td class="align-middle text-center">' . $row["qty"] . '</td>';
                             echo '<td class="align-middle text-center">$' . $row["total_price"] . '</td>';
                             echo '<td class="align-middle text-center">' . $row["shipment_date"] . '</td>';
                             echo '</tr>';

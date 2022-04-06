@@ -16,7 +16,7 @@
     <main class="container">
     <?php
 
-		$oid = $pid = $uid = $t_price = $s_date = $errorMsg = "";
+		$oid = $qty = $pid = $uid = $t_price = $s_date = $errorMsg = "";
         $success = true;
         if (empty($_POST["oid"])) {
             $errorMsg .= "Order id is required.<br>";
@@ -51,6 +51,13 @@
         } else {
             $s_date = sanitize_input($_POST["s_date"]);
         }
+
+        if (empty($_POST["qty"])) {
+            $errorMsg .= "Quantity is required.<br>";
+            $success = false;
+        } else {
+            $qty = sanitize_input($_POST["qty"]);
+        }
         
 
         if ($success) {
@@ -78,7 +85,7 @@
             return $data;
         }
         function savePromotionToDB() {
-            global $oid, $pid, $uid, $t_price, $s_date, $errorMsg, $success;
+            global $oid, $pid, $uid, $t_price, $s_date, $errorMsg, $success, $qty;
             // Create database connection.
             require("conn.php");
             // Check connection
@@ -87,9 +94,9 @@
                 $success = false;
             } else {
                 // Prepare the statement:
-                $stmt = $conn->prepare("INSERT INTO orders (order_id, pid, uid, total_price, shipment_date) VALUES (?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO orders (order_id, pid, uid, total_price, shipment_date, qty) VALUES (?, ?, ?, ?, ?, ?)");
                 // Bind & execute the query statement:
-                $stmt->bind_param("iiids", $oid, $pid, $uid, $t_price, $s_date);
+                $stmt->bind_param("iiidsi", $oid, $pid, $uid, $t_price, $s_date, $qty);
                 if (!$stmt->execute()) {
                     $errorMsg = "User/Product ID not found";
                     $success = false;

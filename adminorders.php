@@ -40,6 +40,7 @@
                         <th>User ID</th>
                         <th>Total Price</th>
                         <th>Shipment Date</th>
+                        <th>Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,6 +55,7 @@
                                 <td><?php echo $row['uid']; ?></td>
                                 <td><?php echo $row['total_price']; ?></td>
                                 <td><?php echo $row['shipment_date']; ?></td>
+                                <td><?php echo $row['qty']; ?></td>
 
                                 <td>
                                     <div class="col-sm-12 text-center">

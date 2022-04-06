@@ -17,6 +17,7 @@
                         } else
                             echo "<div class='center text-center'><h2>You must be signed in to access your cart.</h2></div>";
                         if  (isset($_SESSION["role"]) && !empty($_SESSION["cart"])) {
+                            
                             takeinfo();
                         }
                     ?>
@@ -117,8 +118,11 @@
                 echo '</table>';
                 echo '</div>';
                 echo '<div class="center text-center">';
-                echo '<form action="paymentProcess.php">';
+                
+
+                echo '<form action="paymentProcess.php" method="post">';
                 echo '<button class="btn btn-success">Confirm Transaction</button>';
+                echo '<input type="hidden" name="qty_order" value="'.$_POST["qty_order"].'">';
                 echo '</form>';
                 echo '</div>';
             } else {
