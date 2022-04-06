@@ -8,10 +8,11 @@
     ?>
 </head>
 
-<main>
+
 
 
 <body>
+<main>
     <?php
     include 'navbar.php';
     ?>
@@ -149,7 +150,8 @@
         return $discount2;
     }
     ?>
-
-</body>
+<?php include 'footer.php';?>
 </main>
+</body>
+
 </html>
