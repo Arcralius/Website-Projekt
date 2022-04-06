@@ -73,14 +73,14 @@
                             <input class="form-control" type="text" id="p_image" disabled maxlength="45" value="<?php echo $p_image; ?>">
                             <input class="form-control" type="hidden" name="p_image" value="<?php echo $p_image; ?>">
                             <!-- HTML5 Input Form  -->
-                            <input id="p_image_img" type="file" name="file" />
+                            <input id="p_image_img" type="file" name="file" aria-label="Update Image" />
                         </div>
                         <div class="form-group">
                             <label for="p_thumbnail">Image thumbnail:</label>
                             <input class="form-control" type="text" id="p_thumbnail" disabled maxlength="45" value="<?php echo $p_thumbnail; ?>">
                             <input class="form-control" type="hidden" name="p_thumbnail" value="<?php echo $p_thumbnail; ?>">
                             <!-- HTML5 Input Form  -->
-                            <input id="p_thumbnail_img" type="file" name="file2" />
+                            <input id="p_thumbnail_img" type="file" name="file2" aria-label="Update Thumbnail" />
                         </div>
                         <div class="form-group">
                             <label for="p_price">Price:</label>
