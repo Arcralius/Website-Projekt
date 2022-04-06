@@ -1,5 +1,9 @@
 # Website-Projekt
 
+## V1.56
+### Patch Notes
++ Added check for if user has an existing card on payment.php page
+
 ## V1.55
 ### Patch Notes
 + Fixed bug where "Proceed to Payment" button appeared when cart was empty

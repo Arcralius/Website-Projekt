@@ -18,26 +18,7 @@
                         } else
                             echo "<div class='center text-center'><h2>You must be signed in to access your cart.</h2></div>";
                         if  (isset($_SESSION["role"]) && !empty($_SESSION["cart"])) {
-                            echo '<div class="table-responsive">';
-                            echo '<table class="table user-list">';
-                            echo '<thead>';
-                            echo '<tr>';
-                            echo '<th><span>Card Holder</span></th>';
-                            echo '<th><span>Card Number</span></th>';
-                            echo '<th><span>Expiration Date</span></th>';
-                            echo '<th><span>Delivery Address</span></th>';
-                            echo '</tr>';
-                            echo '</thead>';
-                            echo '<tbody>'; 
                             takeinfo();
-                            echo '</tbody>';
-                            echo '</table>';
-                            echo '</div>';
-                            echo '<div class="center text-center">';
-                            echo '<form action="paymentProcess.php">';
-                            echo '<button class="btn btn-success">Confirm Transaction</button>';
-                            echo '</form>';
-                            echo '</div>';
                         }
                     ?>
                     <div class = "center text-center">
@@ -86,6 +67,17 @@
 
             if ($result->num_rows > 0) {
 
+                echo '<div class="table-responsive">';
+                echo '<table class="table user-list">';
+                echo '<thead>';
+                echo '<tr>';
+                echo '<th><span>Card Holder</span></th>';
+                echo '<th><span>Card Number</span></th>';
+                echo '<th><span>Expiration Date</span></th>';
+                echo '<th><span>Delivery Address</span></th>';
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>'; 
                 while ($row = $result->fetch_assoc()) {
                     $paymentID = $row["payment_id"];
                     $fullName = $row["name"];
@@ -122,8 +114,21 @@
                     echo '</td>';
                     echo '</tr>';
                 }
+                echo '</tbody>';
+                echo '</table>';
+                echo '</div>';
+                echo '<div class="center text-center">';
+                echo '<form action="paymentProcess.php">';
+                echo '<button class="btn btn-success">Confirm Transaction</button>';
+                echo '</form>';
+                echo '</div>';
             } else {
+                echo '<div class="center text-center">';
                 echo "No available cards to display.";
+                echo '<form action="billinginfo.php">';
+                echo '<button class="btn btn-success">Add a Card</button>';
+                echo '</form>';
+                echo '</div>';
             }
 
             $stmt->close();
