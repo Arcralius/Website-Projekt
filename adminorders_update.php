@@ -51,11 +51,11 @@
                     </div>
                     <div class="form-group">
                         <label for="pid">Product ID:</label>
-                        <input class="form-control" type="number" id="pid" step=1 name="pid" required maxlength="20" value="<?php echo $pid; ?>">
+                        <input class="form-control" type="number" id="pid" step=1 name="pid" required maxlength="20" value="<?php echo $pid; ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="uid">User ID:</label>
-                        <input class="form-control" type="number" id="uid" step=1 name="uid" required maxlength="20" value="<?php echo $uid; ?>">
+                        <input class="form-control" type="number" id="uid" step=1 name="uid" required maxlength="20" value="<?php echo $uid; ?>" disabled>
                     </div>
                     <div class="form-group">
                         <label for="t_price">Total Price:</label>

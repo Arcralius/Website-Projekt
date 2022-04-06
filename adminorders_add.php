@@ -21,6 +21,10 @@
 
         <form action="adminorders_add_p.php" method="post">
             <div class="form-group">
+                <label for="oid">Order ID:</label>
+                <input class="form-control" type="number" step=1 id="oid" required maxlength="20" name="oid" placeholder="Enter order id">
+            </div>
+            <div class="form-group">
                 <label for="pid">Product ID:</label>
                 <input class="form-control" type="number" step=1 id="pid" required maxlength="20" name="pid" placeholder="Enter product id">
             </div>

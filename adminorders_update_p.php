@@ -33,9 +33,9 @@
             $s_date = sanitize_input($_POST['s_date']);
 
 
-            $stmt = $conn->prepare("UPDATE `orders` SET `pid`=?,`uid`=?, `total_price`=?, `shipment_date`=? WHERE `order_id`=?");
+            $stmt = $conn->prepare("UPDATE `orders` SET `total_price`=?, `shipment_date`=? WHERE `order_id`=?,`pid`=?,`uid`=?");
             // Bind & execute the query statement:
-            $stmt->bind_param("iidsi", $pid, $uid, $t_price, $s_date, $order_id);
+            $stmt->bind_param("dsiii", $t_price, $s_date, $order_id, $pid, $uid);
             if (!$stmt->execute()) {
                 $errorMsg = "Error! Cannot find product id or user id.";
                 $success = false;
