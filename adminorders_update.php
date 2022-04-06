@@ -22,9 +22,9 @@
             $order_id = $_POST['order_id'];
             $pid = $_POST['pid'];
             $uid = $_POST['uid'];
-            $sql = "SELECT * FROM `orders` WHERE `order_id`= ?";
+            $sql = "SELECT * FROM `orders` WHERE `order_id`= ? AND pid = ? AND uid = ? ";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("i", $order_id);
+            $stmt->bind_param("iii", $order_id, $pid , $uid);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
@@ -52,11 +52,11 @@
                 </div>
                 <div class="form-group">
                     <label for="pid">Product ID:</label>
-                    <input class="form-control" type="number" id="pid" step=1 name="pid" required maxlength="20" value="<?php echo $pid; ?>" disabled>
+                    <input class="form-control" type="number" id="pid" step=1 name="pid_" required maxlength="20" value="<?php echo $pid; ?>" disabled>
                 </div>
                 <div class="form-group">
                     <label for="uid">User ID:</label>
-                    <input class="form-control" type="number" id="uid" step=1 name="uid" required maxlength="20" value="<?php echo $uid; ?>" disabled>
+                    <input class="form-control" type="number" id="uid" step=1 name="uid_" required maxlength="20" value="<?php echo $uid; ?>" disabled>
                 </div>
                 <div class="form-group">
                     <label for="t_price">Total Price:</label>
