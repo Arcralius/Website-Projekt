@@ -15,6 +15,7 @@
 
     <main class="container">
         <?php
+        $success = true;
 
         if (empty($_POST["qty"])) {
             $errorMsg .= "Quantity is required.<br>";
@@ -27,7 +28,8 @@
         }
 
 
-        $success = true;
+
+
         require("conn.php");
         function sanitize_input($data)
         {

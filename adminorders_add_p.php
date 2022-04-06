@@ -15,9 +15,9 @@
     
     <main class="container">
     <?php
-
-		$oid = $qty = $pid = $uid = $t_price = $s_date = $errorMsg = "";
         $success = true;
+		$oid = $qty = $pid = $uid = $t_price = $s_date = $errorMsg = "";
+        
         if (empty($_POST["oid"])) {
             $errorMsg .= "Order id is required.<br>";
             $success = false;
@@ -87,6 +87,7 @@
             $data = htmlspecialchars($data);
             return $data;
         }
+
         function savePromotionToDB() {
             global $oid, $pid, $uid, $t_price, $s_date, $errorMsg, $success, $qty;
             // Create database connection.
