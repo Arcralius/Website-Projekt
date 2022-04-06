@@ -28,7 +28,7 @@
                                 <label class="form-control-placeholder" for="username">Username</label>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" required type="password" id="password" name="password">
+                                <input type="password" class="form-control" required id="password" name="password">
                                 <label class="form-control-placeholder" for="password">Password</label>
                             </div>
                             <div class="form-group">
