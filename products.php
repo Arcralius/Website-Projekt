@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="col-md-4 order-md-1 col-lg-3 sidebar-filter" style="background-color: #FFFFFF;">
-          <form action="" method="post">
+          <form method="post">
             <p class="mt-0 mb-5">Showing <span class="text-primary"><?= $number_of_products ?></span> Products</p>
             <p class="text-uppercase font-weight-bold mb-3">Categories</p>
             <?php
