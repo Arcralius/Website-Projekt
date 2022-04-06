@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>Checkout</title>
         <?php
         include 'header.php';
         ?>
