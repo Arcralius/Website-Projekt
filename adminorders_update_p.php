@@ -16,6 +16,17 @@
     <main class="container">
         <?php
 
+        if (empty($_POST["qty"])) {
+            $errorMsg .= "Quantity is required.<br>";
+            $success = false;
+        } else if (!preg_match("/^[0-9 ]*$/", $_POST["qty"])) {
+            $errorMsg .= "Invalid quantity.<br>";
+            $success = false;
+        } else {
+            $qty = sanitize_input($_POST["qty"]);
+        }
+
+
         $success = true;
         require("conn.php");
         function sanitize_input($data)
@@ -32,7 +43,7 @@
             $t_price = sanitize_input($_POST['t_price']);
             $s_date = sanitize_input($_POST['s_date']);
             $qty = sanitize_input((int)$_POST['qty']);
-        
+
 
             $stmt = $conn->prepare("UPDATE `orders` SET `total_price`=?, `shipment_date`=?, `qty`=? WHERE `order_id`=? AND `pid`=? AND `uid`=?");
             // Bind & execute the query statement:
@@ -43,10 +54,6 @@
                 $success = false;
             }
             if ($success) {
-                
-
-
-
                 echo '<script>';
                 echo 'createCookie("succmessage", "Update success!", 1);';
                 echo 'window.location.href = "adminorders.php";';
