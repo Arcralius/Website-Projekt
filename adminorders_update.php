@@ -21,9 +21,11 @@
 
             if (isset($_POST['order_id'])) {
                 $order_id = $_POST['order_id'];
-                $sql = "SELECT * FROM `orders` WHERE `order_id`=?";
+                $pid = $_POST['pid'];
+                $uid = $_POST['uid'];
+                $sql = "SELECT * FROM `orders` WHERE `order_id`=?,`pid`=?,`uid`=?";
                 $stmt = $conn->prepare($sql); 
-                $stmt->bind_param("i", $order_id);
+                $stmt->bind_param("iii", $order_id, $pid, $uid);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 if ($result->num_rows > 0) {
@@ -59,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label for="t_price">Total Price:</label>
-                        <input class="form-control" type="number" id="uid" step=0.01 name="t_price" required maxlength="20" value="<?php echo $t_price; ?>">
+                        <input class="form-control" type="number" id="t_price" step=0.01 name="t_price" required maxlength="20" value="<?php echo $t_price; ?>">
                     </div>
                     <div class="form-group">
                         <label for="s_date">Shipment Date:</label>

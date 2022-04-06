@@ -60,12 +60,16 @@
                                         <?php
                                         echo '<form action="adminorders_update.php" method="post">';
                                         echo '<input type="hidden" name="order_id" value="' . $row['order_id'] . '">';
+                                        echo '<input type="hidden" name="pid" value="' . $row['pid'] . '">';
+                                        echo '<input type="hidden" name="uid" value="' . $row['uid'] . '">';
                                         echo '<button type="submit" class="btn btn-info btn-md" style=" width: 100px;  display: inline-block; vertical-align: top;">Edit</button>';
                                         echo '</form>';
                                         echo '</td>';
                                         echo '<td>';
                                         echo '<form action="adminorders_delete.php" method="post">';
                                         echo '<input type="hidden" name="order_id" value="' . $row['order_id'] . '">';
+                                        echo '<input type="hidden" name="pid" value="' . $row['pid'] . '">';
+                                        echo '<input type="hidden" name="uid" value="' . $row['uid'] . '">';
                                         echo '<button type="submit" class="btn btn-danger btn-md" style=" width: 100px; display: inline-block; vertical-align: top;" >Delete</button>';
                                         echo '</form>';
                                         ?>

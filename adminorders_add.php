@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label for="t_price">Total Price:</label>
-                <input class="form-control" type="number" step=0.01 id="uid" required maxlength="20" name="t_price" placeholder="Enter price">
+                <input class="form-control" type="number" step=0.01 id="t_price" required maxlength="20" name="t_price" placeholder="Enter price">
             </div>
             <div class="form-group">
                 <label for="s_date">Shipment Date:</label>
