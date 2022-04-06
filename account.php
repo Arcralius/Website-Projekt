@@ -49,7 +49,7 @@
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputFirstName">Change First name</label>
                                 <?php
-                                echo '<input class="form-control" id="inputFirstName" type="text" required name="fname" placeholder="' . $fname . '" value="' . $fname . '"> ';
+                                echo '<input class="form-control" id="inputFirstName" type="text" name="fname" placeholder="' . $fname . '" value="' . $fname . '"> ';
                                 ?>
 
                             </div>

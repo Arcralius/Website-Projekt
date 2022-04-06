@@ -19,7 +19,7 @@
         $success = false;
     } else if (!preg_match("/^[a-zA-Z0-9]{1,255}$/", $_POST["username"])) {
         $errorMsg .= "Username should only contain alphanumeric characters.<br>";
-        $inputSuccess = false;
+        $success = false;
     } else {
         $username = sanitize_input($_POST["username"]);
     }
@@ -30,7 +30,7 @@
         $success = false;
     } else if (!preg_match("/[a-zA-Z0-9_\-]+@([a-zA-Z_\-])+[.]+[a-zA-Z]{2,4}/", $_POST["email"])) {
         $errorMsg .= "Invalid email format.<br>";
-        $inputSuccess = false;
+        $success = false;
     } else {
         $email = sanitize_input($_POST["email"]);
         // Additional check to make sure e-mail address is well-formed.     
