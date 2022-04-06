@@ -15,7 +15,7 @@
         include 'navbar.php';
 
         if (!isset($_SESSION['username'])) {
-            header("Location: /Website-Projekt/signin.php");
+            header("Location: /signin.php");
         } else {
             $username = $_SESSION['username'];
         }
@@ -53,11 +53,16 @@
                                                     ?>
                                                 </tbody>
                                             </table>
-                                            <div class="mb-3">
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addcard">
-                                                    Add card
-                                                </button>
-                                            </div>
+                                            <?php
+
+                                            if (!isset($cardNo)) {
+                                                echo '<div class="mb-3">';
+                                                echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addcard">';
+                                                echo 'Add card';
+                                                echo '</button>';
+                                            }
+                                            ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +96,7 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputCardNo">Card Number</label>
                                         <?php
-                                        echo '<input class="form-control" id="updateCardNo" onkeypress="addSpaces(this)" type="text" minlength="16" maxlength="19" required name="cardno" placeholder="' . $cardNo . '" value="' . $cardNo . '"> ';
+                                        echo '<input class="form-control" id="updateCardNo" onkeypress="addSpaces(this)" type="text" minlength="16" maxlength="19" required name="cardno" placeholder="' . substr($cardNo, 0, 4) . ' **** **** ****"> ';
                                         ?>
 
                                     </div>
@@ -99,7 +104,7 @@
                                     <div class="col-md-6">
                                         <label class="small mb-1" for="inputCVC">CVV</label>
                                         <?php
-                                        echo '<input class="form-control" id="updateCVV" type="text" minlength="3" maxlength="3" required name="cvv" placeholder="' . $cvv . '" value="' . $cvv . '"> ';
+                                        echo '<input class="form-control" id="updateCVV" type="text" minlength="3" maxlength="3" required name="cvv"> ';
                                         ?>
                                     </div>
                                 </div>
@@ -141,7 +146,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <p class="modal-title" id="deletecard">Confirm</p>
+                            <p class="modal-title" id="deletecardbutton">Confirm</p>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -214,7 +219,7 @@
 
                                 <!-- Save changes button-->
 
-                                <button type="submit" class="form-control btn btn-primary rounded submit px-3" >Save Changes</button>
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Save Changes</button>
 
 
                             </form>
@@ -283,14 +288,12 @@
                                 echo '<img src = "https://cdn.mos.cms.futurecdn.net/H3evjLMg9aGDBbaEw9EF2m-80-80.jpg" alt = "mastercard-logo">';
                                 echo '<span class = "label label-default">' . substr($cardNo, 0, 4) . ' **** **** ****</span>';
                                 echo '</td>';
-                            }
-                            else if ($cardNo[0] == 4 ) {
+                            } else if ($cardNo[0] == 4) {
                                 echo '<td>';
                                 echo '<img src = "https://laz-img-cdn.alicdn.com/tfs/TB1RI0cbLDH8KJjy1XcXXcpdXXa-80-80.png" alt = "visa-logo">';
                                 echo '<span class = "label label-default">' . substr($cardNo, 0, 4) . ' **** **** ****</span>';
                                 echo '</td>';
-                            }
-                            else{
+                            } else {
                                 echo '<td>';
                                 echo '<span class = "label label-default">' . substr($cardNo, 0, 4) . ' **** **** ****</span>';
                                 echo '</td>';

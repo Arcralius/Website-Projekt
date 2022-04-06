@@ -15,7 +15,7 @@
         include 'navbar.php';
 
         if (!isset($_SESSION['username'])) {
-            header("Location: /Website-Projekt/signin.php");
+            header("Location: /signin.php");
         } else {
             $username = $_SESSION['username'];
         }
