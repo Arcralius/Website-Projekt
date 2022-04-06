@@ -42,11 +42,11 @@
                             <label class="form-control-placeholder" for="lname">Last name*</label>
                         </div>
                         <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" required  id="password" name="password">
+                            <input  type="password" class="form-control" required  id="password" name="password">
                             <label class="form-control-placeholder" for="password-field">Password*</label>
                         </div>
                         <div class="form-group">
-                            <input id="cfm-password-field" type="password" class="form-control" required id="cfm_password" name="cfm_password">
+                            <input type="password" class="form-control" required id="cfm_password" name="cfm_password">
                             <label class="form-control-placeholder" for="cfm-password-field">Confirm Password*</label>
                         </div>
 
