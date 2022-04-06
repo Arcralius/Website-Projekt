@@ -120,10 +120,6 @@
         function saveProductToDB() {
             global $p_name, $p_desc, $p_category, $p_image, $p_thumbnail, $p_price, $p_quantity, $location, $location2, $errorMsg, $success;
             // Create database connection.
-            /**$config = parse_ini_file('../../private/db-config.ini');
-            $conn = new mysqli($config['servername'], $config['username'],
-                    $config['password'], $config['dbname']);
-            $conn->set_charset("utf8");**/
             require("conn.php");
             // Check connection
             if ($conn->connect_error) {

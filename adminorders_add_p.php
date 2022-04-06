@@ -67,9 +67,6 @@
         function savePromotionToDB() {
             global $pid, $uid, $s_date, $errorMsg, $success;
             // Create database connection.
-            /**$config = parse_ini_file('../../private/db-config.ini');
-            $conn = new mysqli($config['servername'], $config['username'],
-                    $config['password'], $config['dbname']);**/
             require("conn.php");
             // Check connection
             if ($conn->connect_error) {
