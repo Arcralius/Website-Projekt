@@ -55,7 +55,7 @@
         if (empty($_POST["qty"])) {
             $errorMsg .= "Quantity is required.<br>";
             $success = false;
-        } else if (!preg_match("/[0-9]/", $_POST["qty"])) {
+        } else if (!preg_match("/^[1-9]+$/", $_POST["qty"])) {
             $errorMsg .= "Invalid quantity.<br>";
             $success = false;
         } else {
@@ -76,6 +76,12 @@
                 echo 'window.location.href = "adminorders_add.php";';
                 echo '</script>';
             }
+        }
+        else {
+            echo '<script>';
+            echo 'createCookie("errorMsg", "'.$errorMsg.'", 1);';
+            echo 'window.location.href = "adminorders_add.php";';
+            echo '</script>';
         }
 
 
