@@ -1,5 +1,9 @@
 # Website-Projekt
 
+## V1.55
+### Patch Notes
++ Fixed bug where "Proceed to Payment" button appeared when cart was empty
+
 ## V1.54
 ### Patch Notes
 + Compliance with W3C HTML Standards on checkout.php, payment.php, paymentProcess.php, orders.php, adminpromotions.php, adminpromotions_add.php, and adminpromotions_update.php.

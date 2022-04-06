@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
+        <title>Checkout</title>
         <?php
         include 'header.php';
         ?>
@@ -17,11 +18,6 @@
                         <?php
                         if (isset($_SESSION["role"])) {
                             echo '<div class="carttable"></div>';
-                            echo '<form action="payment.php">';
-                            echo '<div class="center text-center">';
-                            echo '<button class="btn btn-success">Proceed to payment</button>';
-                            echo '</div>';
-                            echo '</form';
                         } else
                             echo "<div class='center text-center'><h2>You must be signed in to access your cart.</h2></div>";
                         ?>

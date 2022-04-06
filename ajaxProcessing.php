@@ -151,6 +151,11 @@
             echo '<tr><th></th><th></th><th></th><th></th><th></th><th></th><th class="align-middle text-center">Total</th></tr>';
             echo '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td class="align-middle text-center">$' . $totalCost . '</td></tr>';
             echo '</table>';
+            echo '<form action="payment.php">';
+            echo '<div class="center text-center">';
+            echo '<button class="btn btn-success">Proceed to payment</button>';
+            echo '</div>';
+            echo '</form';
         } else {
             echo "<div class='center text-center'><h2>Your cart is currently empty.</h2></div>";
         }
