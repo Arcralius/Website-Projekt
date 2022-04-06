@@ -24,6 +24,9 @@
                     </section>
                 </div>
             </div>
+            <div class = "center text-center">
+                <p id="errormsg"></p>
+            </div>
         </main>
         <?php include 'footer.php';?>
     </body>
@@ -68,10 +71,10 @@
                 if ($result->num_rows > 0) {
                     echo '<table class="table cart">';
                     echo '<thead><tr>';
-                    echo '<th>Order ID</th>';
-                    echo '<th>Products</th>';
-                    echo '<th>Total</th>';
-                    echo '<th>Shipment Date</th>';
+                    echo '<th class="align-middle text-center">Order ID</th>';
+                    echo '<th class="align-middle text-center">Products</th>';
+                    echo '<th class="align-middle text-center">Total</th>';
+                    echo '<th class="align-middle text-center">Shipment Date</th>';
                     echo '</tr></thead>';
                     while ($row = $result->fetch_assoc()){
                         if (($curr_oid == intval($row["order_id"]))) {
@@ -79,16 +82,16 @@
                         } else {
                             if ($buffcount != 0) {
                                 echo '<tr>';
-                                echo '<td>' . $curr_oid . '</td>';
-                                echo '<td>';
+                                echo '<td class="align-middle text-center">' . $curr_oid . '</td>';
+                                echo '<td class="align-middle text-center">';
                                 foreach ($pbuff as $p) {
                                     $pname = getProd($p);
                                     if ($pname != NULL)
                                         echo getProd($p) . "<br>";
                                 }
                                 echo '</td>';
-                                echo '<td>$' . $price . '</td>';
-                                echo '<td>' . $shipdate . '</td>';
+                                echo '<td class="align-middle text-center">$' . $price . '</td>';
+                                echo '<td class="align-middle text-center">' . $shipdate . '</td>';
                                 echo '</tr>';
                             }
                             $price = $row["total_price"];
@@ -101,21 +104,20 @@
                         $curr_oid = intval($row["order_id"]);
                         if ($count == $resultsCount) {
                             echo '<tr>';
-                            echo '<td>' . $row["order_id"] . '</td>';
-                            echo '<td>';
+                            echo '<td class="align-middle text-center">' . $row["order_id"] . '</td>';
+                            echo '<td class="align-middle text-center">';
                             foreach ($pbuff as $p) {
                                 $pname = getProd($p);
                                 if ($pname != NULL)
                                     echo getProd($p) . "<br>";
                             }
                             echo '</td>';
-                            echo '<td>$' . $row["total_price"] . '</td>';
-                            echo '<td>' . $row["shipment_date"] . '</td>';
+                            echo '<td class="align-middle text-center">$' . $row["total_price"] . '</td>';
+                            echo '<td class="align-middle text-center">' . $row["shipment_date"] . '</td>';
                             echo '</tr>';
                         }
                     }
                     echo '</table>';
-                    echo '</div>';
                 } else {
                     echo "You currently have no past orders.";
                 }

@@ -85,15 +85,14 @@ div.feature a {
 }
 
 .center {
-  display: flex;
   justify-content: center;
   align-items: center;
   height: 200px;
 }
 
 img.cart {
-    width: auto;
-    max-height: 150px;
+    width: 150px;
+    height: 150px;
 }
 
 th, td {

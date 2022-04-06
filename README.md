@@ -1,5 +1,12 @@
 # Website-Projekt
 
+## V1.54
+### Patch Notes
++ Compliance with W3C HTML Standards on checkout.php, payment.php, paymentProcess.php, orders.php, adminpromotions.php, adminpromotions_add.php, and adminpromotions_update.php.
++ Compliance with WCAG Standards on checkout.php, payment.php, paymentProcess.php, orders.php, adminpromotions.php, adminpromotions_add.php, and adminpromotions_update.php.
++ Updated styling for cart, payment summary, and payment history pages
++ Added validation for promotion update CRUD (Cannot update date of promotion if it intersects with another active promo for the same product)
+
 ## V1.53
 ### Patch Notes
 + Switched orders.php away from ajax as it does not need to display content dynamically

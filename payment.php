@@ -11,10 +11,13 @@
         <main>
             <div class="album py-3 bg-white">
                 <div class="container" id="payment">
-                    <section>
-                        <?php
+                    <h1 class='center text-center'>Checkout</h1>
+                    <?php
                         if (isset($_SESSION["role"])) {
                             echo '<div class="paymentsummary"></div>';
+                        } else
+                            echo "<div class='center text-center'><h2>You must be signed in to access your cart.</h2></div>";
+                        if  (isset($_SESSION["role"]) && !empty($_SESSION["cart"])) {
                             echo '<div class="table-responsive">';
                             echo '<table class="table user-list">';
                             echo '<thead>';
@@ -30,36 +33,37 @@
                             echo '</tbody>';
                             echo '</table>';
                             echo '</div>';
-                            echo '<div class="center">';
+                            echo '<div class="center text-center">';
                             echo '<form action="paymentProcess.php">';
                             echo '<button class="btn btn-success">Confirm Transaction</button>';
                             echo '</form>';
                             echo '</div>';
-                        } else
-                            echo "You must be signed in to access your cart.";
-                        ?>
-                    </section>
-                    <div class = "center">
+                        }
+                    ?>
+                    <div class = "center text-center">
                         <p id="errormsg"></p>
                     </div>
-                    <script>
-                        var errormsg = getCookie("errorMsg");
-                        if (errormsg == null) {
-                            errormsg = " ";
-                        }
-                        document.getElementById('errormsg').innerHTML += errormsg;
-                    </script>
                 </div>
             </div>
         </main>
         <?php include 'footer.php';?>
+        <script>
+            var errormsg = getCookie("errorMsg");
+            if (errormsg == null) {
+                errormsg = " ";
+            }
+            document.getElementById('errormsg').innerHTML += errormsg;
+        </script>
     </body>
 </html>
 
 <?php
     function takeinfo()
     {
-        global $errorMsg, $success, $paymentID, $fullName, $cardNo, $expiration, $address;
+        $userid = $paymentID = $cardNo = $expiration = 0;
+        $errorMsg = $fullName = $address = "";
+        $success = true;
+        $userid = $_SESSION['id'];
         $config = parse_ini_file("../../private/db-config.ini");
         $conn = new mysqli(
             $config["servername"],
@@ -74,8 +78,9 @@
         } else {
             // Prepare the statement:         
             $stmt = $conn->prepare("SELECT * FROM payment_details WHERE user_id=?");
-            // Bind & execute the query statement:         
-            $stmt->bind_param("i", $_SESSION['id']);
+            // Bind & execute the query statement:      
+            $userid = mysqli_real_escape_string($conn, $userid);
+            $stmt->bind_param("i", $userid);
             $stmt->execute();
             $result = $stmt->get_result();
 

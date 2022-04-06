@@ -14,12 +14,17 @@
             <div class="album py-3 bg-white">
                 <div class="container" id="products">
                     <section>
-                    <h1>Checkout</h1>
+                    <h1 class='center text-center'>Checkout</h1>
                         <?php
                         if (isset($_SESSION["role"])) {
                             echo '<div class="carttable"></div>';
+                            echo '<form action="payment.php">';
+                            echo '<div class="center text-center">';
+                            echo '<button class="btn btn-success">Proceed to payment</button>';
+                            echo '</div>';
+                            echo '</form';
                         } else
-                            echo "You must be signed in to access your cart.";
+                            echo "<div class='center text-center'><h2>You must be signed in to access your cart.</h2></div>";
                         ?>
                     </section>
                 </div>
