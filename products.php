@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<main>
 
-  <head>
-    <?php
-    include 'header.php';
-    ?>
-  </head>
 
-  <body>
+<head>
+  <?php
+  include 'header.php';
+  ?>
+</head>
+
+<body>
+  <main>
     <?php
     include 'navbar.php';
-
     ?>
     <!-- Header-->
     <header class="bg-dark py-5">
@@ -52,7 +52,7 @@
           <form action="" method="post">
             <p class="mt-0 mb-5">Showing <span class="text-primary"><?= $number_of_products ?></span> Products</p>
             <p class="text-uppercase font-weight-bold mb-3">Categories</p>
-            <?php 
+            <?php
             printcatagories();
             ?>
             <!-- <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
@@ -77,7 +77,7 @@
 
     function printproducts()
     {
-      
+
       require("conn.php");
 
       $sql = "SELECT * FROM `products`; ";
@@ -106,13 +106,11 @@
           echo '<div class="text-center">';
           echo '<p class="fw-bolder">' . $productName . '</p>';
           $discount = checkPromo($productID);
-          if ($discount != NULL)
-          {
-              echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
-              echo '<span class="text"> $' . number_format($productPrice * $discount, 2) . '</span>';
-          }
-          else {
-              echo '<span class="text">$' . $productPrice . '</span>';
+          if ($discount != NULL) {
+            echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
+            echo '<span class="text"> $' . number_format($productPrice * $discount, 2) . '</span>';
+          } else {
+            echo '<span class="text">$' . $productPrice . '</span>';
           }
           echo '</div>';
           echo '</div>';
@@ -168,13 +166,11 @@
           echo '<div class="text-center">';
           echo '<h5 class="fw-bolder">' . $productName . '</h5>';
           $discount = checkPromo($productID);
-          if ($discount != NULL)
-          {
-              echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
-              echo '<span class="text"> $' . number_format($productPrice * $discount, 2) . '</span>';
-          }
-          else {
-              echo '<span class="text">$' . $productPrice . '</span>';
+          if ($discount != NULL) {
+            echo '<span class="text-muted text-decoration-line-through">$' . $productPrice . '</span>';
+            echo '<span class="text"> $' . number_format($productPrice * $discount, 2) . '</span>';
+          } else {
+            echo '<span class="text">$' . $productPrice . '</span>';
           }
           echo '</div>';
           echo '</div>';
@@ -195,7 +191,8 @@
       }
     }
 
-    function printcatagories(){
+    function printcatagories()
+    {
       require("conn.php");
 
       $sql = "SELECT DISTINCT product_category FROM `products`;";
@@ -213,8 +210,8 @@
 
           echo '<div class="mt-2 mb-2 pl-2">';
           echo '<div class="custom-control custom-checkbox">';
-          echo '<input type="checkbox" class="custom-control-input" name="categories[]" value="'.$product_catagory .'" id="'. $product_catagory .'">';
-          echo '<label class="custom-control-label" for="'.$product_catagory .'">'.$product_catagory .'</label>';
+          echo '<input type="checkbox" class="custom-control-input" name="categories[]" value="' . $product_catagory . '" id="' . $product_catagory . '">';
+          echo '<label class="custom-control-label" for="' . $product_catagory . '">' . $product_catagory . '</label>';
           echo '</div>';
           echo '</div>';
         }
@@ -223,40 +220,38 @@
         echo "No catagories";
       }
     }
-    
+
 
 
     function checkPromo($id)
     {
-        require("conn.php");
-        
-        $stmt = $conn->prepare("SELECT discount FROM `promotions` where prod_id = ?;");
-       
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $discount2 = $row['discount'];
-            $discount2 = (100 - $discount2) / 100;
-        }
-        else {
-            $discount2 = NULL;
-        }
+      require("conn.php");
 
-        
+      $stmt = $conn->prepare("SELECT discount FROM `promotions` where prod_id = ?;");
 
-        $stmt->close();
-        $conn->close();
+      $stmt->bind_param("i", $id);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $discount2 = $row['discount'];
+        $discount2 = (100 - $discount2) / 100;
+      } else {
+        $discount2 = NULL;
+      }
 
-        return $discount2;
+
+
+      $stmt->close();
+      $conn->close();
+
+      return $discount2;
     }
     include 'footer.php';
     ?>
 
 
-
-  </body>
+  </main>
+</body>
 
 </html>
-</main>
