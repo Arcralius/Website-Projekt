@@ -1,14 +1,15 @@
 <!DOCTYPE HTML>
 <html lang="en">
-<main>
 
-    <head>
-        <?php
-        include 'header.php';
-        ?>
-    </head>
 
-    <body>
+<head>
+    <?php
+    include 'header.php';
+    ?>
+</head>
+
+<body>
+    <main>
         <?php
         include 'navbar.php';
 
@@ -46,10 +47,9 @@
             </p>
         </div>
 
-        
+        <?php
+        include 'footer.php'; ?>
+    </main>
+</body>
 
-    </body>
-    <?php
-    include 'footer.php'; ?>
 </html>
-</main>
