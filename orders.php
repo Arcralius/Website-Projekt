@@ -96,16 +96,14 @@ function getOrders()
                             foreach ($pbuff as $p) {
                                 $pname = getProd($p);
                                 if ($pname != NULL)
-                                    echo getProd($p) . "<br>";
+                                    echo $pname . "<br>";
                             }
                             echo '</td>';
                             echo '<td class="align-middle text-center">';
-                            foreach ($qbuff as $p) {
-                                $qtyq = getQty($curr_oid);
-                                if ($qtyq != NULL)
-                                    echo getQty($curr_oid) . "<br>";
+                            foreach ($qbuff as $q) {
+                                if ($q != NULL)
+                                    echo $q . "<br>";
                             }
-                            
                             echo '</td>';
                             echo '<td class="align-middle text-center">$' . $price . '</td>';
                             echo '<td class="align-middle text-center">' . $shipdate . '</td>';
@@ -131,12 +129,10 @@ function getOrders()
                         }
                         echo '</td>';
                         echo '<td class="align-middle text-center">';
-                        foreach ($qbuff as $curr_oid) {
-                            $qtyq = getQty($curr_oid);
-                            if ($qtyq != NULL)
-                                echo getQty($curr_oid) . "<br>";
+                        foreach ($qbuff as $q) {
+                            if ($q != NULL)
+                                echo $q . "<br>";
                         }
-                      
                         echo '</td>';
                         echo '<td class="align-middle text-center">$' . $row["total_price"] . '</td>';
                         echo '<td class="align-middle text-center">' . $row["shipment_date"] . '</td>';
@@ -221,37 +217,6 @@ function getProd($pid)
     $conn->close();
     return $pname;
 }
-
-function getQty($pid)
-{
-    $qty = "";
-    $config = parse_ini_file("../../private/db-config.ini");
-    $conn = new mysqli(
-        $config["servername"],
-        $config["username"],
-        $config["password"],
-        $config["dbname"]
-    );
-    $pid = mysqli_real_escape_string($conn, $pid);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } else {
-        $stmt = $conn->prepare("SELECT * FROM `orders` WHERE order_id=?;");
-        $stmt->bind_param("i", $pid);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $qty = $row['qty'];
-        } else {
-            $qty = NULL;
-        }
-        $stmt->close();
-    }
-    $conn->close();
-    return $qty;
-}
-
 
 function sanitize_input($data)
 {

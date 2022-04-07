@@ -152,7 +152,6 @@
             echo '</table>';
             echo '<form action="payment.php" method="post">';
             echo '<div class="center text-center">';
-            echo '<input type="hidden" name="qty_order" value="'.$prod[6].'">';
             echo '<button class="btn btn-success">Proceed to payment</button>';
             echo '</div>';
             echo '</form>';

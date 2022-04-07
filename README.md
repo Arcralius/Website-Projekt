@@ -1,5 +1,9 @@
 # Website-Projekt
 
+## V1.60
+### Patch Notes
++ Updated logic for order qty (Fixed incorrect qty being pushed to DB, fixed incorrect display of qty on orders.php)
+
 ## V1.59
 ### Patch Notes
 + Updated payment info styling on payment.php
