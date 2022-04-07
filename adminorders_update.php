@@ -61,7 +61,7 @@
                 </div>
                 <div class="form-group">
                     <label for="t_price">Total Price:</label>
-                    <input class="form-control" type="number" id="t_price" step=0.01 name="t_price" required maxlength="20" value="<?php echo $t_price; ?>">
+                    <input class="form-control" type="number" id="t_price" name="t_price" required maxlength="20" value="<?php echo $t_price; ?>">
                 </div>
                 <div class="form-group">
                     <label for="s_date">Shipment Date:</label>
