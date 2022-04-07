@@ -1,5 +1,9 @@
 # Website-Projekt
 
+## V1.59
+### Patch Notes
++ Updated payment info styling on payment.php
+
 ## V1.58
 ### Patch Notes
 + Output sanitization for payment.php

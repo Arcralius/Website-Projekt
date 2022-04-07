@@ -71,10 +71,10 @@
                 echo '<table class="table user-list">';
                 echo '<thead>';
                 echo '<tr>';
-                echo '<th><span>Card Holder</span></th>';
-                echo '<th><span>Card Number</span></th>';
-                echo '<th><span>Expiration Date</span></th>';
-                echo '<th><span>Delivery Address</span></th>';
+                echo '<th class="align-middle text-center"><span>Card Holder</span></th>';
+                echo '<th class="align-middle text-center"><span>Card Number</span></th>';
+                echo '<th class="align-middle text-center"><span>Expiration Date</span></th>';
+                echo '<th class="align-middle text-center"><span>Delivery Address</span></th>';
                 echo '</tr>';
                 echo '</thead>';
                 echo '<tbody>'; 
@@ -86,30 +86,30 @@
                     $address = $row["address"];
 
                     echo '<tr>';
-                    echo '<td>';
+                    echo '<td class="align-middle text-center">';
                     echo '<span class = "label label-default">' . htmlspecialchars($fullName) . '</span>';
                     echo '</td>';
                     if ($cardNo[0] == 5) {
-                        echo '<td>';
+                        echo '<td class="align-middle text-center">';
                         echo '<img src = "https://cdn.mos.cms.futurecdn.net/H3evjLMg9aGDBbaEw9EF2m-80-80.jpg" alt = "mastercard-logo">';
                         echo '<span class = "label label-default">' . substr($cardNo, 0, 4) . ' **** **** ****</span>';
                         echo '</td>';
                     }
                     else if ($cardNo[0] == 4 ) {
-                        echo '<td>';
+                        echo '<td class="align-middle text-center">';
                         echo '<img src = "https://laz-img-cdn.alicdn.com/tfs/TB1RI0cbLDH8KJjy1XcXXcpdXXa-80-80.png" alt = "visa-logo">';
                         echo '<span class = "label label-default">' . substr($cardNo, 0, 4) . ' **** **** ****</span>';
                         echo '</td>';
                     }
                     else{
-                        echo '<td>';
+                        echo '<td class="align-middle text-center">';
                         echo '<span class = "label label-default">' . substr($cardNo, 0, 4) . ' **** **** ****</span>';
                         echo '</td>';
                     }
-                    echo '<td class = "align-middle">';
+                    echo '<td class="align-middle text-center">';
                     echo '<span class = "label label-default">Expires on ' . $expiration . '</span>';
                     echo '</td>';
-                    echo '<td>';
+                    echo '<td class="align-middle text-center">';
                     echo '<span class = "label label-default">' . htmlspecialchars($address) . '</span>';
                     echo '</td>';
                     echo '</tr>';
