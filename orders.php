@@ -40,7 +40,7 @@ function getOrders()
     $user_id = $price = $curr_oid = $buffcount = $count = $resultsCount = 0;
     $username = $errorMsg = $shipdate = $pname = "";
     $success = $validated = true;
-    $products = $pbuff = array();
+    $products = $pbuff = $qbuff = array();
     if (empty($_SESSION["username"])) {
         $errorMsg .= "Something has gone wrong. Please contact a System Administrator with the following information: HISTORY ERROR 1<br>";
         $validated = false;
@@ -87,6 +87,7 @@ function getOrders()
                 while ($row = $result->fetch_assoc()) {
                     if (($curr_oid == intval($row["order_id"]))) {
                         array_push($pbuff, $row["pid"]);
+                        array_push($qbuff, $row["qty"]);
                     } else {
                         if ($buffcount != 0) {
                             echo '<tr>';
@@ -99,11 +100,12 @@ function getOrders()
                             }
                             echo '</td>';
                             echo '<td class="align-middle text-center">';
-                            foreach ($pbuff as $p) {
-                                $qtyq = getQty($p);
+                            foreach ($qbuff as $p) {
+                                $qtyq = getQty($curr_oid);
                                 if ($qtyq != NULL)
-                                    echo getQty($p) . "<br>";
+                                    echo getQty($curr_oid) . "<br>";
                             }
+                            
                             echo '</td>';
                             echo '<td class="align-middle text-center">$' . $price . '</td>';
                             echo '<td class="align-middle text-center">' . $shipdate . '</td>';
@@ -113,6 +115,7 @@ function getOrders()
                         $shipdate = $row["shipment_date"];
                         $buffcount = 0;
                         $pbuff = array($row["pid"]);
+                        $qbuff = array($row["qty"]);
                     }
                     $buffcount += 1;
                     $count += 1;
@@ -128,11 +131,12 @@ function getOrders()
                         }
                         echo '</td>';
                         echo '<td class="align-middle text-center">';
-                        foreach ($pbuff as $q) {
-                            $qtyq = getQty($q);
+                        foreach ($qbuff as $curr_oid) {
+                            $qtyq = getQty($curr_oid);
                             if ($qtyq != NULL)
-                                echo getQty($q) . "<br>";
+                                echo getQty($curr_oid) . "<br>";
                         }
+                      
                         echo '</td>';
                         echo '<td class="align-middle text-center">$' . $row["total_price"] . '</td>';
                         echo '<td class="align-middle text-center">' . $row["shipment_date"] . '</td>';
@@ -232,7 +236,7 @@ function getQty($pid)
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     } else {
-        $stmt = $conn->prepare("SELECT * FROM `orders` WHERE pid=?;");
+        $stmt = $conn->prepare("SELECT * FROM `orders` WHERE order_id=?;");
         $stmt->bind_param("i", $pid);
         $stmt->execute();
         $result = $stmt->get_result();
