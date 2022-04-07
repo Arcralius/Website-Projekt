@@ -85,6 +85,7 @@
 </table>
 
 <div>
+    <p>Please delete products from Promotions and Orders first as deleting a product that is in either of them would result in an error.</p>
     <p id="succmessage">
     </p>
     <p id="errormsg">
