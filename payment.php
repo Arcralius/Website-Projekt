@@ -122,7 +122,6 @@
 
                 echo '<form action="paymentProcess.php" method="post">';
                 echo '<button class="btn btn-success">Confirm Transaction</button>';
-                echo '<input type="hidden" name="qty_order" value="'.$_POST["qty_order"].'">';
                 echo '</form>';
                 echo '</div>';
             } else {

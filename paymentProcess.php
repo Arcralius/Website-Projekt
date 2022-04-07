@@ -1,45 +1,40 @@
 <!DOCTYPE HTML>
 <html lang="en">
-
-<head>
-    <?php
-    include 'header.php';
-    ?>
-</head>
-
-<body>
-    <?php
-    include 'navbar.php';
-    ?>
-    <main>
-        <div class="album py-3 bg-white">
-            <div class="container" id="payment">
-                <div class="center text-center">
-                    <?php
-                    $qty = $_POST["qty_order"];
-                    if (isset($_SESSION["role"])) {
-                        confirmPayment();
-                    } else
-                        echo "<div class='center text-center'><h2>You must be signed in to access your cart.</h2></div>";
-                    ?>
+    <head>
+        <?php
+        include 'header.php';
+        ?>
+    </head>
+    <body>
+        <?php
+        include 'navbar.php';
+        ?>
+        <main>
+            <div class="album py-3 bg-white">
+                <div class="container" id="payment">
+                    <div class="center text-center">
+                        <?php
+                        if (isset($_SESSION["role"])) {
+                            confirmPayment();
+                        } else
+                            echo "<div class='center text-center'><h2>You must be signed in to access your cart.</h2></div>";
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <?php include 'footer.php'; ?>
-</body>
-
+        </main>
+        <?php include 'footer.php'; ?>
+    </body>
 </html>
 
 <?php
-
-$ord_id = $prod_id = $user_id = $total_price = $discountCost = $stock = 0;
+$ord_id = $prod_id = $user_id = $total_price = $discountCost = $stock = $qty = 0;
 $username = $shipment_date = $errorMsg = $expiry = "";
 $success = $validated = true;
 
 function confirmPayment()
 {
-    global $ord_id, $prod_id, $username, $user_id, $total_price, $shipment_date, $errorMsg, $success;
+    global $ord_id, $prod_id, $username, $user_id, $total_price, $shipment_date, $errorMsg, $success, $qty;
     $validated = true;
     if (!empty($_SESSION["cart"])) {
         if (empty($_SESSION["username"])) {
@@ -94,7 +89,12 @@ function confirmPayment()
                     $validated = false;
                 }
             }
-
+            if (empty($prod[6])) {
+                $errorMsg .= "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 9<br>";
+                $validated = false;
+            } else {
+                $qty = $prod[6];
+            }
             if ($validated) {
                 insertOrder();
             } else {
@@ -256,7 +256,7 @@ function updateStock($pid, $pquant)
     $pid = mysqli_real_escape_string($conn, $pid);
     $stock = getStock($pid);
     if ($stock == -1) {
-        $errorMsg .= "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 9<br>";
+        $errorMsg .= "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 10<br>";
         $validated = false;
     } else {
         $pquant = $stock - $pquant;
@@ -270,7 +270,7 @@ function updateStock($pid, $pquant)
         $stmt->execute();
         $result = $stmt->get_result();
         if (!$stmt->execute()) {
-            $errorMsg = "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 10<br>" . $stmt->errno;
+            $errorMsg = "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 11<br>" . $stmt->errno;
             $success = false;
         } else {
             $success = true;
@@ -282,7 +282,7 @@ function updateStock($pid, $pquant)
 
 function insertOrder()
 {
-    global $ord_id, $prod_id, $user_id, $total_price, $shipment_date, $errorMsg, $success;
+    global $ord_id, $prod_id, $user_id, $total_price, $shipment_date, $qty, $errorMsg, $success;
     $config = parse_ini_file("../../private/db-config.ini");
     $conn = new mysqli(
         $config["servername"],
@@ -300,11 +300,12 @@ function insertOrder()
         $user_id = mysqli_real_escape_string($conn, $user_id);
         $total_price = mysqli_real_escape_string($conn, $total_price);
         $shipment_date = mysqli_real_escape_string($conn, $shipment_date);
+        $qty = mysqli_real_escape_string($conn, $qty);
         $stmt = $conn->prepare("INSERT INTO orders (order_id, pid, uid, total_price, shipment_date, qty) VALUES (?, ?, ?, ?, ?, ?)");
         // Bind & execute the query statement:
-        $stmt->bind_param("iiidsi", $ord_id, $prod_id, $user_id, $total_price, $shipment_date, $_POST["qty_order"]);
+        $stmt->bind_param("iiidsi", $ord_id, $prod_id, $user_id, $total_price, $shipment_date, $qty);
         if (!$stmt->execute()) {
-            $errorMsg = "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 11<br>" . $stmt->errno;
+            $errorMsg = "Something has gone wrong. Please contact a System Administrator with the following information: PAYMENT ERROR 12<br>" . $stmt->errno;
             $success = false;
         } else {
             $success = true;
