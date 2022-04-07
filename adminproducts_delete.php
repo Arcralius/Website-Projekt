@@ -32,7 +32,7 @@
                 echo '</script>';
             } else {
                 echo '<script>';
-                echo 'createCookie("errorMsg", "An error occoured. Is product in promotion.", 1);';
+                echo 'createCookie("errorMsg", "An error occoured. Is product in promotion?", 1);';
                 echo 'window.location.href = "adminproducts.php";';
                 echo '</script>';
             }
